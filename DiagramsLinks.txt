@@ -1,0 +1,3 @@
+https://app.diagrams.net/#G1NB5sow1q01pVi-eDyEmr7sv9ZQzZQ7Xb - Use Cases
+https://app.diagrams.net/#G1OmslSjarDRVN0efvZMGmMh1Nx0M5HXn7 - Classes
+https://app.diagrams.net/#G1Rr5lokNjpJHWSufXJBVo2BGrMB4j6oiq - Sequence
