@@ -14,9 +14,10 @@ namespace RealExcel
             // TODO: 
             return true;
         }
-        public static void EvaluateExpression(string expression)
+        public static string EvaluateExpression(string expression)
         {
-
+            // TODO:
+            return "";
         }
     }
 }

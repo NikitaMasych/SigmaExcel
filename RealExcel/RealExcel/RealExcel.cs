@@ -12,10 +12,11 @@ namespace RealExcel
 {
     public partial class RealExcel : Form
     {
+        private Table table;
         public RealExcel()
         {
             InitializeComponent();
-            InitializeTable();
+            this.table = new Table(ref dataGridView);
         }
 
         private void RealExcel_Load(object sender, EventArgs e)
@@ -25,63 +26,36 @@ namespace RealExcel
 
         private void AddRow_Click(object sender, EventArgs e)
         {
-            var cellsRow = new List<Cell>();
-            for (int columnIndex = 0; columnIndex != columnsAmount; ++columnIndex)
-            {
-                cellsRow.Add(new Cell(rowsAmount, columnIndex));
-            }
-            cells.Add(cellsRow);
-            dataGridView.Rows.Add(1);
-            dataGridView.Rows[dataGridView.Rows.Count - 1].HeaderCell.Value = 
-                (dataGridView.Rows.Count).ToString();
-            ++rowsAmount;
+            table.AddRow();
         }
         private void AddColumn_Click(object senser, EventArgs e)
         {
-            dataGridView.Columns.Add(ExcelBaseRepresentor.ConvertToPseudo26Base(columnsAmount + 1),
-                    ExcelBaseRepresentor.ConvertToPseudo26Base(columnsAmount + 1));
-            
-            for (int i = 0; i != rowsAmount; ++i)
-            {
-                cells[i].Add(new Cell(i, columnsAmount));
-            }
-            ++columnsAmount;
+            table.AddColumn();
         }
         private void DeleteRow_Click(object sender, EventArgs e)
         {
-            if (rowsAmount == 0) return;
-            dataGridView.Rows.RemoveAt(rowsAmount - 1);
-            cells.RemoveAt(rowsAmount - 1);
-            --rowsAmount;
-            /*
-             * TODO: Add cells' contents update.
-             */
+            table.DeleteRow();
         }
         private void DeleteColumn_Click(object sender, EventArgs e)
         {
-            if (columnsAmount == 1) return;
-            
-            dataGridView.Columns.RemoveAt(columnsAmount - 1);
-            for (int i = 0; i != rowsAmount; ++i)
-            {
-                cells[i].RemoveAt(columnsAmount - 1);
-            }
-            --columnsAmount;
-            /*
-             * TODO: Add cells' contents update.
-             */
+            table.DeleteColumn();
         }
-        private void DataGridView_KeyDown(object sender, KeyEventArgs e)
+        private void UpdateCell_CellEndEdit(object sender, DataGridViewCellEventArgs e)
         {
-            if (e.KeyData == Keys.Enter)
+                HandleCellEnter(e.RowIndex, e.ColumnIndex);
+        }
+        private void HandleCellEnter(int rowIndex, int columnIndex)
+        {
+            var currentCellValue = dataGridView.Rows[rowIndex].Cells[columnIndex].Value;
+            if (currentCellValue == null) return;
+      
+            table.cells[rowIndex][columnIndex].Expression = currentCellValue.ToString();
+            if (currentCellValue != table.cells[rowIndex][columnIndex])
             {
-                if (dataGridView.CurrentCell.Value == null) return;
-                var rowIndex = dataGridView.CurrentCell.RowIndex;
-                var columnIndex = dataGridView.CurrentCell.ColumnIndex;
-                cells[rowIndex][columnIndex].Expression = dataGridView.CurrentCell.Value.ToString();
-                UpdateCell(cells[rowIndex][columnIndex]);
-                expressionTextBox.Text = dataGridView.CurrentCell.Value.ToString();
+                table.UpdateCell(table.cells[rowIndex][columnIndex]);
             }
+            expressionTextBox.Text = dataGridView.CurrentCell.Value.ToString();
+            dataGridView.CurrentCell.Value = table.cells[rowIndex][columnIndex].Evaluation;
         }
     }
 }

@@ -11,13 +11,28 @@ namespace RealExcel
     {
         private int rowIndex, columnIndex;
         public string Expression { get; set; }
-        public double Evaluation { get; set; }
-        public List<Cell> ConjugatedCells = new List<Cell>();
+        public string Evaluation { get; set; }
+        public HashSet<Cell> ConjugatedCells = new HashSet<Cell>();
 
         public Cell(int rowIndex, int columnIndex)
         {
             this.rowIndex = rowIndex;
             this.columnIndex = columnIndex;
+        }
+        public bool CheckForDependenciesCycle()
+        {
+            foreach(var cell in ConjugatedCells)
+            {
+                if (cell.ConjugatedCells.Contains(this))
+                {
+                    return true;
+                }
+                if (cell.CheckForDependenciesCycle())
+                {
+                    return true;
+                }
+            }
+            return false;
         }
     }
 }

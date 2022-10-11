@@ -42,8 +42,7 @@
             this.dataGridView.RowTemplate.Height = 24;
             this.dataGridView.Size = new System.Drawing.Size(997, 452);
             this.dataGridView.TabIndex = 0;
-            this.dataGridView.KeyDown += new System.Windows.Forms.KeyEventHandler(this.DataGridView_KeyDown);
-            this.dataGridView.KeyUp += new System.Windows.Forms.KeyEventHandler(this.DataGridView_KeyDown);
+            this.dataGridView.CellValidated += new System.Windows.Forms.DataGridViewCellEventHandler(this.UpdateCell_CellEndEdit);
             // 
             // addRowButton
             // 
