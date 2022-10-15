@@ -42,9 +42,9 @@ namespace RealExcel
         }
         private void UpdateCell_CellEndEdit(object sender, DataGridViewCellEventArgs e)
         {
-                HandleCellEnter(e.RowIndex, e.ColumnIndex);
+            HandleCellUpdate(e.RowIndex, e.ColumnIndex);
         }
-        private void HandleCellEnter(int rowIndex, int columnIndex)
+        private void HandleCellUpdate(int rowIndex, int columnIndex)
         {
             var currentCellValue = dataGridView.Rows[rowIndex].Cells[columnIndex].Value;
             if (currentCellValue == null) return;
@@ -52,7 +52,7 @@ namespace RealExcel
             table.cells[rowIndex][columnIndex].Expression = currentCellValue.ToString();
             if (currentCellValue != table.cells[rowIndex][columnIndex])
             {
-                table.UpdateCell(table.cells[rowIndex][columnIndex]);
+                table.UpdateCell(rowIndex, columnIndex);
             }
             expressionTextBox.Text = dataGridView.CurrentCell.Value.ToString();
             dataGridView.CurrentCell.Value = table.cells[rowIndex][columnIndex].Evaluation;

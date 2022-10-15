@@ -100,8 +100,9 @@ namespace RealExcel
              * TODO: Add cells' contents update.
              */
         }
-        public void UpdateCell(RealCell cell)
+        public void UpdateCell(int rowIndex, int columnIndex)
         {
+            var cell = cells[rowIndex][columnIndex];
             if (cell.Expression == null) return;
             cell.Evaluation = cell.Expression;
             try
@@ -113,10 +114,13 @@ namespace RealExcel
                 return;
             }
             if (cell.CheckForDependenciesCycle()) return;
-            var expressionValid = RealParser.ValidateExpression(cell.Expression);
-            if (expressionValid)
+            try
+            { 
+                cell.Evaluation = RealEvaluator.EvaluateExpression(cell.Expression).ToString();
+            }
+            catch
             {
-                cell.Evaluation = RealParser.EvaluateExpression(cell.Expression);
+                return;
             }
         }
         private void ReplaceCellsReferences(ref RealCell cell)
@@ -139,7 +143,7 @@ namespace RealExcel
                 }
                 catch
                 {
-                    throw new Exception("non-existing cell reference");
+                    throw new Exception("Non-existing cell reference");
                 }
             }
             MatchEvaluator matchEvaluator = new MatchEvaluator(BindValueToAddress);
@@ -158,7 +162,7 @@ namespace RealExcel
             }
             catch
             {
-                throw new Exception("null value reference");
+                throw new Exception("Null value reference");
             }
         }
     }
