@@ -22,7 +22,7 @@ namespace RealExcel
             this.dataGridView = dataGridView;
             InitializeColumns();
             InitializeRows();
-            InitializeCells();         
+            InitializeCells();
         }
         private void InitializeColumns()
         {
@@ -147,7 +147,7 @@ namespace RealExcel
                 }
             }
             MatchEvaluator matchEvaluator = new MatchEvaluator(BindValueToAddress);
-            regex.Replace(cell.Expression, matchEvaluator);
+            cell.Expression = regex.Replace(cell.Expression, matchEvaluator);
         }
         private string BindValueToAddress(Match match)
         {

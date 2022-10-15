@@ -18,12 +18,10 @@ namespace RealExcel
             InitializeComponent();
             this.table = new RealTable(ref dataGridView);
         }
-
         private void RealExcel_Load(object sender, EventArgs e)
         {
 
         }
-
         private void AddRow_Click(object sender, EventArgs e)
         {
             table.AddRow();
@@ -50,7 +48,7 @@ namespace RealExcel
             if (currentCellValue == null) return;
       
             table.cells[rowIndex][columnIndex].Expression = currentCellValue.ToString();
-            if (currentCellValue != table.cells[rowIndex][columnIndex])
+            if ((string)currentCellValue != table.cells[rowIndex][columnIndex].Evaluation)
             {
                 table.UpdateCell(rowIndex, columnIndex);
             }
