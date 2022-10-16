@@ -42,7 +42,8 @@
             this.dataGridView.RowTemplate.Height = 24;
             this.dataGridView.Size = new System.Drawing.Size(997, 452);
             this.dataGridView.TabIndex = 0;
-            this.dataGridView.CellValidated += new System.Windows.Forms.DataGridViewCellEventHandler(this.UpdateCell_CellEndEdit);
+            this.dataGridView.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.UpdateTextBox_CellClick);
+            this.dataGridView.CellEndEdit += new System.Windows.Forms.DataGridViewCellEventHandler(this.UpdateCell_CellEndEdit);
             // 
             // addRowButton
             // 
@@ -92,7 +93,7 @@
             this.addColumnButton.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
             this.addColumnButton.Location = new System.Drawing.Point(267, 23);
             this.addColumnButton.Name = "addColumnButton";
-            this.addColumnButton.Size = new System.Drawing.Size(93, 37);
+            this.addColumnButton.Size = new System.Drawing.Size(94, 37);
             this.addColumnButton.TabIndex = 7;
             this.addColumnButton.Text = "Add Column";
             this.addColumnButton.UseVisualStyleBackColor = false;
@@ -107,7 +108,7 @@
             this.deleteColumnButton.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
             this.deleteColumnButton.Location = new System.Drawing.Point(392, 23);
             this.deleteColumnButton.Name = "deleteColumnButton";
-            this.deleteColumnButton.Size = new System.Drawing.Size(105, 37);
+            this.deleteColumnButton.Size = new System.Drawing.Size(110, 37);
             this.deleteColumnButton.TabIndex = 8;
             this.deleteColumnButton.Text = "Delete Column";
             this.deleteColumnButton.UseVisualStyleBackColor = false;

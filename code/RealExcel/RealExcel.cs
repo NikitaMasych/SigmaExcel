@@ -40,20 +40,28 @@ namespace RealExcel
         }
         private void UpdateCell_CellEndEdit(object sender, DataGridViewCellEventArgs e)
         {
+            expressionTextBox.Text = 
+                dataGridView.Rows[e.RowIndex].Cells[e.ColumnIndex].Value.ToString();
             HandleCellUpdate(e.RowIndex, e.ColumnIndex);
+        }
+        private void UpdateTextBox_CellClick(object sender, DataGridViewCellEventArgs e)
+        {
+            expressionTextBox.Text =
+                table.cells[e.RowIndex][e.ColumnIndex].Expression;
         }
         private void HandleCellUpdate(int rowIndex, int columnIndex)
         {
-            var currentCellValue = dataGridView.Rows[rowIndex].Cells[columnIndex].Value;
-            if (currentCellValue == null) return;
-      
-            table.cells[rowIndex][columnIndex].Expression = currentCellValue.ToString();
-            if ((string)currentCellValue != table.cells[rowIndex][columnIndex].Evaluation)
+            var selectedCellExpression = dataGridView.Rows[rowIndex].Cells[columnIndex].Value;
+            if (selectedCellExpression == null) return;
+            var newExpression = selectedCellExpression.ToString();
+            var currentCell = table.cells[rowIndex][columnIndex];
+            if (newExpression != currentCell.Expression)
             {
+                currentCell.Expression = newExpression;
                 table.UpdateCell(rowIndex, columnIndex);
+                table.UpdateDependentOnMeCells(rowIndex, columnIndex);
             }
-            expressionTextBox.Text = dataGridView.CurrentCell.Value.ToString();
-            dataGridView.CurrentCell.Value = table.cells[rowIndex][columnIndex].Evaluation;
+            dataGridView.Rows[rowIndex].Cells[columnIndex].Value = currentCell.Evaluation;
         }
     }
 }

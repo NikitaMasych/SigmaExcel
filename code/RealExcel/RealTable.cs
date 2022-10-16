@@ -78,13 +78,14 @@ namespace RealExcel
         }
         public void DeleteRow()
         {
-            if (rowsAmount == 0) return;
+            if (rowsAmount == 1) return;
             dataGridView.Rows.RemoveAt(rowsAmount - 1);
+            foreach(var cell in cells[rowsAmount - 1])
+            {
+                UpdateDependentOnMeCells(cell.rowIndex, cell.columnIndex);
+            }
             cells.RemoveAt(rowsAmount - 1);
             --rowsAmount;
-            /*
-             * TODO: Add cells' contents update.
-             */
         }
         public void DeleteColumn()
         {
@@ -93,12 +94,25 @@ namespace RealExcel
             dataGridView.Columns.RemoveAt(columnsAmount - 1);
             for (int i = 0; i != rowsAmount; ++i)
             {
+                UpdateDependentOnMeCells(i, columnsAmount - 1);
                 cells[i].RemoveAt(columnsAmount - 1);
             }
             --columnsAmount;
-            /*
-             * TODO: Add cells' contents update.
-             */
+        }
+        public void UpdateDependentOnMeCells(int rowIndex, int columnIndex)
+        {
+            var cell = cells[rowIndex][columnIndex];
+            if (cell.CheckForDependenciesCycle(ref cell))
+            {
+                return;
+            }
+            foreach (var dependentCell in cell.dependentOnMeCells.ToList())
+            {
+                UpdateCell(dependentCell.rowIndex, dependentCell.columnIndex);
+                dataGridView.Rows[dependentCell.rowIndex].Cells[dependentCell.columnIndex].Value 
+                    = dependentCell.Evaluation;
+                UpdateDependentOnMeCells(dependentCell.rowIndex, dependentCell.columnIndex);
+            }
         }
         public void UpdateCell(int rowIndex, int columnIndex)
         {
@@ -107,24 +121,22 @@ namespace RealExcel
             cell.Evaluation = cell.Expression;
             try
             {
-                ReplaceCellsReferences(ref cell);
-            }
-            catch
-            {
-                return;
-            }
-            if (cell.CheckForDependenciesCycle()) return;
-            try
-            { 
-                cell.Evaluation = RealEvaluator.EvaluateExpression(cell.Expression).ToString();
+                var expressionWithoutReferences = ReplaceCellsReferences(ref cell);
+                if (cell.CheckForDependenciesCycle(ref cell))
+                {
+                    throw new Exception("Dependencies cycle");
+                }
+                cell.Evaluation = RealEvaluator.EvaluateExpression(expressionWithoutReferences).ToString();
             }
             catch
             {
                 return;
             }
         }
-        private void ReplaceCellsReferences(ref RealCell cell)
+        private string ReplaceCellsReferences(ref RealCell cell)
         {
+            cell.cellsIDependOn = new HashSet<RealCell>();
+            DeleteExpiredDependencies(ref cell);
             string pattern = @"[A-Z]+[0-9]+";
             Regex regex = new Regex(pattern, RegexOptions.IgnoreCase);
             foreach(Match match in regex.Matches(cell.Expression))
@@ -139,7 +151,8 @@ namespace RealExcel
                     {
                         continue; // important moment
                     }
-                    cell.ConjugatedCells.Add(cells[rowIndex][columnIndex]);
+                    cell.cellsIDependOn.Add(cells[rowIndex][columnIndex]);
+                    cells[rowIndex][columnIndex].dependentOnMeCells.Add(cell);
                 }
                 catch
                 {
@@ -147,7 +160,7 @@ namespace RealExcel
                 }
             }
             MatchEvaluator matchEvaluator = new MatchEvaluator(BindValueToAddress);
-            cell.Expression = regex.Replace(cell.Expression, matchEvaluator);
+            return regex.Replace(cell.Expression, matchEvaluator);
         }
         private string BindValueToAddress(Match match)
         {
@@ -163,6 +176,19 @@ namespace RealExcel
             catch
             {
                 throw new Exception("Null value reference");
+            }
+        }
+        private void DeleteExpiredDependencies(ref RealCell currentCell)
+        {
+            foreach(var cellRow in cells)
+            {
+                foreach(var cell in cellRow)
+                {
+                    if (cell.dependentOnMeCells.Contains(currentCell))
+                    {
+                        cell.dependentOnMeCells.Remove(currentCell);
+                    }
+                }
             }
         }
     }
