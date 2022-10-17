@@ -127,6 +127,7 @@
             this.evaluateButton.TabIndex = 9;
             this.evaluateButton.Text = "Evaluate";
             this.evaluateButton.UseVisualStyleBackColor = false;
+            this.evaluateButton.Click += new System.EventHandler(this.Evaluate_Click);
             // 
             // RealExcel
             // 

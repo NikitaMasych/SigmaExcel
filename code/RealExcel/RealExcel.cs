@@ -38,22 +38,25 @@ namespace RealExcel
         {
             table.DeleteColumn();
         }
+        private void Evaluate_Click(object sender, EventArgs e)
+        {
+            HandleCellUpdate(dataGridView.CurrentCell.RowIndex,
+                dataGridView.CurrentCell.ColumnIndex, expressionTextBox.Text);
+        }
         private void UpdateCell_CellEndEdit(object sender, DataGridViewCellEventArgs e)
         {
             expressionTextBox.Text = 
                 dataGridView.Rows[e.RowIndex].Cells[e.ColumnIndex].Value.ToString();
-            HandleCellUpdate(e.RowIndex, e.ColumnIndex);
+
+            HandleCellUpdate(e.RowIndex, e.ColumnIndex, expressionTextBox.Text);
         }
         private void UpdateTextBox_CellClick(object sender, DataGridViewCellEventArgs e)
         {
             expressionTextBox.Text =
                 table.cells[e.RowIndex][e.ColumnIndex].Expression;
         }
-        private void HandleCellUpdate(int rowIndex, int columnIndex)
+        private void HandleCellUpdate(int rowIndex, int columnIndex, string newExpression)
         {
-            var selectedCellExpression = dataGridView.Rows[rowIndex].Cells[columnIndex].Value;
-            if (selectedCellExpression == null) return;
-            var newExpression = selectedCellExpression.ToString();
             var currentCell = table.cells[rowIndex][columnIndex];
             if (newExpression != currentCell.Expression)
             {

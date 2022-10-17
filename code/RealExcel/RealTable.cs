@@ -79,31 +79,33 @@ namespace RealExcel
         public void DeleteRow()
         {
             if (rowsAmount == 1) return;
-            dataGridView.Rows.RemoveAt(rowsAmount - 1);
             foreach(var cell in cells[rowsAmount - 1])
             {
+                cell.Evaluation = "valueToCauseParsingError";
                 UpdateDependentOnMeCells(cell.rowIndex, cell.columnIndex);
             }
             cells.RemoveAt(rowsAmount - 1);
+            dataGridView.Rows.RemoveAt(rowsAmount - 1);
             --rowsAmount;
         }
         public void DeleteColumn()
         {
             if (columnsAmount == 1) return;
-
-            dataGridView.Columns.RemoveAt(columnsAmount - 1);
             for (int i = 0; i != rowsAmount; ++i)
             {
+                cells[i][columnsAmount - 1].Evaluation = "valueToCauseParsingError";
                 UpdateDependentOnMeCells(i, columnsAmount - 1);
                 cells[i].RemoveAt(columnsAmount - 1);
             }
+            dataGridView.Columns.RemoveAt(columnsAmount - 1);
             --columnsAmount;
         }
         public void UpdateDependentOnMeCells(int rowIndex, int columnIndex)
         {
             var cell = cells[rowIndex][columnIndex];
-            if (cell.CheckForDependenciesCycle(ref cell))
+            if (cell.hasDependencyCycle)
             {
+                UpdateCellsInDependencyCycle(rowIndex, columnIndex);
                 return;
             }
             foreach (var dependentCell in cell.dependentOnMeCells.ToList())
@@ -114,6 +116,38 @@ namespace RealExcel
                 UpdateDependentOnMeCells(dependentCell.rowIndex, dependentCell.columnIndex);
             }
         }
+        private void UpdateCellsInDependencyCycle(int rowIndex, int columnIndex)
+        {
+            var linkedCells = new HashSet<RealCell>() { cells[rowIndex][columnIndex] };
+            var visited = new Dictionary<RealCell, bool>();
+            linkedCells = GatherCellsInDependencyCycle(linkedCells, visited);
+            foreach (var cell in linkedCells)
+            {
+                cell.Evaluation = cell.Expression;
+                cell.hasDependencyCycle = true;
+                dataGridView.Rows[cell.rowIndex].Cells[cell.columnIndex].Value = cell.Evaluation;
+            }
+        }
+        private HashSet<RealCell> GatherCellsInDependencyCycle(HashSet<RealCell> current, 
+            Dictionary<RealCell, bool> visited)
+        {
+            foreach (var cell in current.ToList())
+            {   if (visited.ContainsKey(cell))
+                {
+                    if (!visited[cell])
+                    {
+                        visited[cell] = true;
+                        current.UnionWith(GatherCellsInDependencyCycle(cell.dependentOnMeCells, visited));
+                    }
+                }
+                else
+                {
+                    visited.Add(cell, true);
+                    current.UnionWith(GatherCellsInDependencyCycle(cell.dependentOnMeCells, visited));
+                }
+            }
+            return current;
+        }
         public void UpdateCell(int rowIndex, int columnIndex)
         {
             var cell = cells[rowIndex][columnIndex];
@@ -121,11 +155,15 @@ namespace RealExcel
             cell.Evaluation = cell.Expression;
             try
             {
-                var expressionWithoutReferences = ReplaceCellsReferences(ref cell);
+                cell.cellsIDependOn = GetCellsHashSet(cell.Expression);
+                UpdateDependenciesOnMe(ref cell);
+                var expressionWithoutReferences = ReplaceCellsReferences(cell.Expression);
                 if (cell.CheckForDependenciesCycle(ref cell))
                 {
-                    throw new Exception("Dependencies cycle");
+                    cell.hasDependencyCycle = true;
+                    throw new Exception("Dependency cycle");
                 }
+                cell.hasDependencyCycle = false;
                 cell.Evaluation = RealEvaluator.EvaluateExpression(expressionWithoutReferences).ToString();
             }
             catch
@@ -133,13 +171,12 @@ namespace RealExcel
                 return;
             }
         }
-        private string ReplaceCellsReferences(ref RealCell cell)
+        private HashSet<RealCell> GetCellsHashSet(string expression)
         {
-            cell.cellsIDependOn = new HashSet<RealCell>();
-            DeleteExpiredDependencies(ref cell);
-            string pattern = @"[A-Z]+[0-9]+";
+            HashSet<RealCell> cellsInExpression = new HashSet<RealCell>();
+            const string pattern = @"[A-Z]+[0-9]+";
             Regex regex = new Regex(pattern, RegexOptions.IgnoreCase);
-            foreach(Match match in regex.Matches(cell.Expression))
+            foreach(Match match in regex.Matches(expression))
             {
                 string cellAddress = match.Value;
                 var rowIndex = Int32.Parse(Regex.Replace(cellAddress, @"\D", string.Empty)) - 1;
@@ -147,38 +184,21 @@ namespace RealExcel
                 var columnIndex = ExcelBaseRepresentor.ConvertFromPseudo26Base(columnIndexInPseudo26Base) - 1;
                 try
                 {
-                    if(rowIndex == cell.RowIndex && columnIndex == cell.ColumnIndex)
-                    {
-                        continue; // important moment
-                    }
-                    cell.cellsIDependOn.Add(cells[rowIndex][columnIndex]);
-                    cells[rowIndex][columnIndex].dependentOnMeCells.Add(cell);
+                    cellsInExpression.Add(cells[rowIndex][columnIndex]);
                 }
                 catch
                 {
                     throw new Exception("Non-existing cell reference");
                 }
             }
-            MatchEvaluator matchEvaluator = new MatchEvaluator(BindValueToAddress);
-            return regex.Replace(cell.Expression, matchEvaluator);
+            return cellsInExpression;
         }
-        private string BindValueToAddress(Match match)
+        private void UpdateDependenciesOnMe(ref RealCell currentCell)
         {
-            string cellAddress = match.Value;
-            var rowIndex = Int32.Parse(Regex.Replace(cellAddress, @"\D", string.Empty)) - 1 ;
-            var columnIndexInPseudo26Base = Regex.Replace(cellAddress, @"[\d-]", string.Empty);
-            var columnIndex = ExcelBaseRepresentor.ConvertFromPseudo26Base(columnIndexInPseudo26Base) - 1;
-            try
-            {
-                var cellValue = cells[rowIndex][columnIndex].Evaluation.ToString();
-                return cellValue;
-            }
-            catch
-            {
-                throw new Exception("Null value reference");
-            }
+            DeleteExpiredDependenciesOnMe(ref currentCell);
+            SetDependenciesOnMe(ref currentCell);
         }
-        private void DeleteExpiredDependencies(ref RealCell currentCell)
+        private void DeleteExpiredDependenciesOnMe(ref RealCell currentCell)
         {
             foreach(var cellRow in cells)
             {
@@ -189,6 +209,36 @@ namespace RealExcel
                         cell.dependentOnMeCells.Remove(currentCell);
                     }
                 }
+            }
+        }
+        private void SetDependenciesOnMe(ref RealCell currentCell)
+        {
+            foreach (var cell in currentCell.cellsIDependOn)
+            {
+                cell.dependentOnMeCells.Add(currentCell);
+            }
+        }
+        private string ReplaceCellsReferences(string expression)
+        {
+            const string pattern = @"[A-Z]+[0-9]+";
+            Regex regex = new Regex(pattern, RegexOptions.IgnoreCase);
+            MatchEvaluator matchEvaluator = new MatchEvaluator(BindValueToAddress);
+            return regex.Replace(expression, matchEvaluator);
+        }
+        private string BindValueToAddress(Match match)
+        {
+            string cellAddress = match.Value;
+            var rowIndex = Int32.Parse(Regex.Replace(cellAddress, @"\D", string.Empty)) - 1;
+            var columnIndexInPseudo26Base = Regex.Replace(cellAddress, @"[\d-]", string.Empty);
+            var columnIndex = ExcelBaseRepresentor.ConvertFromPseudo26Base(columnIndexInPseudo26Base) - 1;
+            try
+            {
+                var cellValue = cells[rowIndex][columnIndex].Evaluation.ToString();
+                return cellValue;
+            }
+            catch
+            {
+                throw new Exception("Null value reference");
             }
         }
     }

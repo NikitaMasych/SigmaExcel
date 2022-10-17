@@ -11,6 +11,7 @@ namespace RealExcel
     {
         public int rowIndex { get; }
         public int columnIndex {get; }
+        public bool hasDependencyCycle { get; set; }
         public string Expression { get; set; }
         public string Evaluation { get; set; }
         public HashSet<RealCell> cellsIDependOn = new HashSet<RealCell>();
