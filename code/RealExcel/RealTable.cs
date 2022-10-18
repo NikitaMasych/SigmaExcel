@@ -7,6 +7,7 @@ using System.Text;
 using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using System.IO;
 
 namespace RealExcel
 {
@@ -26,6 +27,7 @@ namespace RealExcel
         }
         private void InitializeColumns()
         {
+            dataGridView.Columns.Clear();
             for (int columnIndex = 0; columnIndex != columnsAmount; ++columnIndex)
             {
                 dataGridView.Columns.Add(ExcelBaseRepresentor.ConvertToPseudo26Base(columnIndex + 1),
@@ -34,6 +36,7 @@ namespace RealExcel
         }
         private void InitializeRows()
         {
+            dataGridView.Rows.Clear();
             for (int rowIndex = 0; rowIndex != rowsAmount; ++rowIndex)
             {
                 dataGridView.Rows.Add(1);
@@ -54,27 +57,29 @@ namespace RealExcel
         }
         public void AddRow()
         {
+            ++rowsAmount;
             var cellsRow = new List<RealCell>();
             for (int columnIndex = 0; columnIndex != columnsAmount; ++columnIndex)
             {
-                cellsRow.Add(new RealCell(rowsAmount, columnIndex));
+                cellsRow.Add(new RealCell(rowsAmount - 1, columnIndex));
             }
             cells.Add(cellsRow);
             dataGridView.Rows.Add(1);
             dataGridView.Rows[dataGridView.Rows.Count - 1].HeaderCell.Value =
                 (dataGridView.Rows.Count).ToString();
-            ++rowsAmount;
+            UpdateAllCells();
         }
         public void AddColumn()
         {
-            dataGridView.Columns.Add(ExcelBaseRepresentor.ConvertToPseudo26Base(columnsAmount + 1),
-                    ExcelBaseRepresentor.ConvertToPseudo26Base(columnsAmount + 1));
-
-            for (int i = 0; i != rowsAmount; ++i)
-            {
-                cells[i].Add(new RealCell(i, columnsAmount));
-            }
             ++columnsAmount;
+            dataGridView.Columns.Add(ExcelBaseRepresentor.ConvertToPseudo26Base(columnsAmount),
+                    ExcelBaseRepresentor.ConvertToPseudo26Base(columnsAmount));
+
+            for (int rowIndex = 0; rowIndex != rowsAmount; ++rowIndex)
+            { 
+                cells[rowIndex].Add(new RealCell(rowIndex, columnsAmount - 1));
+            }
+            UpdateAllCells();
         }
         public void DeleteRow()
         {
@@ -83,6 +88,8 @@ namespace RealExcel
             {
                 cell.Evaluation = "valueToCauseParsingError";
                 UpdateDependentOnMeCells(cell.rowIndex, cell.columnIndex);
+                var currentCell = cell;
+                DeleteExpiredDependenciesOnMe(ref currentCell);
             }
             cells.RemoveAt(rowsAmount - 1);
             dataGridView.Rows.RemoveAt(rowsAmount - 1);
@@ -95,10 +102,65 @@ namespace RealExcel
             {
                 cells[i][columnsAmount - 1].Evaluation = "valueToCauseParsingError";
                 UpdateDependentOnMeCells(i, columnsAmount - 1);
+                var currentCell = cells[i][columnsAmount - 1];
+                DeleteExpiredDependenciesOnMe(ref currentCell);
                 cells[i].RemoveAt(columnsAmount - 1);
             }
             dataGridView.Columns.RemoveAt(columnsAmount - 1);
             --columnsAmount;
+        }
+        public void SaveToCSV(string filePath)
+        {
+            const char delimiter = '$';
+            StringBuilder output = new StringBuilder();
+            output.AppendLine($"{rowsAmount.ToString()}{delimiter}{columnsAmount.ToString()}");
+            foreach (var cellRow in cells)
+            {
+                StringBuilder line = new StringBuilder();
+                foreach (var cell in cellRow)
+                {
+                    line.Append($"{cell.Expression}{delimiter}");
+                }
+                output.AppendLine(line.ToString());
+            }
+            File.WriteAllText(filePath, output.ToString());
+        }
+        public void OpenFromCSV(string filePath)
+        {
+            const char delimiter = '$';
+            var reader = new StreamReader(filePath);
+            var size = reader.ReadLine().Split(delimiter);
+            rowsAmount = int.Parse(size[0]);
+            columnsAmount = int.Parse(size[1]);
+            InitializeColumns();
+            InitializeRows();
+
+            cells = new List<List<RealCell>>();
+            for (int rowIndex = 0; rowIndex != rowsAmount; ++rowIndex)
+            {
+                var line = reader.ReadLine();
+                var expressions = line.Split(delimiter);
+                var cellsRow = new List<RealCell>();
+                for (int columnIndex = 0; columnIndex != columnsAmount; ++columnIndex)
+                {
+                    cellsRow.Add(new RealCell(rowIndex, columnIndex, expressions[columnIndex]));
+                }
+                cells.Add(cellsRow);
+            }
+            UpdateAllCells();
+        }
+        private void UpdateAllCells()
+        {
+            for(int rowIndex = 0; rowIndex != rowsAmount; ++rowIndex)
+            {
+                for(int columnIndex = 0; columnIndex != columnsAmount; ++columnIndex)
+                {
+                    UpdateCell(rowIndex, columnIndex);
+                    UpdateDependentOnMeCells(rowIndex, columnIndex);
+                    dataGridView.Rows[rowIndex].Cells[columnIndex].Value 
+                        = cells[rowIndex][columnIndex].Evaluation;
+                }
+            }
         }
         public void UpdateDependentOnMeCells(int rowIndex, int columnIndex)
         {
@@ -151,7 +213,7 @@ namespace RealExcel
         public void UpdateCell(int rowIndex, int columnIndex)
         {
             var cell = cells[rowIndex][columnIndex];
-            if (cell.Expression == null) return;
+            if (cell.Expression == null || cell.Expression == "") return;
             cell.Evaluation = cell.Expression;
             try
             {

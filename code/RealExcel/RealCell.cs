@@ -22,6 +22,12 @@ namespace RealExcel
             this.rowIndex = rowIndex;
             this.columnIndex = columnIndex;
         }
+        public RealCell(int rowIndex, int columnIndex, string Expression) 
+        {
+            this.rowIndex = rowIndex;
+            this.columnIndex = columnIndex;
+            this.Expression = Expression;
+        }
         public bool CheckForDependenciesCycle(ref RealCell current)
         {
             foreach (var cell in cellsIDependOn)

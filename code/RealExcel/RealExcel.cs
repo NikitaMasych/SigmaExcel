@@ -46,7 +46,7 @@ namespace RealExcel
         private void UpdateCell_CellEndEdit(object sender, DataGridViewCellEventArgs e)
         {
             expressionTextBox.Text = 
-                dataGridView.Rows[e.RowIndex].Cells[e.ColumnIndex].Value.ToString();
+                $"{dataGridView.Rows[e.RowIndex].Cells[e.ColumnIndex].Value}";
 
             HandleCellUpdate(e.RowIndex, e.ColumnIndex, expressionTextBox.Text);
         }
@@ -65,6 +65,49 @@ namespace RealExcel
                 table.UpdateDependentOnMeCells(rowIndex, columnIndex);
             }
             dataGridView.Rows[rowIndex].Cells[columnIndex].Value = currentCell.Evaluation;
+        }
+
+        private void saveAsToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            saveFileDialog.Title = "Save the Table";
+            saveFileDialog.InitialDirectory =
+                System.Environment.GetFolderPath(Environment.SpecialFolder.Personal);
+            saveFileDialog.FileName = "";
+            saveFileDialog.Filter = "CSV TABLE|*.csv";
+            if (saveFileDialog.ShowDialog() == DialogResult.Cancel)
+            {
+                return;
+            }
+            else
+            {
+                var selectedFileName = saveFileDialog.FileName;
+                table.SaveToCSV(selectedFileName);
+            }
+        }
+        private void openToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            openFileDialog.Title = "Open the Table";
+            openFileDialog.InitialDirectory =
+                System.Environment.GetFolderPath(Environment.SpecialFolder.Personal);
+            openFileDialog.FileName = "";
+            openFileDialog.Filter = "CSV TABLE|*.csv";
+            openFileDialog.ShowDialog();
+            if (openFileDialog.ShowDialog() == DialogResult.Cancel)
+            {
+                return;
+            }
+            else
+            {
+                var selectedFileName = openFileDialog.FileName;
+                table.OpenFromCSV(selectedFileName);
+            }
+        }
+        private void exitToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            if (MessageBox.Show("Are you sure you want to quit?", "Exit", MessageBoxButtons.YesNo) == DialogResult.Yes)
+            {
+                Application.Exit();
+            }
         }
     }
 }

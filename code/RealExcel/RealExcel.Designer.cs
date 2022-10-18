@@ -27,7 +27,15 @@
             this.addColumnButton = new System.Windows.Forms.Button();
             this.deleteColumnButton = new System.Windows.Forms.Button();
             this.evaluateButton = new System.Windows.Forms.Button();
+            this.menuStrip = new System.Windows.Forms.MenuStrip();
+            this.fileToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.saveAsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.openToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.exitToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.openFileDialog = new System.Windows.Forms.OpenFileDialog();
+            this.saveFileDialog = new System.Windows.Forms.SaveFileDialog();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView)).BeginInit();
+            this.menuStrip.SuspendLayout();
             this.SuspendLayout();
             // 
             // dataGridView
@@ -40,7 +48,7 @@
             this.dataGridView.Name = "dataGridView";
             this.dataGridView.RowHeadersWidth = 51;
             this.dataGridView.RowTemplate.Height = 24;
-            this.dataGridView.Size = new System.Drawing.Size(997, 452);
+            this.dataGridView.Size = new System.Drawing.Size(997, 601);
             this.dataGridView.TabIndex = 0;
             this.dataGridView.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.UpdateTextBox_CellClick);
             this.dataGridView.CellEndEdit += new System.Windows.Forms.DataGridViewCellEventHandler(this.UpdateCell_CellEndEdit);
@@ -52,7 +60,7 @@
             this.addRowButton.Cursor = System.Windows.Forms.Cursors.Hand;
             this.addRowButton.FlatAppearance.BorderColor = System.Drawing.SystemColors.Desktop;
             this.addRowButton.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
-            this.addRowButton.Location = new System.Drawing.Point(22, 23);
+            this.addRowButton.Location = new System.Drawing.Point(184, 23);
             this.addRowButton.Name = "addRowButton";
             this.addRowButton.Size = new System.Drawing.Size(93, 37);
             this.addRowButton.TabIndex = 1;
@@ -64,7 +72,7 @@
             // 
             this.expressionTextBox.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.expressionTextBox.Font = new System.Drawing.Font("Century", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.expressionTextBox.Location = new System.Drawing.Point(630, 26);
+            this.expressionTextBox.Location = new System.Drawing.Point(649, 24);
             this.expressionTextBox.Name = "expressionTextBox";
             this.expressionTextBox.Size = new System.Drawing.Size(247, 36);
             this.expressionTextBox.TabIndex = 5;
@@ -76,7 +84,7 @@
             this.deleteRowButton.Cursor = System.Windows.Forms.Cursors.Hand;
             this.deleteRowButton.FlatAppearance.BorderColor = System.Drawing.SystemColors.Desktop;
             this.deleteRowButton.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
-            this.deleteRowButton.Location = new System.Drawing.Point(143, 23);
+            this.deleteRowButton.Location = new System.Drawing.Point(294, 23);
             this.deleteRowButton.Name = "deleteRowButton";
             this.deleteRowButton.Size = new System.Drawing.Size(93, 37);
             this.deleteRowButton.TabIndex = 6;
@@ -91,7 +99,7 @@
             this.addColumnButton.Cursor = System.Windows.Forms.Cursors.Hand;
             this.addColumnButton.FlatAppearance.BorderColor = System.Drawing.SystemColors.Desktop;
             this.addColumnButton.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
-            this.addColumnButton.Location = new System.Drawing.Point(267, 23);
+            this.addColumnButton.Location = new System.Drawing.Point(407, 23);
             this.addColumnButton.Name = "addColumnButton";
             this.addColumnButton.Size = new System.Drawing.Size(94, 37);
             this.addColumnButton.TabIndex = 7;
@@ -106,7 +114,7 @@
             this.deleteColumnButton.Cursor = System.Windows.Forms.Cursors.Hand;
             this.deleteColumnButton.FlatAppearance.BorderColor = System.Drawing.SystemColors.Desktop;
             this.deleteColumnButton.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
-            this.deleteColumnButton.Location = new System.Drawing.Point(392, 23);
+            this.deleteColumnButton.Location = new System.Drawing.Point(520, 24);
             this.deleteColumnButton.Name = "deleteColumnButton";
             this.deleteColumnButton.Size = new System.Drawing.Size(110, 37);
             this.deleteColumnButton.TabIndex = 8;
@@ -129,11 +137,61 @@
             this.evaluateButton.UseVisualStyleBackColor = false;
             this.evaluateButton.Click += new System.EventHandler(this.Evaluate_Click);
             // 
+            // menuStrip
+            // 
+            this.menuStrip.ImageScalingSize = new System.Drawing.Size(20, 20);
+            this.menuStrip.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.fileToolStripMenuItem});
+            this.menuStrip.Location = new System.Drawing.Point(0, 0);
+            this.menuStrip.Name = "menuStrip";
+            this.menuStrip.Size = new System.Drawing.Size(1034, 28);
+            this.menuStrip.TabIndex = 10;
+            this.menuStrip.Text = "menuStrip";
+            // 
+            // fileToolStripMenuItem
+            // 
+            this.fileToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.saveAsToolStripMenuItem,
+            this.openToolStripMenuItem,
+            this.exitToolStripMenuItem});
+            this.fileToolStripMenuItem.Name = "fileToolStripMenuItem";
+            this.fileToolStripMenuItem.Size = new System.Drawing.Size(44, 24);
+            this.fileToolStripMenuItem.Text = "File";
+            // 
+            // saveAsToolStripMenuItem
+            // 
+            this.saveAsToolStripMenuItem.Name = "saveAsToolStripMenuItem";
+            this.saveAsToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.S)));
+            this.saveAsToolStripMenuItem.Size = new System.Drawing.Size(201, 26);
+            this.saveAsToolStripMenuItem.Text = "Save as";
+            this.saveAsToolStripMenuItem.Click += new System.EventHandler(this.saveAsToolStripMenuItem_Click);
+            // 
+            // openToolStripMenuItem
+            // 
+            this.openToolStripMenuItem.Name = "openToolStripMenuItem";
+            this.openToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.O)));
+            this.openToolStripMenuItem.Size = new System.Drawing.Size(201, 26);
+            this.openToolStripMenuItem.Text = "Open";
+            this.openToolStripMenuItem.Click += new System.EventHandler(this.openToolStripMenuItem_Click);
+            // 
+            // exitToolStripMenuItem
+            // 
+            this.exitToolStripMenuItem.Name = "exitToolStripMenuItem";
+            this.exitToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)(((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.Shift) 
+            | System.Windows.Forms.Keys.Q)));
+            this.exitToolStripMenuItem.Size = new System.Drawing.Size(201, 26);
+            this.exitToolStripMenuItem.Text = "Exit";
+            this.exitToolStripMenuItem.Click += new System.EventHandler(this.exitToolStripMenuItem_Click);
+            // 
+            // openFileDialog
+            // 
+            this.openFileDialog.FileName = "openFileDialog";
+            // 
             // RealExcel
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1034, 553);
+            this.ClientSize = new System.Drawing.Size(1034, 706);
             this.Controls.Add(this.evaluateButton);
             this.Controls.Add(this.deleteColumnButton);
             this.Controls.Add(this.addColumnButton);
@@ -141,11 +199,15 @@
             this.Controls.Add(this.expressionTextBox);
             this.Controls.Add(this.addRowButton);
             this.Controls.Add(this.dataGridView);
+            this.Controls.Add(this.menuStrip);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
+            this.MainMenuStrip = this.menuStrip;
             this.Name = "RealExcel";
             this.Text = "RealExcel";
             this.Load += new System.EventHandler(this.RealExcel_Load);
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView)).EndInit();
+            this.menuStrip.ResumeLayout(false);
+            this.menuStrip.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -160,6 +222,13 @@
         private System.Windows.Forms.Button addColumnButton;
         private System.Windows.Forms.Button deleteColumnButton;
         private System.Windows.Forms.Button evaluateButton;
+        private System.Windows.Forms.MenuStrip menuStrip;
+        private System.Windows.Forms.ToolStripMenuItem fileToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem saveAsToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem openToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem exitToolStripMenuItem;
+        private System.Windows.Forms.OpenFileDialog openFileDialog;
+        private System.Windows.Forms.SaveFileDialog saveFileDialog;
     }
 }
 
