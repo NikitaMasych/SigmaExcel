@@ -1,9 +1,11 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio Version 17
-VisualStudioVersion = 17.3.32922.545
+# Visual Studio 15
+VisualStudioVersion = 15.0.28307.2092
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RealExcel", "RealExcel\RealExcel.csproj", "{A16201CC-DAF4-4CA9-A72D-423B2E159B60}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UnitTests", "UnitTests\UnitTests.csproj", "{ED60B00B-CD80-4752-946E-0CEB1529AC03}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -15,6 +17,10 @@ Global
 		{A16201CC-DAF4-4CA9-A72D-423B2E159B60}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{A16201CC-DAF4-4CA9-A72D-423B2E159B60}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{A16201CC-DAF4-4CA9-A72D-423B2E159B60}.Release|Any CPU.Build.0 = Release|Any CPU
+		{ED60B00B-CD80-4752-946E-0CEB1529AC03}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{ED60B00B-CD80-4752-946E-0CEB1529AC03}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{ED60B00B-CD80-4752-946E-0CEB1529AC03}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{ED60B00B-CD80-4752-946E-0CEB1529AC03}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
