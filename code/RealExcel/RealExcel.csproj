@@ -107,6 +107,24 @@
   <ItemGroup>
     <None Include="App.config" />
   </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Save-9.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Save-1.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\SaveAs-1.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Open-1.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Exit-1.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Info-1.jpg" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
     <PropertyGroup>
