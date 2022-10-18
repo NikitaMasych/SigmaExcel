@@ -41,6 +41,22 @@ public interface IRealExcelVisitor<Result> : IParseTreeVisitor<Result> {
 	Result VisitParenthesis([NotNull] RealExcelParser.ParenthesisContext context);
 
 	/// <summary>
+	/// Visit a parse tree produced by the <c>Trigonometrical</c>
+	/// labeled alternative in <see cref="RealExcelParser.expr"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	/// <return>The visitor result.</return>
+	Result VisitTrigonometrical([NotNull] RealExcelParser.TrigonometricalContext context);
+
+	/// <summary>
+	/// Visit a parse tree produced by the <c>Abs</c>
+	/// labeled alternative in <see cref="RealExcelParser.expr"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	/// <return>The visitor result.</return>
+	Result VisitAbs([NotNull] RealExcelParser.AbsContext context);
+
+	/// <summary>
 	/// Visit a parse tree produced by the <c>Number</c>
 	/// labeled alternative in <see cref="RealExcelParser.expr"/>.
 	/// </summary>
@@ -71,6 +87,14 @@ public interface IRealExcelVisitor<Result> : IParseTreeVisitor<Result> {
 	/// <param name="context">The parse tree.</param>
 	/// <return>The visitor result.</return>
 	Result VisitModIDiv([NotNull] RealExcelParser.ModIDivContext context);
+
+	/// <summary>
+	/// Visit a parse tree produced by the <c>Exponential</c>
+	/// labeled alternative in <see cref="RealExcelParser.expr"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	/// <return>The visitor result.</return>
+	Result VisitExponential([NotNull] RealExcelParser.ExponentialContext context);
 
 	/// <summary>
 	/// Visit a parse tree produced by the <c>MaxMin</c>

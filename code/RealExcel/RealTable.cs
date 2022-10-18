@@ -13,16 +13,24 @@ namespace RealExcel
 {
     class RealTable
     {
+        private const int defaultColumnsAmount = 7;
+        private const int defaultRowsAmount = 10;
         private DataGridView dataGridView;
         public bool hasBeenSaved;
         public string storagePath;
         public List<List<RealCell>> cells = new List<List<RealCell>>();
-        private int columnsAmount = 7;
-        private int rowsAmount = 10;
+        private int columnsAmount = defaultColumnsAmount;
+        private int rowsAmount = defaultRowsAmount;
         
         public RealTable(ref DataGridView dataGridView)
         {
             this.dataGridView = dataGridView;
+            Reset();
+        }
+        public void Reset()
+        {
+            columnsAmount = defaultColumnsAmount;
+            rowsAmount = defaultRowsAmount;
             InitializeColumns();
             InitializeRows();
             InitializeCells();
@@ -56,14 +64,6 @@ namespace RealExcel
                 }
                 cells.Add(cellsRow);
             }
-        }
-        public void Reset()
-        {
-            columnsAmount = 7;
-            rowsAmount = 10;
-            InitializeColumns();
-            InitializeRows();
-            InitializeCells();
         }
         public void AddRow()
         {
@@ -202,6 +202,7 @@ namespace RealExcel
             foreach (var cell in linkedCells)
             {
                 cell.Evaluation = cell.Expression;
+                
                 cell.hasDependencyCycle = true;
                 dataGridView.Rows[cell.rowIndex].Cells[cell.columnIndex].Value = cell.Evaluation;
             }
@@ -228,6 +229,7 @@ namespace RealExcel
         }
         public void UpdateCell(int rowIndex, int columnIndex)
         {
+            
             var cell = cells[rowIndex][columnIndex];
             if (cell.Expression == null || cell.Expression == "") return;
             cell.Evaluation = cell.Expression;

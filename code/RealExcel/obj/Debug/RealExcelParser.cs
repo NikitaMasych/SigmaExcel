@@ -32,7 +32,8 @@ using DFA = Antlr4.Runtime.Dfa.DFA;
 public partial class RealExcelParser : Parser {
 	public const int
 		INT=1, FLOAT=2, LPAREN=3, RPAREN=4, SEP=5, MUL=6, DIV=7, ADD=8, SUB=9, 
-		MOD=10, IDIV=11, MAX=12, MIN=13, WS=14;
+		EXP=10, MOD=11, IDIV=12, MAX=13, MIN=14, ABS=15, SIN=16, COS=17, TAN=18, 
+		COT=19, WS=20;
 	public const int
 		RULE_compileUnit = 0, RULE_decimal = 1, RULE_expr = 2;
 	public static readonly string[] ruleNames = {
@@ -40,12 +41,13 @@ public partial class RealExcelParser : Parser {
 	};
 
 	private static readonly string[] _LiteralNames = {
-		null, null, null, "'('", "')'", null, "'*'", "'/'", "'+'", "'-'", "'mod'", 
-		"'div'", "'max'", "'min'"
+		null, null, null, "'('", "')'", null, "'*'", "'/'", "'+'", "'-'", null, 
+		"'mod'", "'div'", "'max'", "'min'", "'abs'", "'sin'", "'cos'"
 	};
 	private static readonly string[] _SymbolicNames = {
 		null, "INT", "FLOAT", "LPAREN", "RPAREN", "SEP", "MUL", "DIV", "ADD", 
-		"SUB", "MOD", "IDIV", "MAX", "MIN", "WS"
+		"SUB", "EXP", "MOD", "IDIV", "MAX", "MIN", "ABS", "SIN", "COS", "TAN", 
+		"COT", "WS"
 	};
 	public static readonly IVocabulary DefaultVocabulary = new Vocabulary(_LiteralNames, _SymbolicNames);
 
@@ -233,6 +235,55 @@ public partial class RealExcelParser : Parser {
 			else return visitor.VisitChildren(this);
 		}
 	}
+	public partial class TrigonometricalContext : ExprContext {
+		public IToken op;
+		public ITerminalNode LPAREN() { return GetToken(RealExcelParser.LPAREN, 0); }
+		public ExprContext expr() {
+			return GetRuleContext<ExprContext>(0);
+		}
+		public ITerminalNode RPAREN() { return GetToken(RealExcelParser.RPAREN, 0); }
+		public ITerminalNode SIN() { return GetToken(RealExcelParser.SIN, 0); }
+		public ITerminalNode COS() { return GetToken(RealExcelParser.COS, 0); }
+		public ITerminalNode TAN() { return GetToken(RealExcelParser.TAN, 0); }
+		public ITerminalNode COT() { return GetToken(RealExcelParser.COT, 0); }
+		public TrigonometricalContext(ExprContext context) { CopyFrom(context); }
+		public override void EnterRule(IParseTreeListener listener) {
+			IRealExcelListener typedListener = listener as IRealExcelListener;
+			if (typedListener != null) typedListener.EnterTrigonometrical(this);
+		}
+		public override void ExitRule(IParseTreeListener listener) {
+			IRealExcelListener typedListener = listener as IRealExcelListener;
+			if (typedListener != null) typedListener.ExitTrigonometrical(this);
+		}
+		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+			IRealExcelVisitor<TResult> typedVisitor = visitor as IRealExcelVisitor<TResult>;
+			if (typedVisitor != null) return typedVisitor.VisitTrigonometrical(this);
+			else return visitor.VisitChildren(this);
+		}
+	}
+	public partial class AbsContext : ExprContext {
+		public IToken op;
+		public ITerminalNode LPAREN() { return GetToken(RealExcelParser.LPAREN, 0); }
+		public ExprContext expr() {
+			return GetRuleContext<ExprContext>(0);
+		}
+		public ITerminalNode RPAREN() { return GetToken(RealExcelParser.RPAREN, 0); }
+		public ITerminalNode ABS() { return GetToken(RealExcelParser.ABS, 0); }
+		public AbsContext(ExprContext context) { CopyFrom(context); }
+		public override void EnterRule(IParseTreeListener listener) {
+			IRealExcelListener typedListener = listener as IRealExcelListener;
+			if (typedListener != null) typedListener.EnterAbs(this);
+		}
+		public override void ExitRule(IParseTreeListener listener) {
+			IRealExcelListener typedListener = listener as IRealExcelListener;
+			if (typedListener != null) typedListener.ExitAbs(this);
+		}
+		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+			IRealExcelVisitor<TResult> typedVisitor = visitor as IRealExcelVisitor<TResult>;
+			if (typedVisitor != null) return typedVisitor.VisitAbs(this);
+			else return visitor.VisitChildren(this);
+		}
+	}
 	public partial class NumberContext : ExprContext {
 		public DecimalContext @decimal() {
 			return GetRuleContext<DecimalContext>(0);
@@ -330,6 +381,30 @@ public partial class RealExcelParser : Parser {
 			else return visitor.VisitChildren(this);
 		}
 	}
+	public partial class ExponentialContext : ExprContext {
+		public IToken op;
+		public ExprContext[] expr() {
+			return GetRuleContexts<ExprContext>();
+		}
+		public ExprContext expr(int i) {
+			return GetRuleContext<ExprContext>(i);
+		}
+		public ITerminalNode EXP() { return GetToken(RealExcelParser.EXP, 0); }
+		public ExponentialContext(ExprContext context) { CopyFrom(context); }
+		public override void EnterRule(IParseTreeListener listener) {
+			IRealExcelListener typedListener = listener as IRealExcelListener;
+			if (typedListener != null) typedListener.EnterExponential(this);
+		}
+		public override void ExitRule(IParseTreeListener listener) {
+			IRealExcelListener typedListener = listener as IRealExcelListener;
+			if (typedListener != null) typedListener.ExitExponential(this);
+		}
+		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+			IRealExcelVisitor<TResult> typedVisitor = visitor as IRealExcelVisitor<TResult>;
+			if (typedVisitor != null) return typedVisitor.VisitExponential(this);
+			else return visitor.VisitChildren(this);
+		}
+	}
 	public partial class MaxMinContext : ExprContext {
 		public IToken op;
 		public ITerminalNode LPAREN() { return GetToken(RealExcelParser.LPAREN, 0); }
@@ -401,7 +476,7 @@ public partial class RealExcelParser : Parser {
 			int _alt;
 			EnterOuterAlt(_localctx, 1);
 			{
-			State = 37;
+			State = 47;
 			_errHandler.Sync(this);
 			switch (_input.La(1)) {
 			case LPAREN:
@@ -434,7 +509,7 @@ public partial class RealExcelParser : Parser {
 					_errHandler.ReportMatch(this);
 					Consume();
 				}
-				State = 17; expr(6);
+				State = 17; expr(8);
 				}
 				break;
 			case MOD:
@@ -501,20 +576,57 @@ public partial class RealExcelParser : Parser {
 				State = 34; Match(RPAREN);
 				}
 				break;
+			case ABS:
+				{
+				_localctx = new AbsContext(_localctx);
+				_ctx = _localctx;
+				_prevctx = _localctx;
+				State = 36; ((AbsContext)_localctx).op = Match(ABS);
+				State = 37; Match(LPAREN);
+				State = 38; expr(0);
+				State = 39; Match(RPAREN);
+				}
+				break;
+			case SIN:
+			case COS:
+			case TAN:
+			case COT:
+				{
+				_localctx = new TrigonometricalContext(_localctx);
+				_ctx = _localctx;
+				_prevctx = _localctx;
+				State = 41;
+				((TrigonometricalContext)_localctx).op = _input.Lt(1);
+				_la = _input.La(1);
+				if ( !((((_la) & ~0x3f) == 0 && ((1L << _la) & ((1L << SIN) | (1L << COS) | (1L << TAN) | (1L << COT))) != 0)) ) {
+					((TrigonometricalContext)_localctx).op = _errHandler.RecoverInline(this);
+				} else {
+					if (_input.La(1) == TokenConstants.Eof) {
+						matchedEOF = true;
+					}
+
+					_errHandler.ReportMatch(this);
+					Consume();
+				}
+				State = 42; Match(LPAREN);
+				State = 43; expr(0);
+				State = 44; Match(RPAREN);
+				}
+				break;
 			case INT:
 			case FLOAT:
 				{
 				_localctx = new NumberContext(_localctx);
 				_ctx = _localctx;
 				_prevctx = _localctx;
-				State = 36; @decimal();
+				State = 46; @decimal();
 				}
 				break;
 			default:
 				throw new NoViableAltException(this);
 			}
 			_ctx.stop = _input.Lt(-1);
-			State = 47;
+			State = 60;
 			_errHandler.Sync(this);
 			_alt = Interpreter.AdaptivePredict(_input,3,_ctx);
 			while ( _alt!=2 && _alt!=global::Antlr4.Runtime.Atn.ATN.InvalidAltNumber ) {
@@ -522,16 +634,27 @@ public partial class RealExcelParser : Parser {
 					if ( _parseListeners!=null ) TriggerExitRuleEvent();
 					_prevctx = _localctx;
 					{
-					State = 45;
+					State = 58;
 					_errHandler.Sync(this);
 					switch ( Interpreter.AdaptivePredict(_input,2,_ctx) ) {
 					case 1:
 						{
+						_localctx = new ExponentialContext(new ExprContext(_parentctx, _parentState));
+						PushNewRecursionContext(_localctx, _startState, RULE_expr);
+						State = 49;
+						if (!(Precpred(_ctx, 9))) throw new FailedPredicateException(this, "Precpred(_ctx, 9)");
+						State = 50; ((ExponentialContext)_localctx).op = Match(EXP);
+						State = 51; expr(10);
+						}
+						break;
+
+					case 2:
+						{
 						_localctx = new MulDivContext(new ExprContext(_parentctx, _parentState));
 						PushNewRecursionContext(_localctx, _startState, RULE_expr);
-						State = 39;
-						if (!(Precpred(_ctx, 5))) throw new FailedPredicateException(this, "Precpred(_ctx, 5)");
-						State = 40;
+						State = 52;
+						if (!(Precpred(_ctx, 7))) throw new FailedPredicateException(this, "Precpred(_ctx, 7)");
+						State = 53;
 						((MulDivContext)_localctx).op = _input.Lt(1);
 						_la = _input.La(1);
 						if ( !(_la==MUL || _la==DIV) ) {
@@ -544,17 +667,17 @@ public partial class RealExcelParser : Parser {
 							_errHandler.ReportMatch(this);
 							Consume();
 						}
-						State = 41; expr(6);
+						State = 54; expr(8);
 						}
 						break;
 
-					case 2:
+					case 3:
 						{
 						_localctx = new AddSubContext(new ExprContext(_parentctx, _parentState));
 						PushNewRecursionContext(_localctx, _startState, RULE_expr);
-						State = 42;
-						if (!(Precpred(_ctx, 4))) throw new FailedPredicateException(this, "Precpred(_ctx, 4)");
-						State = 43;
+						State = 55;
+						if (!(Precpred(_ctx, 6))) throw new FailedPredicateException(this, "Precpred(_ctx, 6)");
+						State = 56;
 						((AddSubContext)_localctx).op = _input.Lt(1);
 						_la = _input.La(1);
 						if ( !(_la==ADD || _la==SUB) ) {
@@ -567,13 +690,13 @@ public partial class RealExcelParser : Parser {
 							_errHandler.ReportMatch(this);
 							Consume();
 						}
-						State = 44; expr(5);
+						State = 57; expr(7);
 						}
 						break;
 					}
 					} 
 				}
-				State = 49;
+				State = 62;
 				_errHandler.Sync(this);
 				_alt = Interpreter.AdaptivePredict(_input,3,_ctx);
 			}
@@ -598,34 +721,41 @@ public partial class RealExcelParser : Parser {
 	}
 	private bool expr_sempred(ExprContext _localctx, int predIndex) {
 		switch (predIndex) {
-		case 0: return Precpred(_ctx, 5);
+		case 0: return Precpred(_ctx, 9);
 
-		case 1: return Precpred(_ctx, 4);
+		case 1: return Precpred(_ctx, 7);
+
+		case 2: return Precpred(_ctx, 6);
 		}
 		return true;
 	}
 
 	public static readonly string _serializedATN =
-		"\x3\xAF6F\x8320\x479D\xB75C\x4880\x1605\x191C\xAB37\x3\x10\x35\x4\x2\t"+
+		"\x3\xAF6F\x8320\x479D\xB75C\x4880\x1605\x191C\xAB37\x3\x16\x42\x4\x2\t"+
 		"\x2\x4\x3\t\x3\x4\x4\t\x4\x3\x2\x3\x2\x3\x2\x3\x3\x3\x3\x3\x4\x3\x4\x3"+
 		"\x4\x3\x4\x3\x4\x3\x4\x3\x4\x3\x4\x3\x4\x3\x4\x3\x4\x3\x4\x3\x4\x3\x4"+
 		"\x3\x4\x3\x4\x3\x4\x3\x4\x3\x4\x6\x4!\n\x4\r\x4\xE\x4\"\x3\x4\x3\x4\x3"+
-		"\x4\x5\x4(\n\x4\x3\x4\x3\x4\x3\x4\x3\x4\x3\x4\x3\x4\a\x4\x30\n\x4\f\x4"+
-		"\xE\x4\x33\v\x4\x3\x4\x2\x2\x3\x6\x5\x2\x2\x4\x2\x6\x2\x2\a\x3\x2\x3\x4"+
-		"\x3\x2\n\v\x3\x2\f\r\x3\x2\xE\xF\x3\x2\b\t\x38\x2\b\x3\x2\x2\x2\x4\v\x3"+
-		"\x2\x2\x2\x6\'\x3\x2\x2\x2\b\t\x5\x6\x4\x2\t\n\a\x2\x2\x3\n\x3\x3\x2\x2"+
-		"\x2\v\f\t\x2\x2\x2\f\x5\x3\x2\x2\x2\r\xE\b\x4\x1\x2\xE\xF\a\x5\x2\x2\xF"+
-		"\x10\x5\x6\x4\x2\x10\x11\a\x6\x2\x2\x11(\x3\x2\x2\x2\x12\x13\t\x3\x2\x2"+
-		"\x13(\x5\x6\x4\b\x14\x15\t\x4\x2\x2\x15\x16\a\x5\x2\x2\x16\x17\x5\x6\x4"+
-		"\x2\x17\x18\a\a\x2\x2\x18\x19\x5\x6\x4\x2\x19\x1A\a\x6\x2\x2\x1A(\x3\x2"+
-		"\x2\x2\x1B\x1C\t\x5\x2\x2\x1C\x1D\a\x5\x2\x2\x1D \x5\x6\x4\x2\x1E\x1F"+
-		"\a\a\x2\x2\x1F!\x5\x6\x4\x2 \x1E\x3\x2\x2\x2!\"\x3\x2\x2\x2\" \x3\x2\x2"+
-		"\x2\"#\x3\x2\x2\x2#$\x3\x2\x2\x2$%\a\x6\x2\x2%(\x3\x2\x2\x2&(\x5\x4\x3"+
-		"\x2\'\r\x3\x2\x2\x2\'\x12\x3\x2\x2\x2\'\x14\x3\x2\x2\x2\'\x1B\x3\x2\x2"+
-		"\x2\'&\x3\x2\x2\x2(\x31\x3\x2\x2\x2)*\f\a\x2\x2*+\t\x6\x2\x2+\x30\x5\x6"+
-		"\x4\b,-\f\x6\x2\x2-.\t\x3\x2\x2.\x30\x5\x6\x4\a/)\x3\x2\x2\x2/,\x3\x2"+
-		"\x2\x2\x30\x33\x3\x2\x2\x2\x31/\x3\x2\x2\x2\x31\x32\x3\x2\x2\x2\x32\a"+
-		"\x3\x2\x2\x2\x33\x31\x3\x2\x2\x2\x6\"\'/\x31";
+		"\x4\x3\x4\x3\x4\x3\x4\x3\x4\x3\x4\x3\x4\x3\x4\x3\x4\x3\x4\x3\x4\x5\x4"+
+		"\x32\n\x4\x3\x4\x3\x4\x3\x4\x3\x4\x3\x4\x3\x4\x3\x4\x3\x4\x3\x4\a\x4="+
+		"\n\x4\f\x4\xE\x4@\v\x4\x3\x4\x2\x2\x3\x6\x5\x2\x2\x4\x2\x6\x2\x2\b\x3"+
+		"\x2\x3\x4\x3\x2\n\v\x3\x2\r\xE\x3\x2\xF\x10\x3\x2\x12\x15\x3\x2\b\tH\x2"+
+		"\b\x3\x2\x2\x2\x4\v\x3\x2\x2\x2\x6\x31\x3\x2\x2\x2\b\t\x5\x6\x4\x2\t\n"+
+		"\a\x2\x2\x3\n\x3\x3\x2\x2\x2\v\f\t\x2\x2\x2\f\x5\x3\x2\x2\x2\r\xE\b\x4"+
+		"\x1\x2\xE\xF\a\x5\x2\x2\xF\x10\x5\x6\x4\x2\x10\x11\a\x6\x2\x2\x11\x32"+
+		"\x3\x2\x2\x2\x12\x13\t\x3\x2\x2\x13\x32\x5\x6\x4\n\x14\x15\t\x4\x2\x2"+
+		"\x15\x16\a\x5\x2\x2\x16\x17\x5\x6\x4\x2\x17\x18\a\a\x2\x2\x18\x19\x5\x6"+
+		"\x4\x2\x19\x1A\a\x6\x2\x2\x1A\x32\x3\x2\x2\x2\x1B\x1C\t\x5\x2\x2\x1C\x1D"+
+		"\a\x5\x2\x2\x1D \x5\x6\x4\x2\x1E\x1F\a\a\x2\x2\x1F!\x5\x6\x4\x2 \x1E\x3"+
+		"\x2\x2\x2!\"\x3\x2\x2\x2\" \x3\x2\x2\x2\"#\x3\x2\x2\x2#$\x3\x2\x2\x2$"+
+		"%\a\x6\x2\x2%\x32\x3\x2\x2\x2&\'\a\x11\x2\x2\'(\a\x5\x2\x2()\x5\x6\x4"+
+		"\x2)*\a\x6\x2\x2*\x32\x3\x2\x2\x2+,\t\x6\x2\x2,-\a\x5\x2\x2-.\x5\x6\x4"+
+		"\x2./\a\x6\x2\x2/\x32\x3\x2\x2\x2\x30\x32\x5\x4\x3\x2\x31\r\x3\x2\x2\x2"+
+		"\x31\x12\x3\x2\x2\x2\x31\x14\x3\x2\x2\x2\x31\x1B\x3\x2\x2\x2\x31&\x3\x2"+
+		"\x2\x2\x31+\x3\x2\x2\x2\x31\x30\x3\x2\x2\x2\x32>\x3\x2\x2\x2\x33\x34\f"+
+		"\v\x2\x2\x34\x35\a\f\x2\x2\x35=\x5\x6\x4\f\x36\x37\f\t\x2\x2\x37\x38\t"+
+		"\a\x2\x2\x38=\x5\x6\x4\n\x39:\f\b\x2\x2:;\t\x3\x2\x2;=\x5\x6\x4\t<\x33"+
+		"\x3\x2\x2\x2<\x36\x3\x2\x2\x2<\x39\x3\x2\x2\x2=@\x3\x2\x2\x2><\x3\x2\x2"+
+		"\x2>?\x3\x2\x2\x2?\a\x3\x2\x2\x2@>\x3\x2\x2\x2\x6\"\x31<>";
 	public static readonly ATN _ATN =
 		new ATNDeserializer().Deserialize(_serializedATN.ToCharArray());
 }

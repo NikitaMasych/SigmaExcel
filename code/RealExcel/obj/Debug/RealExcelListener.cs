@@ -45,6 +45,32 @@ public interface IRealExcelListener : IParseTreeListener {
 	void ExitParenthesis([NotNull] RealExcelParser.ParenthesisContext context);
 
 	/// <summary>
+	/// Enter a parse tree produced by the <c>Trigonometrical</c>
+	/// labeled alternative in <see cref="RealExcelParser.expr"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	void EnterTrigonometrical([NotNull] RealExcelParser.TrigonometricalContext context);
+	/// <summary>
+	/// Exit a parse tree produced by the <c>Trigonometrical</c>
+	/// labeled alternative in <see cref="RealExcelParser.expr"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	void ExitTrigonometrical([NotNull] RealExcelParser.TrigonometricalContext context);
+
+	/// <summary>
+	/// Enter a parse tree produced by the <c>Abs</c>
+	/// labeled alternative in <see cref="RealExcelParser.expr"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	void EnterAbs([NotNull] RealExcelParser.AbsContext context);
+	/// <summary>
+	/// Exit a parse tree produced by the <c>Abs</c>
+	/// labeled alternative in <see cref="RealExcelParser.expr"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	void ExitAbs([NotNull] RealExcelParser.AbsContext context);
+
+	/// <summary>
 	/// Enter a parse tree produced by the <c>Number</c>
 	/// labeled alternative in <see cref="RealExcelParser.expr"/>.
 	/// </summary>
@@ -95,6 +121,19 @@ public interface IRealExcelListener : IParseTreeListener {
 	/// </summary>
 	/// <param name="context">The parse tree.</param>
 	void ExitModIDiv([NotNull] RealExcelParser.ModIDivContext context);
+
+	/// <summary>
+	/// Enter a parse tree produced by the <c>Exponential</c>
+	/// labeled alternative in <see cref="RealExcelParser.expr"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	void EnterExponential([NotNull] RealExcelParser.ExponentialContext context);
+	/// <summary>
+	/// Exit a parse tree produced by the <c>Exponential</c>
+	/// labeled alternative in <see cref="RealExcelParser.expr"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	void ExitExponential([NotNull] RealExcelParser.ExponentialContext context);
 
 	/// <summary>
 	/// Enter a parse tree produced by the <c>MaxMin</c>

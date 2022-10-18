@@ -16,19 +16,19 @@ namespace RealExcel
         }
         public override decimal VisitNumber(RealExcelParser.NumberContext context)
         {
-            return decimal.Parse(context.GetText());
+            return decimal.Parse(context.GetText().Replace(',', '.'));
         }
         public override decimal VisitParenthesis(RealExcelParser.ParenthesisContext context)
         {
             return Visit(context.expr());
         }
+        
         public override decimal VisitAddSub(RealExcelParser.AddSubContext context)
         {
             var left = Visit(context.expr(leftPart));
             var right = Visit(context.expr(rightPart));
             return context.op.Type == RealExcelParser.ADD ? 
                 left + right : left - right;
-          
         }
         public override decimal VisitMulDiv(RealExcelParser.MulDivContext context)
         {
@@ -67,6 +67,33 @@ namespace RealExcel
             }
             return context.op.Type == RealExcelParser.MAX ?
                 values.Max() : values.Min();
+        }
+        public override decimal VisitExponential(RealExcelParser.ExponentialContext context)
+        {
+            var left = (double)Visit(context.expr(leftPart));
+            var right = (double)Visit(context.expr(rightPart));
+        
+            return (decimal)Math.Pow(left, right);
+        }
+        public override decimal VisitAbs(RealExcelParser.AbsContext context)
+        {
+            return Math.Abs(Visit(context.expr()));
+        }
+        public override decimal VisitTrigonometrical(RealExcelParser.TrigonometricalContext context)
+        {
+            var value = (double)Visit(context.expr());
+            switch (context.op.Type)
+            {
+                case RealExcelParser.SIN:
+                    return (decimal)Math.Sin(value);
+                case RealExcelParser.COS:
+                    return (decimal)Math.Cos(value);
+                case RealExcelParser.TAN:
+                    return (decimal)Math.Tan(value);
+                case RealExcelParser.COT:
+                    return (decimal)(1 / Math.Tan(value));
+            }
+            return base.VisitTrigonometrical(context);
         }
     }
 }

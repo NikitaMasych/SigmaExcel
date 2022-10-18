@@ -11,12 +11,11 @@ using System.IO;
 namespace RealExcel
 {
     public class RealEvaluator
-    {
+    {   
         public static decimal EvaluateExpression(string expression)
         {
             var inputStream = new AntlrInputStream(expression);
             var lexer = new RealExcelLexer(inputStream);
-
             // Important to define custom error listener, 
             // so that exceptions are not handled and 
             // invalid expressions are not validated:
