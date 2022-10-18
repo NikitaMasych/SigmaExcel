@@ -41,6 +41,16 @@ namespace RealExcel
             HandleCellUpdate(dataGridView.CurrentCell.RowIndex,
                 dataGridView.CurrentCell.ColumnIndex, expressionTextBox.Text);
         }
+        private void TextBox_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Enter)
+            {
+                HandleCellUpdate(dataGridView.CurrentCell.RowIndex,
+                    dataGridView.CurrentCell.ColumnIndex, expressionTextBox.Text);
+                expressionTextBox.Enabled = false;
+                expressionTextBox.Enabled = true;
+            }
+        }
         private void UpdateCell_CellEndEdit(object sender, DataGridViewCellEventArgs e)
         {
             expressionTextBox.Text = 
@@ -50,6 +60,7 @@ namespace RealExcel
         }
         private void UpdateTextBox_CellClick(object sender, DataGridViewCellEventArgs e)
         {
+            if (e.RowIndex < 0 || e.ColumnIndex < 0) return;
             expressionTextBox.Text =
                 table.Cells[e.RowIndex][e.ColumnIndex].Expression;
         }
