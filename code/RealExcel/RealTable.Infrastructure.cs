@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.IO;
 
@@ -83,9 +82,8 @@ namespace RealExcel
         }
         public void SaveToCSV(string filePath)
         {
-            HasBeenSaved = true;
             StoragePath = filePath;
-            const char delimiter = '$';
+            var delimiter = Environment.GetEnvironmentVariable("DEFAULT_SEPARATOR");
             StringBuilder output = new StringBuilder();
             output.AppendLine($"{rowsAmount.ToString()}{delimiter}{columnsAmount.ToString()}");
             foreach (var cellRow in Cells)
@@ -97,13 +95,19 @@ namespace RealExcel
                 }
                 output.AppendLine(line.ToString());
             }
+            if (File.Exists(filePath))
+            {
+                File.Delete(filePath);
+            }
             File.WriteAllText(filePath, output.ToString());
+            HasBeenSaved = true;
         }
         public void OpenFromCSV(string filePath)
         {
             HasBeenSaved = true;
             StoragePath = filePath;
-            const char delimiter = '$';
+            char delimiter = Environment.GetEnvironmentVariable("DEFAULT_SEPARATOR").
+                ToCharArray()[0];
             using (var reader = new StreamReader(filePath))
             {
                 var size = reader.ReadLine().Split(delimiter);

@@ -17,3 +17,4 @@ C:\Users\38099\Desktop\Data\Study\2_year\Lab1Excel\code\RealExcel\obj\Release\Re
 C:\Users\38099\Desktop\Data\Study\2_year\Lab1Excel\code\RealExcel\obj\Release\RealExcel.csproj.CopyComplete
 C:\Users\38099\Desktop\Data\Study\2_year\Lab1Excel\code\RealExcel\obj\Release\RealExcel.exe
 C:\Users\38099\Desktop\Data\Study\2_year\Lab1Excel\code\RealExcel\obj\Release\RealExcel.pdb
+C:\Users\38099\Desktop\Data\Study\2_year\Lab1Excel\code\RealExcel\obj\Release\RealExcel.csprojAssemblyReference.cache

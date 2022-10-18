@@ -1,9 +1,6 @@
-﻿using Antlr4.Runtime.Misc;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace RealExcel
 { 
@@ -52,16 +49,18 @@ namespace RealExcel
         public override decimal VisitMaxMin(RealExcelParser.MaxMinContext context)
         {
             List<decimal> values = new List<decimal>(10);
-            for (int nextIndex = 0; ; ++nextIndex)
+            var amountOfExpressions = context.GetText().Length 
+                - context.GetText().Replace(",", "").Length + 1;
+            for (int i = 0; i != amountOfExpressions; ++i)
             {
                 try
                 {
-                    var nextValue = Visit(context.expr(nextIndex));
+                    var nextValue = Visit(context.expr(i));
                     values.Add(nextValue);
                 }
                 catch
                 {
-                    break;
+                    throw new Exception("Invalid expression");
                 }
             }
             return context.op.Type == RealExcelParser.MAX ?

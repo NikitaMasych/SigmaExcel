@@ -1,13 +1,8 @@
 ﻿using System;
-using System.CodeDom;
 using System.Collections.Generic;
-using System.Data;
 using System.Linq;
-using System.Text;
 using System.Text.RegularExpressions;
-using System.Threading.Tasks;
 using System.Windows.Forms;
-using System.IO;
 
 namespace RealExcel
 {
@@ -41,6 +36,7 @@ namespace RealExcel
         }
         private void InitializeCells()
         {
+            Cells = new List<List<RealCell>>();
             for (int rowIndex = 0; rowIndex != rowsAmount; ++rowIndex)
             {
                 var CellsRow = new List<RealCell>();

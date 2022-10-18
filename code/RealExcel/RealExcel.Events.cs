@@ -1,11 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace RealExcel
@@ -62,7 +55,7 @@ namespace RealExcel
         {
             if (e.RowIndex < 0 || e.ColumnIndex < 0) return;
             expressionTextBox.Text =
-                table.Cells[e.RowIndex][e.ColumnIndex].Expression;
+                $"{table.Cells[e.RowIndex][e.ColumnIndex].Expression}"; 
         }
         private void Save_Click(object sender, EventArgs e)
         {
@@ -100,6 +93,11 @@ namespace RealExcel
                 HandleTableSaving(true);
                 HandleExit();
             }
+        }
+        private void GoToDocumentationWebsite_Click(object sender, EventArgs e)
+        {
+            var documentationURL = Environment.GetEnvironmentVariable("DOCUMENTATION_URL");
+            System.Diagnostics.Process.Start(documentationURL);
         }
     }
 }

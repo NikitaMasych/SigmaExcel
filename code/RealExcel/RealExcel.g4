@@ -20,7 +20,6 @@ expr: LPAREN expr RPAREN							#Parenthesis
 	| decimal										#Number
 	;
 
-
 /* Lexer rules: */
 
 fragment DIGIT: [0-9];
@@ -36,17 +35,12 @@ MUL: '*';
 DIV: '/';
 ADD: '+';
 SUB: '-';
-
 EXP: '^' | '**';
-
 MOD: 'mod';
 IDIV: 'div'; // stands for integer division, i.e. div(5,3) = 1
-
 MAX: 'max';
 MIN: 'min';
-
 ABS: 'abs';
-
 SIN: 'sin';
 COS: 'cos';
 TAN: 'tg' | 'tan';

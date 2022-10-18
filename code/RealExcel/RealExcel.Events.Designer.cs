@@ -176,6 +176,7 @@
             this.goToDocumentationToolStripMenuItem.Name = "goToDocumentationToolStripMenuItem";
             this.goToDocumentationToolStripMenuItem.Size = new System.Drawing.Size(233, 28);
             this.goToDocumentationToolStripMenuItem.Text = "Go to documentation";
+            this.goToDocumentationToolStripMenuItem.Click += new System.EventHandler(this.GoToDocumentationWebsite_Click);
             // 
             // addRowToolStripMenuItem
             // 
