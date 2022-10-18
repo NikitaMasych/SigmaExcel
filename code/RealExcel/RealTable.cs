@@ -14,6 +14,8 @@ namespace RealExcel
     class RealTable
     {
         private DataGridView dataGridView;
+        public bool hasBeenSaved;
+        public string storagePath;
         public List<List<RealCell>> cells = new List<List<RealCell>>();
         private int columnsAmount = 7;
         private int rowsAmount = 10;
@@ -54,6 +56,14 @@ namespace RealExcel
                 }
                 cells.Add(cellsRow);
             }
+        }
+        public void Reset()
+        {
+            columnsAmount = 7;
+            rowsAmount = 10;
+            InitializeColumns();
+            InitializeRows();
+            InitializeCells();
         }
         public void AddRow()
         {
@@ -111,6 +121,8 @@ namespace RealExcel
         }
         public void SaveToCSV(string filePath)
         {
+            hasBeenSaved = true;
+            storagePath = filePath;
             const char delimiter = '$';
             StringBuilder output = new StringBuilder();
             output.AppendLine($"{rowsAmount.ToString()}{delimiter}{columnsAmount.ToString()}");
@@ -127,25 +139,29 @@ namespace RealExcel
         }
         public void OpenFromCSV(string filePath)
         {
+            hasBeenSaved = true;
+            storagePath = filePath;
             const char delimiter = '$';
-            var reader = new StreamReader(filePath);
-            var size = reader.ReadLine().Split(delimiter);
-            rowsAmount = int.Parse(size[0]);
-            columnsAmount = int.Parse(size[1]);
-            InitializeColumns();
-            InitializeRows();
-
-            cells = new List<List<RealCell>>();
-            for (int rowIndex = 0; rowIndex != rowsAmount; ++rowIndex)
+            using (var reader = new StreamReader(filePath))
             {
-                var line = reader.ReadLine();
-                var expressions = line.Split(delimiter);
-                var cellsRow = new List<RealCell>();
-                for (int columnIndex = 0; columnIndex != columnsAmount; ++columnIndex)
+                var size = reader.ReadLine().Split(delimiter);
+                rowsAmount = int.Parse(size[0]);
+                columnsAmount = int.Parse(size[1]);
+                InitializeColumns();
+                InitializeRows();
+
+                cells = new List<List<RealCell>>();
+                for (int rowIndex = 0; rowIndex != rowsAmount; ++rowIndex)
                 {
-                    cellsRow.Add(new RealCell(rowIndex, columnIndex, expressions[columnIndex]));
+                    var line = reader.ReadLine();
+                    var expressions = line.Split(delimiter);
+                    var cellsRow = new List<RealCell>();
+                    for (int columnIndex = 0; columnIndex != columnsAmount; ++columnIndex)
+                    {
+                        cellsRow.Add(new RealCell(rowIndex, columnIndex, expressions[columnIndex]));
+                    }
+                    cells.Add(cellsRow);
                 }
-                cells.Add(cellsRow);
             }
             UpdateAllCells();
         }

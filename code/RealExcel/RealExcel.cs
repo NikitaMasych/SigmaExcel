@@ -13,6 +13,7 @@ namespace RealExcel
     public partial class RealExcel : Form
     {
         private RealTable table;
+        private const string defaultStoragePath = "RealExcelTableEmergencySave.csv";
         public RealExcel()
         {
             InitializeComponent();
@@ -38,6 +39,10 @@ namespace RealExcel
         {
             table.DeleteColumn();
         }
+        private void Reset_Click(object sender, EventArgs e)
+        {
+            table.Reset();
+        }
         private void Evaluate_Click(object sender, EventArgs e)
         {
             HandleCellUpdate(dataGridView.CurrentCell.RowIndex,
@@ -55,6 +60,43 @@ namespace RealExcel
             expressionTextBox.Text =
                 table.cells[e.RowIndex][e.ColumnIndex].Expression;
         }
+        private void Save_Click(object sender, EventArgs e)
+        {
+            if (table.hasBeenSaved)
+            {
+                table.SaveToCSV(table.storagePath);
+            }
+            else
+            {
+                HandleTableSaving(false);
+            }
+        }
+        private void SaveAs_Click(object sender, EventArgs e)
+        {
+            HandleTableSaving(false);
+        }
+        private void Open_Click(object sender, EventArgs e)
+        {
+            HandleTableOpening();
+        }
+        private void Exit_Click(object sender, EventArgs e)
+        {
+            HandleExit();
+        }
+        private void FormExit_Click(object sender, FormClosingEventArgs e)
+        {
+            const bool customHandling = true;
+            e.Cancel = customHandling; 
+            if (e.CloseReason == CloseReason.UserClosing)
+            {
+               HandleExit();
+            }
+            else if (e.CloseReason == CloseReason.WindowsShutDown)
+            {
+                HandleTableSaving(true);
+                HandleExit();
+            }
+        }
         private void HandleCellUpdate(int rowIndex, int columnIndex, string newExpression)
         {
             var currentCell = table.cells[rowIndex][columnIndex];
@@ -66,47 +108,57 @@ namespace RealExcel
             }
             dataGridView.Rows[rowIndex].Cells[columnIndex].Value = currentCell.Evaluation;
         }
-
-        private void saveAsToolStripMenuItem_Click(object sender, EventArgs e)
+        private void HandleTableSaving(bool emergency)
         {
+            if (emergency)
+            {
+                var storagePath = (table.hasBeenSaved) ? table.storagePath : defaultStoragePath;
+                table.SaveToCSV(storagePath);
+                return;
+            }
             saveFileDialog.Title = "Save the Table";
             saveFileDialog.InitialDirectory =
                 System.Environment.GetFolderPath(Environment.SpecialFolder.Personal);
             saveFileDialog.FileName = "";
             saveFileDialog.Filter = "CSV TABLE|*.csv";
-            if (saveFileDialog.ShowDialog() == DialogResult.Cancel)
-            {
-                return;
-            }
-            else
+            if (saveFileDialog.ShowDialog() != DialogResult.Cancel)
             {
                 var selectedFileName = saveFileDialog.FileName;
                 table.SaveToCSV(selectedFileName);
             }
         }
-        private void openToolStripMenuItem_Click(object sender, EventArgs e)
+        private void HandleTableOpening()
         {
             openFileDialog.Title = "Open the Table";
             openFileDialog.InitialDirectory =
                 System.Environment.GetFolderPath(Environment.SpecialFolder.Personal);
             openFileDialog.FileName = "";
+            openFileDialog.CheckFileExists = true;
             openFileDialog.Filter = "CSV TABLE|*.csv";
-            openFileDialog.ShowDialog();
-            if (openFileDialog.ShowDialog() == DialogResult.Cancel)
-            {
-                return;
-            }
-            else
+            openFileDialog.RestoreDirectory = true;
+            if (openFileDialog.ShowDialog() != DialogResult.Cancel)
             {
                 var selectedFileName = openFileDialog.FileName;
                 table.OpenFromCSV(selectedFileName);
             }
         }
-        private void exitToolStripMenuItem_Click(object sender, EventArgs e)
+        private void HandleExit()
         {
-            if (MessageBox.Show("Are you sure you want to quit?", "Exit", MessageBoxButtons.YesNo) == DialogResult.Yes)
+            const string message = "Do you want to save the table before exit?";
+            const string caption = "Exit";
+            switch (MessageBox.Show(message, caption, MessageBoxButtons.YesNoCancel))
             {
-                Application.Exit();
+                case DialogResult.Yes:
+                {
+                    HandleTableSaving(false);
+                    System.Environment.Exit(1);
+                    break;
+                }
+                case DialogResult.No:
+                {
+                    System.Environment.Exit(1);
+                    break;
+                }
             }
         }
     }
