@@ -9,30 +9,30 @@ namespace RealExcel
 {
     public class RealCell : DataGridViewTextBoxCell
     {
-        public int rowIndex { get; }
-        public int columnIndex {get; }
-        public bool hasDependencyCycle { get; set; }
-        public string Expression { get; set; }
-        public string Evaluation { get; set; }
-        public HashSet<RealCell> cellsIDependOn = new HashSet<RealCell>();
-        public HashSet<RealCell> dependentOnMeCells = new HashSet<RealCell>();
+        public int Row;
+        public int Column;
+        public bool HasDependencyCycle;
+        public string Expression;
+        public string Evaluation;
+        public HashSet<RealCell> CellsIDependOn = new HashSet<RealCell>();
+        public HashSet<RealCell> DependentOnMeCells = new HashSet<RealCell>();
 
-        public RealCell(int rowIndex, int columnIndex)
+        public RealCell(int row, int column)
         {
-            this.rowIndex = rowIndex;
-            this.columnIndex = columnIndex;
+            Row = row;
+            Column = column;
         }
-        public RealCell(int rowIndex, int columnIndex, string Expression) 
+        public RealCell(int row, int column, string expression) 
         {
-            this.rowIndex = rowIndex;
-            this.columnIndex = columnIndex;
-            this.Expression = Expression;
+            Row = row;
+            Column = column;
+            Expression = expression;
         }
         public bool CheckForDependenciesCycle(ref RealCell current)
         {
-            foreach (var cell in cellsIDependOn)
+            foreach (var cell in CellsIDependOn)
             {
-                if (cell.cellsIDependOn.Contains(current))
+                if (cell.CellsIDependOn.Contains(current))
                 {
                     return true;
                 }

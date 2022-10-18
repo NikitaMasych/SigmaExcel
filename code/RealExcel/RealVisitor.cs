@@ -16,13 +16,12 @@ namespace RealExcel
         }
         public override decimal VisitNumber(RealExcelParser.NumberContext context)
         {
-            return decimal.Parse(context.GetText().Replace(',', '.'));
+            return decimal.Parse(context.GetText());
         }
         public override decimal VisitParenthesis(RealExcelParser.ParenthesisContext context)
         {
             return Visit(context.expr());
         }
-        
         public override decimal VisitAddSub(RealExcelParser.AddSubContext context)
         {
             var left = Visit(context.expr(leftPart));

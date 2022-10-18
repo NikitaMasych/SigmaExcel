@@ -25,7 +25,7 @@ expr: LPAREN expr RPAREN							#Parenthesis
 
 fragment DIGIT: [0-9];
 INT: DIGIT +;
-FLOAT: DIGIT + ('.' | ',') DIGIT +;
+FLOAT: DIGIT + '.' DIGIT +;
 
 LPAREN: '(';
 RPAREN: ')';

@@ -55,19 +55,24 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="EnvironmentalLoader.cs" />
     <Compile Include="ExcelBaseRepresentor.cs" />
     <Compile Include="RealCell.cs" />
     <Compile Include="RealEvaluator.cs" />
-    <Compile Include="RealExcel.cs">
+    <Compile Include="RealExcel.Events.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="RealExcel.Designer.cs">
-      <DependentUpon>RealExcel.cs</DependentUpon>
+    <Compile Include="RealExcel.Events.Designer.cs">
+      <DependentUpon>RealExcel.Events.cs</DependentUpon>
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="RealExcel.Handlers.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="RealTable.Infrastructure.cs" />
     <Compile Include="ThrowExceptionErrorListener.cs" />
-    <Compile Include="RealTable.cs" />
+    <Compile Include="RealTable.Aux.cs" />
     <Compile Include="RealVisitor.cs" />
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
@@ -79,9 +84,11 @@
       <DependentUpon>Resources.resx</DependentUpon>
       <DesignTime>True</DesignTime>
     </Compile>
-    <EmbeddedResource Include="RealExcel.resx">
-      <DependentUpon>RealExcel.cs</DependentUpon>
+    <EmbeddedResource Include="RealExcel.Events.resx">
+      <DependentUpon>RealExcel.Events.cs</DependentUpon>
+      <SubType>Designer</SubType>
     </EmbeddedResource>
+    <None Include=".env" />
     <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
