@@ -1,4 +1,6 @@
-﻿namespace RealExcel
+﻿using System;
+
+namespace RealExcel
 {
     partial class RealExcel
     {
@@ -13,6 +15,25 @@
                 components.Dispose();
             }
             base.Dispose(disposing);
+        }
+        private void ConfigureOpenFileDialog()
+        {
+            openFileDialog.Title = "Open the Table";
+            openFileDialog.InitialDirectory =
+                System.Environment.GetFolderPath(Environment.SpecialFolder.Personal);
+            openFileDialog.FileName = "";
+            openFileDialog.CheckFileExists = true;
+            openFileDialog.Filter = "CSV TABLE|*.csv";
+            openFileDialog.RestoreDirectory = true;
+        }
+        private void ConfigureSaveFileDialog()
+        {
+            saveFileDialog.Title = "Save the Table";
+            saveFileDialog.InitialDirectory =
+                System.Environment.GetFolderPath(Environment.SpecialFolder.Personal);
+            saveFileDialog.FileName = "";
+            saveFileDialog.Filter = "CSV TABLE|*.csv";
+            saveFileDialog.RestoreDirectory = true;
         }
 
         #region Windows Form Designer generated code
@@ -38,6 +59,9 @@
             this.resetToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.openFileDialog = new System.Windows.Forms.OpenFileDialog();
             this.saveFileDialog = new System.Windows.Forms.SaveFileDialog();
+            this.settingsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.warningsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.disableAllToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView)).BeginInit();
             this.menuStrip.SuspendLayout();
             this.SuspendLayout();
@@ -105,7 +129,8 @@
             this.deleteRowToolStripMenuItem,
             this.addColumnToolStripMenuItem,
             this.deleteColumnToolStripMenuItem,
-            this.resetToolStripMenuItem});
+            this.resetToolStripMenuItem,
+            this.settingsToolStripMenuItem});
             this.menuStrip.Location = new System.Drawing.Point(0, 0);
             this.menuStrip.Name = "menuStrip";
             this.menuStrip.Size = new System.Drawing.Size(961, 40);
@@ -217,6 +242,28 @@
             // 
             this.openFileDialog.FileName = "openFileDialog";
             // 
+            // settingsToolStripMenuItem
+            // 
+            this.settingsToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.warningsToolStripMenuItem});
+            this.settingsToolStripMenuItem.Name = "settingsToolStripMenuItem";
+            this.settingsToolStripMenuItem.Size = new System.Drawing.Size(76, 36);
+            this.settingsToolStripMenuItem.Text = "Settings";
+            // 
+            // warningsToolStripMenuItem
+            // 
+            this.warningsToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.disableAllToolStripMenuItem});
+            this.warningsToolStripMenuItem.Name = "warningsToolStripMenuItem";
+            this.warningsToolStripMenuItem.Size = new System.Drawing.Size(216, 28);
+            this.warningsToolStripMenuItem.Text = "Warnings";
+            // 
+            // disableAllToolStripMenuItem
+            // 
+            this.disableAllToolStripMenuItem.Name = "disableAllToolStripMenuItem";
+            this.disableAllToolStripMenuItem.Size = new System.Drawing.Size(216, 28);
+            this.disableAllToolStripMenuItem.Text = "Disable All";
+            // 
             // RealExcel
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(120F, 120F);
@@ -264,6 +311,9 @@
         private System.Windows.Forms.ToolStripMenuItem addColumnToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem deleteColumnToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem resetToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem settingsToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem warningsToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem disableAllToolStripMenuItem;
     }
 }
 

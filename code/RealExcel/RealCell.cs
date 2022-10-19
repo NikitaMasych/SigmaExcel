@@ -39,5 +39,26 @@ namespace RealExcel
             }
             return false;
         }
+        public RealCell DeepCopy()
+        {
+            var newCell = new RealCell(Row, Column, Expression);
+            newCell.HasDependencyCycle = HasDependencyCycle;
+            newCell.Evaluation = Evaluation;
+            var iDependOn = new HashSet<RealCell>(CellsIDependOn);
+            newCell.CellsIDependOn = iDependOn;
+            var dependOnMe = new HashSet<RealCell>(DependentOnMeCells);
+            newCell.DependentOnMeCells = dependOnMe;
+            return newCell;
+        }
+        public bool Equals(RealCell another)
+        {
+            return (Row == another.Row &&
+                    Column == another.Column &&
+                    HasDependencyCycle == another.HasDependencyCycle &&
+                    Expression == another.Expression &&
+                    Evaluation == another.Evaluation &&
+                    CellsIDependOn.Equals(another.CellsIDependOn) &&
+                    DependentOnMeCells.Equals(another.DependentOnMeCells));
+        }
     }
 }

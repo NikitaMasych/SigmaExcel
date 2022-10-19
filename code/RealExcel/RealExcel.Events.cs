@@ -19,15 +19,15 @@ namespace RealExcel
         }
         private void DeleteRow_Click(object sender, EventArgs e)
         {
-            table.DeleteRow();
+            HandleRowDeletion();
         }
         private void DeleteColumn_Click(object sender, EventArgs e)
         {
-            table.DeleteColumn();
+            HandleColumnDeletion();
         }
         private void Reset_Click(object sender, EventArgs e)
         {
-            table.Reset();
+            HandleReset();
         }
         private void Evaluate_Click(object sender, EventArgs e)
         {
@@ -59,7 +59,7 @@ namespace RealExcel
         }
         private void Save_Click(object sender, EventArgs e)
         {
-            if (table.HasBeenSaved)
+            if (table.StoragePath != string.Empty)
             {
                 table.SaveToCSV(table.StoragePath);
             }

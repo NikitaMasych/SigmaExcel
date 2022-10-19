@@ -12,9 +12,9 @@ namespace RealExcel
             int.Parse(Environment.GetEnvironmentVariable("DEFAULT_COLUMNS_AMOUNT"));
         private static int defaultRowsAmount =
             int.Parse(Environment.GetEnvironmentVariable("DEFAULT_ROWS_AMOUNT"));
-        private DataGridView dataGridView;
         private int columnsAmount = defaultColumnsAmount;
         private int rowsAmount = defaultRowsAmount;
+        private DataGridView dataGridView;
 
         private void InitializeColumns()
         {
@@ -72,6 +72,37 @@ namespace RealExcel
                 cell.HasDependencyCycle = true;
                 dataGridView.Rows[cell.Row].Cells[cell.Column].Value = cell.Evaluation;
             }
+        }
+        private void FullCellUpdate(ref RealCell cell)
+        {
+            try
+            {
+                cell.CellsIDependOn = GetCellsHashSet(cell.Expression);
+                UpdateDependenciesOnMe(ref cell);
+                ValidateDependencyCycleState(ref cell);
+                UpdateCellEvaluation(ref cell, ReplaceCellsReferences(cell.Expression));
+            }
+            catch
+            {
+                cell.Evaluation = cell.Expression;
+            }
+        }
+        private void ValidateDependencyCycleState(ref RealCell cell)
+        {
+            if (cell.CheckForDependenciesCycle(ref cell))
+            {
+                cell.HasDependencyCycle = true;
+                throw new Exception("Dependency cycle");
+            }
+            cell.HasDependencyCycle = false;
+        }
+        private void UpdateCellEvaluation(ref RealCell cell, string newExpression)
+        {
+            if (cell.Expression == null || cell.Expression == "")
+            {
+                return;
+            }
+            cell.Evaluation = RealEvaluator.EvaluateExpression(newExpression).ToString();
         }
         private HashSet<RealCell> GatherCellsInDependencyCycle(HashSet<RealCell> current, 
             Dictionary<RealCell, bool> visited)

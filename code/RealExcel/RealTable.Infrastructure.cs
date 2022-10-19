@@ -7,9 +7,15 @@ using System.IO;
 
 namespace RealExcel
 {
+    public enum TableState
+    {
+        New,
+        Modified,
+        Saved
+    }
     public partial class RealTable
     {
-        public bool HasBeenSaved;
+        public TableState State = TableState.New;
         public string StoragePath;
         public List<List<RealCell>> Cells = new List<List<RealCell>>();
 
@@ -17,6 +23,7 @@ namespace RealExcel
         {
             this.dataGridView = dataGridView;
             Reset();
+            State = TableState.New;
         }
         public void Reset()
         {
@@ -25,6 +32,7 @@ namespace RealExcel
             InitializeColumns();
             InitializeRows();
             InitializeCells();
+            State = TableState.Modified;
         }
         public void AddRow()
         {
@@ -39,6 +47,7 @@ namespace RealExcel
             dataGridView.Rows[dataGridView.Rows.Count - 1].HeaderCell.Value =
                 (dataGridView.Rows.Count).ToString();
             UpdateAllCells();
+            State = TableState.Modified;
         }
         public void AddColumn()
         {
@@ -51,6 +60,7 @@ namespace RealExcel
                 Cells[rowIndex].Add(new RealCell(rowIndex, columnsAmount - 1));
             }
             UpdateAllCells();
+            State = TableState.Modified;
         }
         public void DeleteRow()
         {
@@ -65,6 +75,7 @@ namespace RealExcel
             Cells.RemoveAt(rowsAmount - 1);
             dataGridView.Rows.RemoveAt(rowsAmount - 1);
             --rowsAmount;
+            State = TableState.Modified;
         }
         public void DeleteColumn()
         {
@@ -79,6 +90,7 @@ namespace RealExcel
             }
             dataGridView.Columns.RemoveAt(columnsAmount - 1);
             --columnsAmount;
+            State = TableState.Modified;
         }
         public void SaveToCSV(string filePath)
         {
@@ -100,11 +112,10 @@ namespace RealExcel
                 File.Delete(filePath);
             }
             File.WriteAllText(filePath, output.ToString());
-            HasBeenSaved = true;
+            State = TableState.Saved;
         }
         public void OpenFromCSV(string filePath)
         {
-            HasBeenSaved = true;
             StoragePath = filePath;
             char delimiter = Environment.GetEnvironmentVariable("DEFAULT_SEPARATOR").
                 ToCharArray()[0];
@@ -130,6 +141,7 @@ namespace RealExcel
                 }
             }
             UpdateAllCells();
+            State = TableState.Saved;
         }
         public void UpdateDependentOnMeCells(int rowIndex, int columnIndex)
         {
@@ -149,27 +161,36 @@ namespace RealExcel
         }
         public void UpdateCell(int rowIndex, int columnIndex)
         {
-
             var cell = Cells[rowIndex][columnIndex];
-            if (cell.Expression == null || cell.Expression == "") return;
-            cell.Evaluation = cell.Expression;
-            try
+            var cellBefore = cell.DeepCopy();
+            FullCellUpdate(ref cell);
+            if (!cellBefore.Equals(Cells[rowIndex][columnIndex]))
             {
-                cell.CellsIDependOn = GetCellsHashSet(cell.Expression);
-                UpdateDependenciesOnMe(ref cell);
-                var expressionWithoutReferences = ReplaceCellsReferences(cell.Expression);
-                if (cell.CheckForDependenciesCycle(ref cell))
+                State = TableState.Modified;
+            }
+        }
+        public bool IsRowEmpty(int rowIndex)
+        {
+            foreach (var cell in Cells[rowIndex])
+            {
+                if (cell.Expression != null && cell.Expression != "")
                 {
-                    cell.HasDependencyCycle = true;
-                    throw new Exception("Dependency cycle");
+                    return false;
                 }
-                cell.HasDependencyCycle = false;
-                cell.Evaluation = RealEvaluator.EvaluateExpression(expressionWithoutReferences).ToString();
             }
-            catch
+            return true;
+        }
+        public bool IsColumnEmpty(int columnIndex)
+        {
+            foreach (var cellRow in Cells)
             {
-                return;
+                if (cellRow[columnIndex].Expression != null && 
+                    cellRow[columnIndex].Expression != "")
+                {
+                    return false;
+                }
             }
+            return true;
         }
     }
 }
