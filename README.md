@@ -8,6 +8,7 @@ This is MVP electronic table similar to the Microsoft Excel via C# and .NET.
 * Save table to a .csv file
 * Open table from a .csv file
 * Modify rows and columns amount
+* Reset table to the default state
 
 ## Supported operations and syntax:
 ```
