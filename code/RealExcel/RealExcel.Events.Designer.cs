@@ -42,7 +42,6 @@ namespace RealExcel
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(RealExcel));
             this.dataGridView = new System.Windows.Forms.DataGridView();
-            this.expressionTextBox = new System.Windows.Forms.TextBox();
             this.evaluateButton = new System.Windows.Forms.Button();
             this.menuStrip = new System.Windows.Forms.MenuStrip();
             this.fileToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -57,13 +56,16 @@ namespace RealExcel
             this.addColumnToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.deleteColumnToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.resetToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.openFileDialog = new System.Windows.Forms.OpenFileDialog();
-            this.saveFileDialog = new System.Windows.Forms.SaveFileDialog();
             this.settingsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.warningsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.disableAllToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.openFileDialog = new System.Windows.Forms.OpenFileDialog();
+            this.saveFileDialog = new System.Windows.Forms.SaveFileDialog();
+            this.panel1 = new System.Windows.Forms.Panel();
+            this.expressionTextBox = new System.Windows.Forms.TextBox();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView)).BeginInit();
             this.menuStrip.SuspendLayout();
+            this.panel1.SuspendLayout();
             this.SuspendLayout();
             // 
             // dataGridView
@@ -75,40 +77,30 @@ namespace RealExcel
             this.dataGridView.BackgroundColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(224)))), ((int)(((byte)(224)))));
             this.dataGridView.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.dataGridView.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dataGridView.Location = new System.Drawing.Point(0, 96);
+            this.dataGridView.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.dataGridView.Location = new System.Drawing.Point(0, 113);
             this.dataGridView.Name = "dataGridView";
             this.dataGridView.RowHeadersWidthSizeMode = System.Windows.Forms.DataGridViewRowHeadersWidthSizeMode.AutoSizeToAllHeaders;
             this.dataGridView.RowTemplate.Height = 24;
-            this.dataGridView.Size = new System.Drawing.Size(961, 525);
+            this.dataGridView.Size = new System.Drawing.Size(961, 501);
             this.dataGridView.TabIndex = 0;
             this.dataGridView.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.UpdateTextBox_CellClick);
             this.dataGridView.CellEndEdit += new System.Windows.Forms.DataGridViewCellEventHandler(this.UpdateCell_CellEndEdit);
             // 
-            // expressionTextBox
-            // 
-            this.expressionTextBox.BackColor = System.Drawing.Color.Black;
-            this.expressionTextBox.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.expressionTextBox.Font = new System.Drawing.Font("Quicksand", 13.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.expressionTextBox.ForeColor = System.Drawing.Color.White;
-            this.expressionTextBox.Location = new System.Drawing.Point(0, 51);
-            this.expressionTextBox.Name = "expressionTextBox";
-            this.expressionTextBox.Size = new System.Drawing.Size(825, 36);
-            this.expressionTextBox.TabIndex = 5;
-            this.expressionTextBox.KeyDown += new System.Windows.Forms.KeyEventHandler(this.TextBox_KeyDown);
-            // 
             // evaluateButton
             // 
+            this.evaluateButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.evaluateButton.AutoSize = true;
             this.evaluateButton.BackColor = System.Drawing.Color.Black;
             this.evaluateButton.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.evaluateButton.FlatAppearance.BorderColor = System.Drawing.Color.Red;
+            this.evaluateButton.FlatAppearance.BorderColor = System.Drawing.Color.OrangeRed;
             this.evaluateButton.FlatAppearance.BorderSize = 3;
             this.evaluateButton.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Red;
             this.evaluateButton.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Orange;
             this.evaluateButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.evaluateButton.Font = new System.Drawing.Font("Quicksand", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.evaluateButton.ForeColor = System.Drawing.Color.White;
-            this.evaluateButton.Location = new System.Drawing.Point(846, 49);
+            this.evaluateButton.Location = new System.Drawing.Point(844, 13);
             this.evaluateButton.Name = "evaluateButton";
             this.evaluateButton.Size = new System.Drawing.Size(105, 41);
             this.evaluateButton.TabIndex = 9;
@@ -133,7 +125,7 @@ namespace RealExcel
             this.settingsToolStripMenuItem});
             this.menuStrip.Location = new System.Drawing.Point(0, 0);
             this.menuStrip.Name = "menuStrip";
-            this.menuStrip.Size = new System.Drawing.Size(961, 40);
+            this.menuStrip.Size = new System.Drawing.Size(961, 48);
             this.menuStrip.TabIndex = 10;
             this.menuStrip.Text = "menuStrip";
             // 
@@ -146,7 +138,7 @@ namespace RealExcel
             this.exitToolStripMenuItem});
             this.fileToolStripMenuItem.ImageTransparentColor = System.Drawing.Color.Transparent;
             this.fileToolStripMenuItem.Name = "fileToolStripMenuItem";
-            this.fileToolStripMenuItem.Size = new System.Drawing.Size(44, 36);
+            this.fileToolStripMenuItem.Size = new System.Drawing.Size(44, 44);
             this.fileToolStripMenuItem.Text = "File";
             // 
             // saveToolStripMenuItem
@@ -192,7 +184,7 @@ namespace RealExcel
             this.aboutToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.goToDocumentationToolStripMenuItem});
             this.aboutToolStripMenuItem.Name = "aboutToolStripMenuItem";
-            this.aboutToolStripMenuItem.Size = new System.Drawing.Size(64, 36);
+            this.aboutToolStripMenuItem.Size = new System.Drawing.Size(64, 44);
             this.aboutToolStripMenuItem.Text = "About";
             // 
             // goToDocumentationToolStripMenuItem
@@ -206,48 +198,44 @@ namespace RealExcel
             // addRowToolStripMenuItem
             // 
             this.addRowToolStripMenuItem.Name = "addRowToolStripMenuItem";
-            this.addRowToolStripMenuItem.Size = new System.Drawing.Size(84, 36);
+            this.addRowToolStripMenuItem.Size = new System.Drawing.Size(84, 44);
             this.addRowToolStripMenuItem.Text = "Add Row";
             this.addRowToolStripMenuItem.Click += new System.EventHandler(this.AddRow_Click);
             // 
             // deleteRowToolStripMenuItem
             // 
             this.deleteRowToolStripMenuItem.Name = "deleteRowToolStripMenuItem";
-            this.deleteRowToolStripMenuItem.Size = new System.Drawing.Size(99, 36);
+            this.deleteRowToolStripMenuItem.Size = new System.Drawing.Size(99, 44);
             this.deleteRowToolStripMenuItem.Text = "Delete Row";
             this.deleteRowToolStripMenuItem.Click += new System.EventHandler(this.DeleteRow_Click);
             // 
             // addColumnToolStripMenuItem
             // 
             this.addColumnToolStripMenuItem.Name = "addColumnToolStripMenuItem";
-            this.addColumnToolStripMenuItem.Size = new System.Drawing.Size(108, 36);
+            this.addColumnToolStripMenuItem.Size = new System.Drawing.Size(108, 44);
             this.addColumnToolStripMenuItem.Text = "Add Column";
             this.addColumnToolStripMenuItem.Click += new System.EventHandler(this.AddColumn_Click);
             // 
             // deleteColumnToolStripMenuItem
             // 
             this.deleteColumnToolStripMenuItem.Name = "deleteColumnToolStripMenuItem";
-            this.deleteColumnToolStripMenuItem.Size = new System.Drawing.Size(123, 36);
+            this.deleteColumnToolStripMenuItem.Size = new System.Drawing.Size(123, 44);
             this.deleteColumnToolStripMenuItem.Text = "Delete Column";
             this.deleteColumnToolStripMenuItem.Click += new System.EventHandler(this.DeleteColumn_Click);
             // 
             // resetToolStripMenuItem
             // 
             this.resetToolStripMenuItem.Name = "resetToolStripMenuItem";
-            this.resetToolStripMenuItem.Size = new System.Drawing.Size(60, 36);
+            this.resetToolStripMenuItem.Size = new System.Drawing.Size(60, 44);
             this.resetToolStripMenuItem.Text = "Reset";
             this.resetToolStripMenuItem.Click += new System.EventHandler(this.Reset_Click);
-            // 
-            // openFileDialog
-            // 
-            this.openFileDialog.FileName = "openFileDialog";
             // 
             // settingsToolStripMenuItem
             // 
             this.settingsToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.warningsToolStripMenuItem});
             this.settingsToolStripMenuItem.Name = "settingsToolStripMenuItem";
-            this.settingsToolStripMenuItem.Size = new System.Drawing.Size(76, 36);
+            this.settingsToolStripMenuItem.Size = new System.Drawing.Size(76, 44);
             this.settingsToolStripMenuItem.Text = "Settings";
             // 
             // warningsToolStripMenuItem
@@ -255,14 +243,43 @@ namespace RealExcel
             this.warningsToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.disableAllToolStripMenuItem});
             this.warningsToolStripMenuItem.Name = "warningsToolStripMenuItem";
-            this.warningsToolStripMenuItem.Size = new System.Drawing.Size(216, 28);
+            this.warningsToolStripMenuItem.Size = new System.Drawing.Size(152, 28);
             this.warningsToolStripMenuItem.Text = "Warnings";
             // 
             // disableAllToolStripMenuItem
             // 
             this.disableAllToolStripMenuItem.Name = "disableAllToolStripMenuItem";
-            this.disableAllToolStripMenuItem.Size = new System.Drawing.Size(216, 28);
+            this.disableAllToolStripMenuItem.Size = new System.Drawing.Size(156, 28);
             this.disableAllToolStripMenuItem.Text = "Disable All";
+            // 
+            // openFileDialog
+            // 
+            this.openFileDialog.FileName = "openFileDialog";
+            // 
+            // panel1
+            // 
+            this.panel1.BackColor = System.Drawing.Color.White;
+            this.panel1.Controls.Add(this.expressionTextBox);
+            this.panel1.Controls.Add(this.evaluateButton);
+            this.panel1.Dock = System.Windows.Forms.DockStyle.Top;
+            this.panel1.Location = new System.Drawing.Point(0, 48);
+            this.panel1.Name = "panel1";
+            this.panel1.Size = new System.Drawing.Size(961, 65);
+            this.panel1.TabIndex = 11;
+            // 
+            // expressionTextBox
+            // 
+            this.expressionTextBox.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.expressionTextBox.BackColor = System.Drawing.Color.Black;
+            this.expressionTextBox.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.expressionTextBox.Font = new System.Drawing.Font("Quicksand", 13.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.expressionTextBox.ForeColor = System.Drawing.Color.White;
+            this.expressionTextBox.Location = new System.Drawing.Point(3, 13);
+            this.expressionTextBox.Name = "expressionTextBox";
+            this.expressionTextBox.Size = new System.Drawing.Size(825, 36);
+            this.expressionTextBox.TabIndex = 5;
+            this.expressionTextBox.KeyDown += new System.Windows.Forms.KeyEventHandler(this.TextBox_KeyDown);
             // 
             // RealExcel
             // 
@@ -271,9 +288,8 @@ namespace RealExcel
             this.AutoSize = true;
             this.BackColor = System.Drawing.Color.White;
             this.ClientSize = new System.Drawing.Size(961, 614);
-            this.Controls.Add(this.evaluateButton);
-            this.Controls.Add(this.expressionTextBox);
             this.Controls.Add(this.dataGridView);
+            this.Controls.Add(this.panel1);
             this.Controls.Add(this.menuStrip);
             this.Font = new System.Drawing.Font("Quicksand", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
@@ -286,15 +302,15 @@ namespace RealExcel
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView)).EndInit();
             this.menuStrip.ResumeLayout(false);
             this.menuStrip.PerformLayout();
+            this.panel1.ResumeLayout(false);
+            this.panel1.PerformLayout();
             this.ResumeLayout(false);
-            this.PerformLayout();
 
         }
 
         #endregion
 
         private System.Windows.Forms.DataGridView dataGridView;
-        private System.Windows.Forms.TextBox expressionTextBox;
         private System.Windows.Forms.Button evaluateButton;
         private System.Windows.Forms.MenuStrip menuStrip;
         private System.Windows.Forms.ToolStripMenuItem fileToolStripMenuItem;
@@ -314,6 +330,8 @@ namespace RealExcel
         private System.Windows.Forms.ToolStripMenuItem settingsToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem warningsToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem disableAllToolStripMenuItem;
+        private System.Windows.Forms.Panel panel1;
+        private System.Windows.Forms.TextBox expressionTextBox;
     }
 }
 

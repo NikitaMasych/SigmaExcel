@@ -46,7 +46,7 @@ namespace RealExcel
             dataGridView.Rows.Add(1);
             dataGridView.Rows[dataGridView.Rows.Count - 1].HeaderCell.Value =
                 (dataGridView.Rows.Count).ToString();
-            UpdateAllCells();
+            UpdateAllCells(); // here for all cells i need to update their list of "CellsIDependOn" considering new cells appeared 
             State = TableState.Modified;
         }
         public void AddColumn()

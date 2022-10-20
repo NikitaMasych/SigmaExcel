@@ -55,6 +55,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Config.cs" />
     <Compile Include="EnvironmentalLoader.cs" />
     <Compile Include="ExcelBaseRepresentor.cs" />
     <Compile Include="RealCell.cs" />
