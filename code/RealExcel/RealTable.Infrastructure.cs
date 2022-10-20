@@ -36,6 +36,10 @@ namespace RealExcel
         }
         public void AddRow()
         {
+            dataGridView.Rows.Add(1);
+            dataGridView.Rows[dataGridView.Rows.Count - 1].HeaderCell.Value =
+                (dataGridView.Rows.Count).ToString();
+
             ++rowsAmount;
             var cellsRow = new List<RealCell>();
             for (int columnIndex = 0; columnIndex != columnsAmount; ++columnIndex)
@@ -43,9 +47,6 @@ namespace RealExcel
                 cellsRow.Add(new RealCell(rowsAmount - 1, columnIndex));
             }
             Cells.Add(cellsRow);
-            dataGridView.Rows.Add(1);
-            dataGridView.Rows[dataGridView.Rows.Count - 1].HeaderCell.Value =
-                (dataGridView.Rows.Count).ToString();
             UpdateAllCells(); // here for all cells i need to update their list of "CellsIDependOn" considering new cells appeared 
             State = TableState.Modified;
         }

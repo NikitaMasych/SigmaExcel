@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Reflection;
+using System.Windows.Forms;
 
 namespace RealExcel
 {
@@ -15,6 +17,16 @@ namespace RealExcel
                 components.Dispose();
             }
             base.Dispose(disposing);
+        }
+        private void SetDoubleBuffering(bool enableDoubleBuffering)
+        {
+            if (!SystemInformation.TerminalServerSession)
+            {
+                Type dgvType = dataGridView.GetType();
+                PropertyInfo pI = dgvType.GetProperty("DoubleBuffered",
+                  BindingFlags.Instance | BindingFlags.NonPublic);
+                pI.SetValue(dataGridView, enableDoubleBuffering, null);
+            }
         }
         private void ConfigureOpenFileDialog()
         {

@@ -11,6 +11,7 @@ namespace RealExcel
         public RealExcel()
         {
             InitializeComponent();
+            SetDoubleBuffering(true);
             table = new RealTable(ref dataGridView);
             ConfigureOpenFileDialog();
             ConfigureSaveFileDialog();
