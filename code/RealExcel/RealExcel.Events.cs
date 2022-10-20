@@ -4,7 +4,7 @@ using System.Windows.Forms;
 namespace RealExcel
 {
     public partial class RealExcel : Form
-    {
+    { 
         private void RealExcel_Load(object sender, EventArgs e)
         {
 
@@ -82,8 +82,11 @@ namespace RealExcel
         }
         private void FormExit_Click(object sender, FormClosingEventArgs e)
         {
-            const bool customHandling = true;
-            e.Cancel = customHandling; 
+            e.Cancel = !exitNow;
+            if (!e.Cancel)
+            {
+                return;
+            }
             if (e.CloseReason == CloseReason.UserClosing)
             {
                HandleExit();

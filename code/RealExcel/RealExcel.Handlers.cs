@@ -8,6 +8,7 @@ namespace RealExcel
         private RealTable table;
         private static string emergencySaveFilePath =
             Environment.GetEnvironmentVariable("EMERGENCY_SAVE_FILEPATH");
+        private static bool exitNow = false;
         public RealExcel()
         {
             InitializeComponent();
@@ -44,7 +45,9 @@ namespace RealExcel
         {
             if (table.State == TableState.Saved || table.State == TableState.New)
             {
-                System.Environment.Exit(0);
+                exitNow = true;
+                Application.Exit();
+                return;
             }
 
             const string message = "Do you want to save the table before exit?";
@@ -54,12 +57,14 @@ namespace RealExcel
                 case DialogResult.Yes:
                     {
                         HandleTableSaving(false);
-                        System.Environment.Exit(1);
+                        exitNow = true;
+                        Application.Exit();
                         break;
                     }
                 case DialogResult.No:
                     {
-                        System.Environment.Exit(0);
+                        exitNow = true;
+                        Application.Exit();
                         break;
                     }
             }
