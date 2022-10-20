@@ -284,7 +284,7 @@
             Возвращает или задает целевой объект
             </summary>
         </member>
-        <member name="P:Microsoft.VisualStudio.TestTools.UnitTesting.PrivateObject.RealType">
+        <member name="P:Microsoft.VisualStudio.TestTools.UnitTesting.PrivateObject.SigmaType">
             <summary>
             Возвращает тип базового объекта
             </summary>

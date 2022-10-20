@@ -284,7 +284,7 @@
             Obtiene o establece el destino.
             </summary>
         </member>
-        <member name="P:Microsoft.VisualStudio.TestTools.UnitTesting.PrivateObject.RealType">
+        <member name="P:Microsoft.VisualStudio.TestTools.UnitTesting.PrivateObject.SigmaType">
             <summary>
             Obtiene el tipo del objeto subyacente.
             </summary>
@@ -353,7 +353,7 @@
             Invoca el método especificado.
             </summary>
             <param name="name">Nombre del método</param>
-            <param name="bindingFlags">Máscara de bits que consta de uno o más objetos <see cref="T:System.Reflection.BindingFlags"/> que especifican cómo se realiza la búsqueda.</param>
+            <param name="bindingFlags">Máscara de bits que consta de uno o más objetos <see cref="T:System.Reflection.BindingFlags"/> que especifican cómo se Sigmaiza la búsqueda.</param>
             <param name="args">Argumentos para pasar al miembro que se va a invocar.</param>
             <returns>Resultado de la llamada al método</returns>
         </member>
@@ -362,7 +362,7 @@
             Invoca el método especificado.
             </summary>
             <param name="name">Nombre del método</param>
-            <param name="bindingFlags">Máscara de bits que consta de uno o más objetos <see cref="T:System.Reflection.BindingFlags"/> que especifican cómo se realiza la búsqueda.</param>
+            <param name="bindingFlags">Máscara de bits que consta de uno o más objetos <see cref="T:System.Reflection.BindingFlags"/> que especifican cómo se Sigmaiza la búsqueda.</param>
             <param name="parameterTypes">Una matriz de <see cref="T:System.Type"/> objetos que representan el número, orden y tipo de los parámetros para el método que se va a obtener.</param>
             <param name="args">Argumentos para pasar al miembro que se va a invocar.</param>
             <returns>Resultado de la llamada al método</returns>
@@ -372,7 +372,7 @@
             Invoca el método especificado.
             </summary>
             <param name="name">Nombre del método</param>
-            <param name="bindingFlags">Máscara de bits que consta de uno o más objetos <see cref="T:System.Reflection.BindingFlags"/> que especifican cómo se realiza la búsqueda.</param>
+            <param name="bindingFlags">Máscara de bits que consta de uno o más objetos <see cref="T:System.Reflection.BindingFlags"/> que especifican cómo se Sigmaiza la búsqueda.</param>
             <param name="args">Argumentos para pasar al miembro que se va a invocar.</param>
             <param name="culture">Información de referencia cultural</param>
             <returns>Resultado de la llamada al método</returns>
@@ -382,7 +382,7 @@
             Invoca el método especificado.
             </summary>
             <param name="name">Nombre del método</param>
-            <param name="bindingFlags">Máscara de bits que consta de uno o más objetos <see cref="T:System.Reflection.BindingFlags"/> que especifican cómo se realiza la búsqueda.</param>
+            <param name="bindingFlags">Máscara de bits que consta de uno o más objetos <see cref="T:System.Reflection.BindingFlags"/> que especifican cómo se Sigmaiza la búsqueda.</param>
             <param name="parameterTypes">Una matriz de <see cref="T:System.Type"/> objetos que representan el número, orden y tipo de los parámetros para el método que se va a obtener.</param>
             <param name="args">Argumentos para pasar al miembro que se va a invocar.</param>
             <param name="culture">Información de referencia cultural</param>
@@ -393,7 +393,7 @@
             Invoca el método especificado.
             </summary>
             <param name="name">Nombre del método</param>
-            <param name="bindingFlags">Máscara de bits que consta de uno o más objetos <see cref="T:System.Reflection.BindingFlags"/> que especifican cómo se realiza la búsqueda.</param>
+            <param name="bindingFlags">Máscara de bits que consta de uno o más objetos <see cref="T:System.Reflection.BindingFlags"/> que especifican cómo se Sigmaiza la búsqueda.</param>
             <param name="parameterTypes">Una matriz de <see cref="T:System.Type"/> objetos que representan el número, orden y tipo de los parámetros para el método que se va a obtener.</param>
             <param name="args">Argumentos para pasar al miembro que se va a invocar.</param>
             <param name="culture">Información de referencia cultural</param>
@@ -421,7 +421,7 @@
             Obtiene el elemento de matriz con una matriz de subíndices para cada dimensión.
             </summary>
             <param name="name">Nombre del miembro</param>
-            <param name="bindingFlags">Máscara de bits que consta de uno o más objetos <see cref="T:System.Reflection.BindingFlags"/> que especifican cómo se realiza la búsqueda.</param>
+            <param name="bindingFlags">Máscara de bits que consta de uno o más objetos <see cref="T:System.Reflection.BindingFlags"/> que especifican cómo se Sigmaiza la búsqueda.</param>
             <param name="indices">los índices de la matriz</param>
             <returns>Una matriz de elementos.</returns>
         </member>
@@ -430,7 +430,7 @@
             Establece el elemento de matriz con una matriz de subíndices para cada dimensión.
             </summary>
             <param name="name">Nombre del miembro</param>
-            <param name="bindingFlags">Máscara de bits que consta de uno o más objetos <see cref="T:System.Reflection.BindingFlags"/> que especifican cómo se realiza la búsqueda.</param>
+            <param name="bindingFlags">Máscara de bits que consta de uno o más objetos <see cref="T:System.Reflection.BindingFlags"/> que especifican cómo se Sigmaiza la búsqueda.</param>
             <param name="value">Valor para establecer</param>
             <param name="indices">los índices de la matriz</param>
         </member>
@@ -453,7 +453,7 @@
             Obtiene el campo.
             </summary>
             <param name="name">Nombre del campo</param>
-            <param name="bindingFlags">Máscara de bits que consta de uno o más objetos <see cref="T:System.Reflection.BindingFlags"/> que especifican cómo se realiza la búsqueda.</param>
+            <param name="bindingFlags">Máscara de bits que consta de uno o más objetos <see cref="T:System.Reflection.BindingFlags"/> que especifican cómo se Sigmaiza la búsqueda.</param>
             <returns>El campo.</returns>
         </member>
         <member name="M:Microsoft.VisualStudio.TestTools.UnitTesting.PrivateObject.SetField(System.String,System.Reflection.BindingFlags,System.Object)">
@@ -461,7 +461,7 @@
             Establece el campo.
             </summary>
             <param name="name">Nombre del campo</param>
-            <param name="bindingFlags">Máscara de bits que consta de uno o más objetos <see cref="T:System.Reflection.BindingFlags"/> que especifican cómo se realiza la búsqueda.</param>
+            <param name="bindingFlags">Máscara de bits que consta de uno o más objetos <see cref="T:System.Reflection.BindingFlags"/> que especifican cómo se Sigmaiza la búsqueda.</param>
             <param name="value">valor para establecer</param>
         </member>
         <member name="M:Microsoft.VisualStudio.TestTools.UnitTesting.PrivateObject.GetFieldOrProperty(System.String)">
@@ -483,7 +483,7 @@
             Obtiene el campo o la propiedad.
             </summary>
             <param name="name">Nombre del campo o propiedad</param>
-            <param name="bindingFlags">Máscara de bits que consta de uno o más objetos <see cref="T:System.Reflection.BindingFlags"/> que especifican cómo se realiza la búsqueda.</param>
+            <param name="bindingFlags">Máscara de bits que consta de uno o más objetos <see cref="T:System.Reflection.BindingFlags"/> que especifican cómo se Sigmaiza la búsqueda.</param>
             <returns>El campo o la propiedad.</returns>
         </member>
         <member name="M:Microsoft.VisualStudio.TestTools.UnitTesting.PrivateObject.SetFieldOrProperty(System.String,System.Reflection.BindingFlags,System.Object)">
@@ -491,7 +491,7 @@
             Establece el campo o la propiedad.
             </summary>
             <param name="name">Nombre del campo o propiedad</param>
-            <param name="bindingFlags">Máscara de bits que consta de uno o más objetos <see cref="T:System.Reflection.BindingFlags"/> que especifican cómo se realiza la búsqueda.</param>
+            <param name="bindingFlags">Máscara de bits que consta de uno o más objetos <see cref="T:System.Reflection.BindingFlags"/> que especifican cómo se Sigmaiza la búsqueda.</param>
             <param name="value">valor para establecer</param>
         </member>
         <member name="M:Microsoft.VisualStudio.TestTools.UnitTesting.PrivateObject.GetProperty(System.String,System.Object[])">
@@ -533,7 +533,7 @@
             Obtiene la propiedad.
             </summary>
             <param name="name">Nombre de la propiedad</param>
-            <param name="bindingFlags">Máscara de bits que consta de uno o más objetos <see cref="T:System.Reflection.BindingFlags"/> que especifican cómo se realiza la búsqueda.</param>
+            <param name="bindingFlags">Máscara de bits que consta de uno o más objetos <see cref="T:System.Reflection.BindingFlags"/> que especifican cómo se Sigmaiza la búsqueda.</param>
             <param name="args">Argumentos para pasar al miembro que se va a invocar.</param>
             <returns>La propiedad.</returns>
         </member>
@@ -542,7 +542,7 @@
             Obtiene la propiedad.
             </summary>
             <param name="name">Nombre de la propiedad</param>
-            <param name="bindingFlags">Máscara de bits que consta de uno o más objetos <see cref="T:System.Reflection.BindingFlags"/> que especifican cómo se realiza la búsqueda.</param>
+            <param name="bindingFlags">Máscara de bits que consta de uno o más objetos <see cref="T:System.Reflection.BindingFlags"/> que especifican cómo se Sigmaiza la búsqueda.</param>
             <param name="parameterTypes">Una matriz de <see cref="T:System.Type"/> objetos que representan el número, orden y tipo de los parámetros para la propiedad indizada.</param>
             <param name="args">Argumentos para pasar al miembro que se va a invocar.</param>
             <returns>La propiedad.</returns>
@@ -552,7 +552,7 @@
             Establece la propiedad.
             </summary>
             <param name="name">Nombre de la propiedad</param>
-            <param name="bindingFlags">Máscara de bits que consta de uno o más objetos <see cref="T:System.Reflection.BindingFlags"/> que especifican cómo se realiza la búsqueda.</param>
+            <param name="bindingFlags">Máscara de bits que consta de uno o más objetos <see cref="T:System.Reflection.BindingFlags"/> que especifican cómo se Sigmaiza la búsqueda.</param>
             <param name="value">valor para establecer</param>
             <param name="args">Argumentos para pasar al miembro que se va a invocar.</param>
         </member>
@@ -561,7 +561,7 @@
             Establece la propiedad.
             </summary>
             <param name="name">Nombre de la propiedad</param>
-            <param name="bindingFlags">Máscara de bits que consta de uno o más objetos <see cref="T:System.Reflection.BindingFlags"/> que especifican cómo se realiza la búsqueda.</param>
+            <param name="bindingFlags">Máscara de bits que consta de uno o más objetos <see cref="T:System.Reflection.BindingFlags"/> que especifican cómo se Sigmaiza la búsqueda.</param>
             <param name="value">valor para establecer</param>
             <param name="parameterTypes">Una matriz de <see cref="T:System.Type"/> objetos que representan el número, orden y tipo de los parámetros para la propiedad indizada.</param>
             <param name="args">Argumentos para pasar al miembro que se va a invocar.</param>
@@ -993,12 +993,12 @@
         </member>
         <member name="P:Microsoft.VisualStudio.TestTools.UnitTesting.TestContext.DataRow">
             <summary>
-            Obtiene la fila de datos actual cuando la prueba se usa para realizar pruebas controladas por datos.
+            Obtiene la fila de datos actual cuando la prueba se usa para Sigmaizar pruebas controladas por datos.
             </summary>
         </member>
         <member name="P:Microsoft.VisualStudio.TestTools.UnitTesting.TestContext.DataConnection">
             <summary>
-            Obtiene la fila de conexión de datos actual cuando la prueba se usa para realizar pruebas controladas por datos.
+            Obtiene la fila de conexión de datos actual cuando la prueba se usa para Sigmaizar pruebas controladas por datos.
             </summary>
         </member>
         <member name="P:Microsoft.VisualStudio.TestTools.UnitTesting.TestContext.TestRunDirectory">

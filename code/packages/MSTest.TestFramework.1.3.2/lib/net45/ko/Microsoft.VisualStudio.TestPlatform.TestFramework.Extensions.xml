@@ -284,7 +284,7 @@
             대상을 가져오거나 설정합니다.
             </summary>
         </member>
-        <member name="P:Microsoft.VisualStudio.TestTools.UnitTesting.PrivateObject.RealType">
+        <member name="P:Microsoft.VisualStudio.TestTools.UnitTesting.PrivateObject.SigmaType">
             <summary>
             기본 개체의 형식을 가져옵니다.
             </summary>

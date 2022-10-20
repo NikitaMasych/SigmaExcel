@@ -284,7 +284,7 @@
             Ruf das Ziel ab bzw. legt dieses fest.
             </summary>
         </member>
-        <member name="P:Microsoft.VisualStudio.TestTools.UnitTesting.PrivateObject.RealType">
+        <member name="P:Microsoft.VisualStudio.TestTools.UnitTesting.PrivateObject.SigmaType">
             <summary>
             Ruft den Typ des zugrunde liegenden Objekts ab
             </summary>

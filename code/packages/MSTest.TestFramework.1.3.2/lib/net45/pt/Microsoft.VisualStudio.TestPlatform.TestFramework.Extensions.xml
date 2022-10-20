@@ -284,7 +284,7 @@
             Obtém ou define o destino
             </summary>
         </member>
-        <member name="P:Microsoft.VisualStudio.TestTools.UnitTesting.PrivateObject.RealType">
+        <member name="P:Microsoft.VisualStudio.TestTools.UnitTesting.PrivateObject.SigmaType">
             <summary>
             Obtém o tipo de objeto subjacente
             </summary>

@@ -284,7 +284,7 @@
             Hedefi alır veya ayarlar
             </summary>
         </member>
-        <member name="P:Microsoft.VisualStudio.TestTools.UnitTesting.PrivateObject.RealType">
+        <member name="P:Microsoft.VisualStudio.TestTools.UnitTesting.PrivateObject.SigmaType">
             <summary>
             Temel alınan nesnenin türünü alır
             </summary>

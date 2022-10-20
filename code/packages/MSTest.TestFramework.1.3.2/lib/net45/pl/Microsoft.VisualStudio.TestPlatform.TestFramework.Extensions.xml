@@ -284,7 +284,7 @@
             Pobiera lub ustawia element docelowy
             </summary>
         </member>
-        <member name="P:Microsoft.VisualStudio.TestTools.UnitTesting.PrivateObject.RealType">
+        <member name="P:Microsoft.VisualStudio.TestTools.UnitTesting.PrivateObject.SigmaType">
             <summary>
             Pobiera typ obiektu bazowego
             </summary>

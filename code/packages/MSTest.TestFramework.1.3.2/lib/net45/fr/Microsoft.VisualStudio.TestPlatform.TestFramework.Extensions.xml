@@ -284,7 +284,7 @@
             Obtient ou définit la cible
             </summary>
         </member>
-        <member name="P:Microsoft.VisualStudio.TestTools.UnitTesting.PrivateObject.RealType">
+        <member name="P:Microsoft.VisualStudio.TestTools.UnitTesting.PrivateObject.SigmaType">
             <summary>
             Obtient le type de l'objet sous-jacent
             </summary>

@@ -284,7 +284,7 @@
             Ottiene o imposta la destinazione
             </summary>
         </member>
-        <member name="P:Microsoft.VisualStudio.TestTools.UnitTesting.PrivateObject.RealType">
+        <member name="P:Microsoft.VisualStudio.TestTools.UnitTesting.PrivateObject.SigmaType">
             <summary>
             Ottiene il tipo dell'oggetto sottostante
             </summary>

@@ -284,7 +284,7 @@
             ターゲットを取得または設定します
             </summary>
         </member>
-        <member name="P:Microsoft.VisualStudio.TestTools.UnitTesting.PrivateObject.RealType">
+        <member name="P:Microsoft.VisualStudio.TestTools.UnitTesting.PrivateObject.SigmaType">
             <summary>
             基になるオブジェクトの型を取得します
             </summary>

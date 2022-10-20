@@ -49,16 +49,16 @@
     <Reference Include="System.Core" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="RealEvaluatorTests.cs" />
+    <Compile Include="SigmaEvaluatorTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\RealExcel\RealExcel.csproj">
+    <ProjectReference Include="..\SigmaExcel\SigmaExcel.csproj">
       <Project>{a16201cc-daf4-4ca9-a72d-423b2e159b60}</Project>
-      <Name>RealExcel</Name>
+      <Name>SigmaExcel</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(VSToolsPath)\TeamTest\Microsoft.TestTools.targets" Condition="Exists('$(VSToolsPath)\TeamTest\Microsoft.TestTools.targets')" />

@@ -1,0 +1,6 @@
+C:\Users\38099\Desktop\Data\Study\2_year\Lab1Excel\code\SigmaExcel\obj\Debug\SigmaExcelLexer.cs
+C:\Users\38099\Desktop\Data\Study\2_year\Lab1Excel\code\SigmaExcel\obj\Debug\SigmaExcelParser.cs
+C:\Users\38099\Desktop\Data\Study\2_year\Lab1Excel\code\SigmaExcel\obj\Debug\SigmaExcelListener.cs
+C:\Users\38099\Desktop\Data\Study\2_year\Lab1Excel\code\SigmaExcel\obj\Debug\SigmaExcelBaseListener.cs
+C:\Users\38099\Desktop\Data\Study\2_year\Lab1Excel\code\SigmaExcel\obj\Debug\SigmaExcelVisitor.cs
+C:\Users\38099\Desktop\Data\Study\2_year\Lab1Excel\code\SigmaExcel\obj\Debug\SigmaExcelBaseVisitor.cs

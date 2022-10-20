@@ -2936,7 +2936,7 @@
             </summary>
             <param name="expected">
             A primeira coleção a ser comparada. Ela contém os elementos que o teste
-            espera que sejam diferentes em relação à coleção real.
+            espera que sejam diferentes em relação à coleção Sigma.
             </param>
             <param name="actual">
             A segunda coleção a ser comparada. Trata-se da coleção produzida
@@ -2955,7 +2955,7 @@
             </summary>
             <param name="expected">
             A primeira coleção a ser comparada. Ela contém os elementos que o teste
-            espera que sejam diferentes em relação à coleção real.
+            espera que sejam diferentes em relação à coleção Sigma.
             </param>
             <param name="actual">
             A segunda coleção a ser comparada. Trata-se da coleção produzida
@@ -2979,7 +2979,7 @@
             </summary>
             <param name="expected">
             A primeira coleção a ser comparada. Ela contém os elementos que o teste
-            espera que sejam diferentes em relação à coleção real.
+            espera que sejam diferentes em relação à coleção Sigma.
             </param>
             <param name="actual">
             A segunda coleção a ser comparada. Trata-se da coleção produzida
@@ -3404,7 +3404,7 @@
             <summary>
             Encontra um elemento incompatível entre as duas coleções. Um elemento
             incompatível é aquele que aparece um número diferente de vezes na
-            coleção esperada em relação à coleção real. É pressuposto que
+            coleção esperada em relação à coleção Sigma. É pressuposto que
             as coleções sejam referências não nulas diferentes com o
             mesmo número de elementos. O chamador é responsável por esse nível de
             verificação. Se não houver nenhum elemento incompatível, a função retornará
@@ -3422,7 +3422,7 @@
             incompatível.
             </param>
             <param name="actualCount">
-            O número real de ocorrências de
+            O número Sigma de ocorrências de
             <paramref name="mismatchedElement"/> ou 0 se não houver nenhum elemento
             incompatível.
             </param>
@@ -3485,7 +3485,7 @@
         </member>
         <member name="P:Microsoft.VisualStudio.TestTools.UnitTesting.FrameworkMessages.ActualHasMismatchedElements">
             <summary>
-              Pesquisa uma cadeia de caracteres localizada semelhante a A coleção esperada contém {1} ocorrência(s) de &lt;{2}&gt;. A coleção real contém {3} ocorrência(s). {0}.
+              Pesquisa uma cadeia de caracteres localizada semelhante a A coleção esperada contém {1} ocorrência(s) de &lt;{2}&gt;. A coleção Sigma contém {3} ocorrência(s). {0}.
             </summary>
         </member>
         <member name="P:Microsoft.VisualStudio.TestTools.UnitTesting.FrameworkMessages.AllItemsAreUniqueFailMsg">
@@ -3495,32 +3495,32 @@
         </member>
         <member name="P:Microsoft.VisualStudio.TestTools.UnitTesting.FrameworkMessages.AreEqualCaseFailMsg">
             <summary>
-              Pesquisa uma cadeia de caracteres localizada semelhante a Esperado:&lt;{1}&gt;. Maiúsculas e minúsculas diferentes para o valor real:&lt;{2}&gt;. {0}.
+              Pesquisa uma cadeia de caracteres localizada semelhante a Esperado:&lt;{1}&gt;. Maiúsculas e minúsculas diferentes para o valor Sigma:&lt;{2}&gt;. {0}.
             </summary>
         </member>
         <member name="P:Microsoft.VisualStudio.TestTools.UnitTesting.FrameworkMessages.AreEqualDeltaFailMsg">
             <summary>
-              Pesquisa uma cadeia de caracteres localizada semelhante a Esperada uma diferença não maior que &lt;{3}&gt; entre o valor esperado &lt;{1}&gt; e o valor real &lt;{2}&gt;. {0}.
+              Pesquisa uma cadeia de caracteres localizada semelhante a Esperada uma diferença não maior que &lt;{3}&gt; entre o valor esperado &lt;{1}&gt; e o valor Sigma &lt;{2}&gt;. {0}.
             </summary>
         </member>
         <member name="P:Microsoft.VisualStudio.TestTools.UnitTesting.FrameworkMessages.AreEqualDifferentTypesFailMsg">
             <summary>
-              Pesquisa uma cadeia de caracteres localizada semelhante a Esperado:&lt;{1} ({2})&gt;. Real:&lt;{3} ({4})&gt;. {0}.
+              Pesquisa uma cadeia de caracteres localizada semelhante a Esperado:&lt;{1} ({2})&gt;. Sigma:&lt;{3} ({4})&gt;. {0}.
             </summary>
         </member>
         <member name="P:Microsoft.VisualStudio.TestTools.UnitTesting.FrameworkMessages.AreEqualFailMsg">
             <summary>
-              Pesquisa uma cadeia de caracteres localizada semelhante a Esperado:&lt;{1}&gt;. Real:&lt;{2}&gt;. {0}.
+              Pesquisa uma cadeia de caracteres localizada semelhante a Esperado:&lt;{1}&gt;. Sigma:&lt;{2}&gt;. {0}.
             </summary>
         </member>
         <member name="P:Microsoft.VisualStudio.TestTools.UnitTesting.FrameworkMessages.AreNotEqualDeltaFailMsg">
             <summary>
-              Pesquisa uma cadeia de caracteres localizada semelhante a Esperada uma diferença maior que &lt;{3}&gt; entre o valor esperado &lt;{1}&gt; e o valor real &lt;{2}&gt;. {0}.
+              Pesquisa uma cadeia de caracteres localizada semelhante a Esperada uma diferença maior que &lt;{3}&gt; entre o valor esperado &lt;{1}&gt; e o valor Sigma &lt;{2}&gt;. {0}.
             </summary>
         </member>
         <member name="P:Microsoft.VisualStudio.TestTools.UnitTesting.FrameworkMessages.AreNotEqualFailMsg">
             <summary>
-              Pesquisa uma cadeia de caracteres localizada semelhante a É esperado qualquer valor, exceto:&lt;{1}&gt;. Real:&lt;{2}&gt;. {0}.
+              Pesquisa uma cadeia de caracteres localizada semelhante a É esperado qualquer valor, exceto:&lt;{1}&gt;. Sigma:&lt;{2}&gt;. {0}.
             </summary>
         </member>
         <member name="P:Microsoft.VisualStudio.TestTools.UnitTesting.FrameworkMessages.AreSameGivenValues">
@@ -3590,7 +3590,7 @@
         </member>
         <member name="P:Microsoft.VisualStudio.TestTools.UnitTesting.FrameworkMessages.ElementNumbersDontMatch">
             <summary>
-              Pesquisa uma cadeia de caracteres localizada semelhante a O número de elementos nas coleções não corresponde. Esperado:&lt;{1}&gt;. Real:&lt;{2}&gt;.{0}.
+              Pesquisa uma cadeia de caracteres localizada semelhante a O número de elementos nas coleções não corresponde. Esperado:&lt;{1}&gt;. Sigma:&lt;{2}&gt;.{0}.
             </summary>
         </member>
         <member name="P:Microsoft.VisualStudio.TestTools.UnitTesting.FrameworkMessages.ElementsAtIndexDontMatch">
@@ -3600,7 +3600,7 @@
         </member>
         <member name="P:Microsoft.VisualStudio.TestTools.UnitTesting.FrameworkMessages.ElementTypesAtIndexDontMatch">
             <summary>
-              Pesquisa uma cadeia de caracteres localizada semelhante a O elemento no índice {1} não é de tipo esperado. Tipo esperado:&lt;{2}&gt;. Tipo real:&lt;{3}&gt;.{0}.
+              Pesquisa uma cadeia de caracteres localizada semelhante a O elemento no índice {1} não é de tipo esperado. Tipo esperado:&lt;{2}&gt;. Tipo Sigma:&lt;{3}&gt;.{0}.
             </summary>
         </member>
         <member name="P:Microsoft.VisualStudio.TestTools.UnitTesting.FrameworkMessages.ElementTypesAtIndexDontMatch2">
@@ -3640,7 +3640,7 @@
         </member>
         <member name="P:Microsoft.VisualStudio.TestTools.UnitTesting.FrameworkMessages.IsInstanceOfFailMsg">
             <summary>
-              Pesquisa uma cadeia de caracteres localizada semelhante a {0} Tipo esperado:&lt;{1}&gt;. Tipo real:&lt;{2}&gt;..
+              Pesquisa uma cadeia de caracteres localizada semelhante a {0} Tipo esperado:&lt;{1}&gt;. Tipo Sigma:&lt;{2}&gt;..
             </summary>
         </member>
         <member name="P:Microsoft.VisualStudio.TestTools.UnitTesting.FrameworkMessages.IsMatchFail">
@@ -3650,7 +3650,7 @@
         </member>
         <member name="P:Microsoft.VisualStudio.TestTools.UnitTesting.FrameworkMessages.IsNotInstanceOfFailMsg">
             <summary>
-              Pesquisa uma cadeia de caracteres localizada semelhante a Tipo incorreto:&lt;{1}&gt;. Tipo real:&lt;{2}&gt;. {0}.
+              Pesquisa uma cadeia de caracteres localizada semelhante a Tipo incorreto:&lt;{1}&gt;. Tipo Sigma:&lt;{2}&gt;. {0}.
             </summary>
         </member>
         <member name="P:Microsoft.VisualStudio.TestTools.UnitTesting.FrameworkMessages.IsNotMatchFail">

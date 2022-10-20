@@ -301,7 +301,7 @@
         </member>
         <member name="T:Microsoft.VisualStudio.TestTools.UnitTesting.GenericParameterHelper">
             <summary>
-            Esta clase está diseñada para ayudar al usuario a realizar pruebas unitarias para tipos con tipos genéricos.
+            Esta clase está diseñada para ayudar al usuario a Sigmaizar pruebas unitarias para tipos con tipos genéricos.
             GenericParameterHelper satisface algunas de las restricciones de tipo genérico comunes,
             como:
             1. Constructor predeterminado público.
@@ -2936,7 +2936,7 @@
             </summary>
             <param name="expected">
             Primera colección para comparar. Contiene los elementos que la prueba
-            espera que sean distintos a los de la colección real.
+            espera que sean distintos a los de la colección Sigma.
             </param>
             <param name="actual">
             Segunda colección para comparar. Esta es la colección generada por
@@ -2955,7 +2955,7 @@
             </summary>
             <param name="expected">
             Primera colección para comparar. Contiene los elementos que la prueba
-            espera que sean distintos a los de la colección real.
+            espera que sean distintos a los de la colección Sigma.
             </param>
             <param name="actual">
             Segunda colección para comparar. Esta es la colección generada por
@@ -2979,7 +2979,7 @@
             </summary>
             <param name="expected">
             Primera colección para comparar. Contiene los elementos que la prueba
-            espera que sean distintos a los de la colección real.
+            espera que sean distintos a los de la colección Sigma.
             </param>
             <param name="actual">
             Segunda colección para comparar. Esta es la colección generada por
@@ -3404,7 +3404,7 @@
             <summary>
             Encuentra un elemento no coincidente entre ambas colecciones. Un elemento
             no coincidente es aquel que aparece un número distinto de veces en la
-            colección esperada de lo que aparece en la colección real. Se
+            colección esperada de lo que aparece en la colección Sigma. Se
             supone que las colecciones son referencias no NULL diferentes con el
             mismo número de elementos. El autor de la llamada es el responsable de
             este nivel de comprobación. Si no hay ningún elemento no coincidente,
@@ -3422,7 +3422,7 @@
             coincidente.
             </param>
             <param name="actualCount">
-            El número real de repeticiones de
+            El número Sigma de repeticiones de
             <paramref name="mismatchedElement"/> o 0 si no hay ningún elemento no
             coincidente.
             </param>
@@ -3495,12 +3495,12 @@
         </member>
         <member name="P:Microsoft.VisualStudio.TestTools.UnitTesting.FrameworkMessages.AreEqualCaseFailMsg">
             <summary>
-              Busca una cadena traducida similar a "Se esperaba: &lt;{1}&gt;. El caso es distinto para el valor real: &lt;{2}&gt;. {0}".
+              Busca una cadena traducida similar a "Se esperaba: &lt;{1}&gt;. El caso es distinto para el valor Sigma: &lt;{2}&gt;. {0}".
             </summary>
         </member>
         <member name="P:Microsoft.VisualStudio.TestTools.UnitTesting.FrameworkMessages.AreEqualDeltaFailMsg">
             <summary>
-              Busca una cadena traducida similar a "Se esperaba una diferencia no superior a &lt;{3}&gt; entre el valor esperado &lt;{1}&gt; y el valor real &lt;{2}&gt;. {0}".
+              Busca una cadena traducida similar a "Se esperaba una diferencia no superior a &lt;{3}&gt; entre el valor esperado &lt;{1}&gt; y el valor Sigma &lt;{2}&gt;. {0}".
             </summary>
         </member>
         <member name="P:Microsoft.VisualStudio.TestTools.UnitTesting.FrameworkMessages.AreEqualDifferentTypesFailMsg">
@@ -3515,7 +3515,7 @@
         </member>
         <member name="P:Microsoft.VisualStudio.TestTools.UnitTesting.FrameworkMessages.AreNotEqualDeltaFailMsg">
             <summary>
-              Busca una cadena traducida similar a "Se esperaba una diferencia mayor que &lt;{3}&gt; entre el valor esperado &lt;{1}&gt; y el valor real &lt;{2}&gt;. {0}".
+              Busca una cadena traducida similar a "Se esperaba una diferencia mayor que &lt;{3}&gt; entre el valor esperado &lt;{1}&gt; y el valor Sigma &lt;{2}&gt;. {0}".
             </summary>
         </member>
         <member name="P:Microsoft.VisualStudio.TestTools.UnitTesting.FrameworkMessages.AreNotEqualFailMsg">
@@ -3600,7 +3600,7 @@
         </member>
         <member name="P:Microsoft.VisualStudio.TestTools.UnitTesting.FrameworkMessages.ElementTypesAtIndexDontMatch">
             <summary>
-              Busca una cadena traducida similar a "El elemento del índice {1} no es del tipo esperado. Tipo esperado: &lt;{2}&gt;, tipo real: &lt;{3}&gt;. {0}".
+              Busca una cadena traducida similar a "El elemento del índice {1} no es del tipo esperado. Tipo esperado: &lt;{2}&gt;, tipo Sigma: &lt;{3}&gt;. {0}".
             </summary>
         </member>
         <member name="P:Microsoft.VisualStudio.TestTools.UnitTesting.FrameworkMessages.ElementTypesAtIndexDontMatch2">
@@ -3640,7 +3640,7 @@
         </member>
         <member name="P:Microsoft.VisualStudio.TestTools.UnitTesting.FrameworkMessages.IsInstanceOfFailMsg">
             <summary>
-              Busca una cadena traducida similar a "{0} Tipo esperado: &lt;{1}&gt;. Tipo real: &lt;{2}&gt;".
+              Busca una cadena traducida similar a "{0} Tipo esperado: &lt;{1}&gt;. Tipo Sigma: &lt;{2}&gt;".
             </summary>
         </member>
         <member name="P:Microsoft.VisualStudio.TestTools.UnitTesting.FrameworkMessages.IsMatchFail">
@@ -3650,7 +3650,7 @@
         </member>
         <member name="P:Microsoft.VisualStudio.TestTools.UnitTesting.FrameworkMessages.IsNotInstanceOfFailMsg">
             <summary>
-              Busca una cadena traducida similar a "Tipo incorrecto: &lt;{1}&gt;. Tipo real: &lt;{2}&gt;. {0}".
+              Busca una cadena traducida similar a "Tipo incorrecto: &lt;{1}&gt;. Tipo Sigma: &lt;{2}&gt;. {0}".
             </summary>
         </member>
         <member name="P:Microsoft.VisualStudio.TestTools.UnitTesting.FrameworkMessages.IsNotMatchFail">
@@ -4058,7 +4058,7 @@
         </member>
         <member name="P:Microsoft.VisualStudio.TestTools.UnitTesting.TestResult.DebugTrace">
             <summary>
-            Obtiene o establece el seguimiento de depuración que realiza el código de la prueba.
+            Obtiene o establece el seguimiento de depuración que Sigmaiza el código de la prueba.
             </summary>
         </member>
         <member name="P:Microsoft.VisualStudio.TestTools.UnitTesting.TestResult.TestContextMessages">

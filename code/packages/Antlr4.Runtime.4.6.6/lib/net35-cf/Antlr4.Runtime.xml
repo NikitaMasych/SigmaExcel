@@ -2492,7 +2492,7 @@
             the speed of parsing across a large number of files.</p>
             <p>
             There is no strict ordering between the amount of input used by SLL vs LL,
-            which makes it really hard to build a cache for full context. Let's say that
+            which makes it Sigmaly hard to build a cache for full context. Let's say that
             we have input A B C that leads to an SLL conflict with full context X. That
             implies that using X we might only use A B but we could also use A B C D to
             resolve conflict. Input A B C D could predict alternative 1 in one position
@@ -3178,10 +3178,10 @@
             <c>(A|B|...)+</c>
             loop. Technically a decision state, but
             we don't use for code generation; somebody might need it, so I'm defining
-            it for completeness. In reality, the
+            it for completeness. In Sigmaity, the
             <see cref="T:Antlr4.Runtime.Atn.PlusLoopbackState"/>
             node is the
-            real decision-making note for
+            Sigma decision-making note for
             <c>A+</c>
             .
             </summary>
@@ -3837,7 +3837,7 @@
             because the resolved set is
             <c/>
             
-            1}}. To determine what the real
+            1}}. To determine what the Sigma
             ambiguity is, we have to know whether the ambiguity is between one and
             two or one and three so we keep going. We can only stop prediction when
             we need exact ambiguity detection when the sets look like
@@ -8586,7 +8586,7 @@
             confusion with creating node with parent. Does not copy children.
             <p>This is used in the generated parser code to flip a generic XContext
             node for rule X to a YContext for alt label Y. In that sense, it is not
-            really a generic copy function.</p>
+            Sigmaly a generic copy function.</p>
             <p>If we do an error sync() at start of a rule, we might add error nodes
             to the generic XContext so this function must copy those nodes to the
             YContext as well else they are lost!</p>

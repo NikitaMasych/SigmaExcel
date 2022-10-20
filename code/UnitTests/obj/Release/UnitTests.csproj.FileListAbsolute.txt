@@ -5,10 +5,10 @@ C:\Users\38099\Desktop\Data\Study\2_year\Lab1Excel\code\UnitTests\bin\Release\Un
 C:\Users\38099\Desktop\Data\Study\2_year\Lab1Excel\code\UnitTests\bin\Release\UnitTests.pdb
 C:\Users\38099\Desktop\Data\Study\2_year\Lab1Excel\code\UnitTests\bin\Release\Microsoft.VisualStudio.TestPlatform.TestFramework.dll
 C:\Users\38099\Desktop\Data\Study\2_year\Lab1Excel\code\UnitTests\bin\Release\Microsoft.VisualStudio.TestPlatform.TestFramework.Extensions.dll
-C:\Users\38099\Desktop\Data\Study\2_year\Lab1Excel\code\UnitTests\bin\Release\RealExcel.exe
+C:\Users\38099\Desktop\Data\Study\2_year\Lab1Excel\code\UnitTests\bin\Release\SigmaExcel.exe
 C:\Users\38099\Desktop\Data\Study\2_year\Lab1Excel\code\UnitTests\bin\Release\Antlr4.Runtime.dll
-C:\Users\38099\Desktop\Data\Study\2_year\Lab1Excel\code\UnitTests\bin\Release\RealExcel.pdb
-C:\Users\38099\Desktop\Data\Study\2_year\Lab1Excel\code\UnitTests\bin\Release\RealExcel.exe.config
+C:\Users\38099\Desktop\Data\Study\2_year\Lab1Excel\code\UnitTests\bin\Release\SigmaExcel.pdb
+C:\Users\38099\Desktop\Data\Study\2_year\Lab1Excel\code\UnitTests\bin\Release\SigmaExcel.exe.config
 C:\Users\38099\Desktop\Data\Study\2_year\Lab1Excel\code\UnitTests\bin\Release\Microsoft.VisualStudio.TestPlatform.TestFramework.xml
 C:\Users\38099\Desktop\Data\Study\2_year\Lab1Excel\code\UnitTests\bin\Release\Microsoft.VisualStudio.TestPlatform.TestFramework.Extensions.xml
 C:\Users\38099\Desktop\Data\Study\2_year\Lab1Excel\code\UnitTests\bin\Release\Antlr4.Runtime.xml

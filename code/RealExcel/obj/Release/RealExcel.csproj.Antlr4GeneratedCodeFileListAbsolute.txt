@@ -1,6 +1,0 @@
-C:\Users\38099\Desktop\Data\Study\2_year\Lab1Excel\code\RealExcel\obj\Release\RealExcelLexer.cs
-C:\Users\38099\Desktop\Data\Study\2_year\Lab1Excel\code\RealExcel\obj\Release\RealExcelParser.cs
-C:\Users\38099\Desktop\Data\Study\2_year\Lab1Excel\code\RealExcel\obj\Release\RealExcelListener.cs
-C:\Users\38099\Desktop\Data\Study\2_year\Lab1Excel\code\RealExcel\obj\Release\RealExcelBaseListener.cs
-C:\Users\38099\Desktop\Data\Study\2_year\Lab1Excel\code\RealExcel\obj\Release\RealExcelVisitor.cs
-C:\Users\38099\Desktop\Data\Study\2_year\Lab1Excel\code\RealExcel\obj\Release\RealExcelBaseVisitor.cs

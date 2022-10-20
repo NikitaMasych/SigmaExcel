@@ -24,7 +24,7 @@ This is MVP electronic table similar to the Microsoft Excel via C# and .NET.
 ```
 # Parser implementation:
 
-Parsing realized with ANTLR4 context grammar.
+Parsing Sigmaized with ANTLR4 context grammar.
 
 # Saving to the files:
 
