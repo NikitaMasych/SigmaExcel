@@ -1,39 +1,28 @@
 ﻿using System;
 using System.Windows.Forms;
+using System.Linq;
+using System.Drawing;
 
 namespace RealExcel
 {
     public partial class RealExcel : Form
-    { 
-        private void RealExcel_Load(object sender, EventArgs e)
-        {
+    {
+        private Point mouseDownWarningsSettingPanelLocation;
 
-        }
-        private void AddRow_Click(object sender, EventArgs e)
-        {
+        private void RealExcel_Load(object sender, EventArgs e) {}
+        private void AddRow_Click(object sender, EventArgs e) => 
             table.AddRow();
-        }
-        private void AddColumn_Click(object senser, EventArgs e)
-        {
+        private void AddColumn_Click(object senser, EventArgs e) => 
             table.AddColumn();
-        }
-        private void DeleteRow_Click(object sender, EventArgs e)
-        {
+        private void DeleteRow_Click(object sender, EventArgs e) => 
             HandleRowDeletion();
-        }
-        private void DeleteColumn_Click(object sender, EventArgs e)
-        {
+        private void DeleteColumn_Click(object sender, EventArgs e) => 
             HandleColumnDeletion();
-        }
-        private void Reset_Click(object sender, EventArgs e)
-        {
+        private void Reset_Click(object sender, EventArgs e) => 
             HandleReset();
-        }
-        private void Evaluate_Click(object sender, EventArgs e)
-        {
+        private void Evaluate_Click(object sender, EventArgs e) =>
             HandleCellUpdate(dataGridView.CurrentCell.RowIndex,
                 dataGridView.CurrentCell.ColumnIndex, expressionTextBox.Text);
-        }
         private void TextBox_KeyDown(object sender, KeyEventArgs e)
         {
             if (e.KeyCode == Keys.Enter)
@@ -68,18 +57,12 @@ namespace RealExcel
                 HandleTableSaving(false);
             }
         }
-        private void SaveAs_Click(object sender, EventArgs e)
-        {
+        private void SaveAs_Click(object sender, EventArgs e) =>
             HandleTableSaving(false);
-        }
-        private void Open_Click(object sender, EventArgs e)
-        {
+        private void Open_Click(object sender, EventArgs e) =>
             HandleTableOpening();
-        }
-        private void Exit_Click(object sender, EventArgs e)
-        {
+        private void Exit_Click(object sender, EventArgs e) =>
             HandleExit();
-        }
         private void FormExit_Click(object sender, FormClosingEventArgs e)
         {
             e.Cancel = !exitNow;
@@ -101,6 +84,61 @@ namespace RealExcel
         {
             var documentationURL = Environment.GetEnvironmentVariable("DOCUMENTATION_URL");
             System.Diagnostics.Process.Start(documentationURL);
+        }
+        private void SetDeletionOfRowWarning_CheckedChanged(object sender, EventArgs e) =>
+            Config.Warnings[NonSavedContentWarnings.DeletionOfRow] =
+                deletionOfRowWarningCheckBox.Checked;
+        private void SetDeletionOfColumnWarning_CheckedChanged(object sender, EventArgs e) =>
+            Config.Warnings[NonSavedContentWarnings.DeletionOfColumn] =
+                deletionOfColumnWarningCheckBox.Checked;
+        private void SetResetWarning_CheckedChanged(object sender, EventArgs e) =>
+            Config.Warnings[NonSavedContentWarnings.Reset] = 
+                resetWarningCheckBox.Checked;
+        private void SetOpenWarning_CheckedChanged(object sender, EventArgs e) =>
+            Config.Warnings[NonSavedContentWarnings.Opening] =
+                openWarningCheckBox.Checked;
+        private void SetExitWarning_CheckedChanged(object sender, EventArgs e) =>
+            Config.Warnings[NonSavedContentWarnings.Exit] =
+               exitWarningCheckBox.Checked;
+        private void EnableAllWarnings_Click(object sender, EventArgs e)
+        {
+            const bool enable = true;
+            SetValueToAllWarningsCheckBoxes(enable);
+            foreach (var warning in Config.Warnings.Keys.ToList())
+            {
+                Config.Warnings[warning] = enable;
+            }
+        }
+        private void DisableAllWarnings_Click(object sender, EventArgs e)
+        {
+            const bool disable = false;
+            SetValueToAllWarningsCheckBoxes(disable);
+            foreach (var warning in Config.Warnings.Keys.ToList())
+            {
+                Config.Warnings[warning] = disable;
+            }
+        }
+        private void CloseWarningsSettings_Click(object sender, EventArgs e) =>
+            warningsSettingsPanel.Visible = false;
+        private void OpenWarningsSettings_Click(object sender, EventArgs e) =>
+            warningsSettingsPanel.Visible = true;
+        private void MoveWarningsSettingPanel_MouseDown(object sender, MouseEventArgs e)
+        {
+            if (e.Button == MouseButtons.Left)
+            {
+                
+                mouseDownWarningsSettingPanelLocation = e.Location;
+            }
+        }
+        private void MoveWarningsSettingPanel_MouseMove(object sender, MouseEventArgs e)
+        {
+            if (e.Button == MouseButtons.Left)
+            {
+                warningsSettingsPanel.Left = e.X + warningsSettingsPanel.Left - 
+                    mouseDownWarningsSettingPanelLocation.X;
+                warningsSettingsPanel.Top = e.Y + warningsSettingsPanel.Top -
+                    mouseDownWarningsSettingPanelLocation.Y;
+            }
         }
     }
 }

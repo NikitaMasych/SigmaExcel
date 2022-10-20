@@ -16,10 +16,12 @@ namespace RealExcel
             table = new RealTable(ref dataGridView);
             ConfigureOpenFileDialog();
             ConfigureSaveFileDialog();
+            SetValueToAllWarningsCheckBoxes(true);
         }
         private void HandleReset()
         {
-            if (table.State == TableState.Saved)
+            if (table.State == TableState.Saved ||
+                !Config.Warnings[NonSavedContentWarnings.Reset])
             {
                 table.Reset();
                 return;
@@ -43,13 +45,13 @@ namespace RealExcel
         }
         private void HandleExit()
         {
-            if (table.State == TableState.Saved || table.State == TableState.New)
+            if (table.State == TableState.Saved || table.State == TableState.New ||
+                !Config.Warnings[NonSavedContentWarnings.Exit])
             {
                 exitNow = true;
                 Application.Exit();
                 return;
             }
-
             const string message = "Do you want to save the table before exit?";
             const string caption = "Exit";
             switch (MessageBox.Show(message, caption, MessageBoxButtons.YesNoCancel))
@@ -71,7 +73,8 @@ namespace RealExcel
         }
         private void HandleTableOpening()
         {
-            if (table.State == TableState.Modified)
+            if (table.State == TableState.Modified && 
+                Config.Warnings[NonSavedContentWarnings.Opening])
             {   const string msg = "Do you want to save changes?";
                 const string caption = "Save before Open";
                 switch (MessageBox.Show(msg, caption, MessageBoxButtons.YesNoCancel))
@@ -107,7 +110,8 @@ namespace RealExcel
         }
         private void HandleRowDeletion()
         {
-            if (!table.IsRowEmpty(table.Cells.Count - 1))
+            if (!table.IsRowEmpty(table.Cells.Count - 1) && 
+                Config.Warnings[NonSavedContentWarnings.DeletionOfRow])
             {
                 const string msg = "Do you want to delete non-empty row?";
                 const string caption = "Delete row";
@@ -120,7 +124,8 @@ namespace RealExcel
         }
         private void HandleColumnDeletion()
         {
-            if (!table.IsColumnEmpty(table.Cells[0].Count - 1))
+            if (!table.IsColumnEmpty(table.Cells[0].Count - 1) &&
+                 Config.Warnings[NonSavedContentWarnings.DeletionOfColumn])
             {
                 const string msg = "Do you want to delete non-empty column?";
                 const string caption = "Delete column";
@@ -141,6 +146,14 @@ namespace RealExcel
                 table.UpdateDependentOnMeCells(rowIndex, columnIndex);
             }
             dataGridView.Rows[rowIndex].Cells[columnIndex].Value = currentCell.Evaluation;
+        }
+        private void SetValueToAllWarningsCheckBoxes(bool value)
+        {
+            deletionOfRowWarningCheckBox.Checked = value;
+            deletionOfColumnWarningCheckBox.Checked = value;
+            resetWarningCheckBox.Checked = value;
+            exitWarningCheckBox.Checked = value;
+            openWarningCheckBox.Checked = value;
         }
     }
 }

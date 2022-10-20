@@ -12,7 +12,7 @@ namespace RealExcel
     }
     class Config
     {
-        public readonly Dictionary<NonSavedContentWarnings, bool> Warnings =
+        public static readonly Dictionary<NonSavedContentWarnings, bool> Warnings =
             new Dictionary<NonSavedContentWarnings, bool>
             {
                 [NonSavedContentWarnings.DeletionOfRow] = true,
