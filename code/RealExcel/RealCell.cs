@@ -60,5 +60,16 @@ namespace RealExcel
                     CellsIDependOn.Equals(another.CellsIDependOn) &&
                     DependentOnMeCells.Equals(another.DependentOnMeCells));
         }
+        public bool DoIDependOn(RealCell current)
+        {
+            foreach (var cell in CellsIDependOn)
+            {
+                if (cell.Row == current.Row && cell.Column == current.Column)
+                {
+                    return true;
+                }
+            }
+            return false;
+        }
     }
 }

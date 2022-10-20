@@ -135,13 +135,13 @@ namespace RealExcel
                 var rowIndex = Int32.Parse(Regex.Replace(cellAddress, @"\D", string.Empty)) - 1;
                 var columnIndexInPseudo26Base = Regex.Replace(cellAddress, @"[\d-]", string.Empty);
                 var columnIndex = ExcelBaseRepresentor.ConvertFromPseudo26Base(columnIndexInPseudo26Base) - 1;
-                try
+                if (rowIndex < rowsAmount && columnIndex < columnsAmount)
                 {
                     CellsInExpression.Add(Cells[rowIndex][columnIndex]);
                 }
-                catch
+                else
                 {
-                    throw new Exception("Non-existing cell reference");
+                    CellsInExpression.Add(new RealCell(rowIndex, columnIndex));
                 }
             }
             return CellsInExpression;
@@ -169,6 +169,19 @@ namespace RealExcel
             foreach (var cell in currentCell.CellsIDependOn)
             {
                 cell.DependentOnMeCells.Add(currentCell);
+            }
+        }
+        private void SetCellsIDependOn(ref RealCell currentCell)
+        {
+            foreach (var cellRow in Cells)
+            {
+                foreach (var cell in cellRow)
+                {
+                    if (cell.DoIDependOn(currentCell))
+                    {
+                        currentCell.DependentOnMeCells.Add(cell);
+                    }
+                }
             }
         }
         private string ReplaceCellsReferences(string expression)

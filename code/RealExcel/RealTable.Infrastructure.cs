@@ -44,10 +44,11 @@ namespace RealExcel
             var cellsRow = new List<RealCell>();
             for (int columnIndex = 0; columnIndex != columnsAmount; ++columnIndex)
             {
-                cellsRow.Add(new RealCell(rowsAmount - 1, columnIndex));
+                var newCell = new RealCell(rowsAmount - 1, columnIndex);
+                SetCellsIDependOn(ref newCell);
+                cellsRow.Add(newCell);
             }
             Cells.Add(cellsRow);
-            UpdateAllCells(); // here for all cells i need to update their list of "CellsIDependOn" considering new cells appeared 
             State = TableState.Modified;
         }
         public void AddColumn()
@@ -58,9 +59,10 @@ namespace RealExcel
 
             for (int rowIndex = 0; rowIndex != rowsAmount; ++rowIndex)
             {
-                Cells[rowIndex].Add(new RealCell(rowIndex, columnsAmount - 1));
+                var newCell = new RealCell(rowIndex, columnsAmount - 1);
+                SetCellsIDependOn(ref newCell);
+                Cells[rowIndex].Add(newCell);
             }
-            UpdateAllCells();
             State = TableState.Modified;
         }
         public void DeleteRow()
