@@ -73,30 +73,30 @@ namespace SigmaExcel
                 dataGridView.Rows[cell.Row].Cells[cell.Column].Value = cell.Evaluation;
             }
         }
-        private void FullCellUpdate(ref SigmaCell cell)
+        private void FullCellUpdate(SigmaCell cell)
         {
             try
             {
                 cell.CellsIDependOn = GetCellsHashSet(cell.Expression);
-                UpdateDependenciesOnMe(ref cell);
-                ValidateDependencyCycleState(ref cell);
-                UpdateCellEvaluation(ref cell, ReplaceCellsReferences(cell.Expression));
+                UpdateDependenciesOnMe(cell);
+                ValidateDependencyCycleState(cell);
+                UpdateCellEvaluation(cell, ReplaceCellsReferences(cell.Expression));
             }
             catch
             {
                 cell.Evaluation = cell.Expression;
             }
         }
-        private void ValidateDependencyCycleState(ref SigmaCell cell)
+        private void ValidateDependencyCycleState(SigmaCell cell)
         {
-            if (cell.CheckForDependenciesCycle(ref cell))
+            if (cell.CheckForDependenciesCycle(cell))
             {
                 cell.HasDependencyCycle = true;
                 throw new Exception("Dependency cycle");
             }
             cell.HasDependencyCycle = false;
         }
-        private void UpdateCellEvaluation(ref SigmaCell cell, string newExpression)
+        private void UpdateCellEvaluation(SigmaCell cell, string newExpression)
         {
             if (cell.Expression == null || cell.Expression == "")
             {
@@ -146,12 +146,12 @@ namespace SigmaExcel
             }
             return CellsInExpression;
         }
-        private void UpdateDependenciesOnMe(ref SigmaCell currentCell)
+        private void UpdateDependenciesOnMe(SigmaCell currentCell)
         {
-            DeleteExpiredDependenciesOnMe(ref currentCell);
-            SetDependenciesOnMe(ref currentCell);
+            DeleteExpiredDependenciesOnMe(currentCell);
+            SetDependenciesOnMe(currentCell);
         }
-        private void DeleteExpiredDependenciesOnMe(ref SigmaCell currentCell)
+        private void DeleteExpiredDependenciesOnMe(SigmaCell currentCell)
         {
             foreach(var cellRow in Cells)
             {
@@ -164,14 +164,14 @@ namespace SigmaExcel
                 }
             }
         }
-        private void SetDependenciesOnMe(ref SigmaCell currentCell)
+        private void SetDependenciesOnMe(SigmaCell currentCell)
         {
             foreach (var cell in currentCell.CellsIDependOn)
             {
                 cell.DependentOnMeCells.Add(currentCell);
             }
         }
-        private void SetCellsIDependOn(ref SigmaCell currentCell)
+        private void SetCellsIDependOn(SigmaCell currentCell)
         {
             foreach (var cellRow in Cells)
             {

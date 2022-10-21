@@ -169,12 +169,12 @@ namespace SigmaExcel
                  [TableState.New] = "New",
                  [TableState.Saved] = "Saved",
              };
-            string previousStatus = GetSavedFileName() + " - " + State[table.State];
+            string previousStatus = table.GetSavedFileName() + " - " + State[table.State];
             string currentStatus;
             const int newStatusPercentage = 100;
             while (true)
             {
-                currentStatus = GetSavedFileName() + " - " + State[table.State];
+                currentStatus = table.GetSavedFileName() + " - " + State[table.State];
 
                 if (previousStatus != currentStatus)
                 {
@@ -182,14 +182,6 @@ namespace SigmaExcel
                     previousStatus = currentStatus;
                 }
             }
-        }
-        private string GetSavedFileName()
-        {
-            if (string.IsNullOrEmpty(table.StoragePath))
-            {
-                return "Unsaved";
-            }
-            return Path.GetFileName(table.StoragePath);
         }
     }
 }

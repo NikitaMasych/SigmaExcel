@@ -24,7 +24,7 @@ namespace SigmaExcel
             Column = column;
             Expression = expression;
         }
-        public bool CheckForDependenciesCycle(ref SigmaCell current)
+        public bool CheckForDependenciesCycle(SigmaCell current)
         {
             foreach (var cell in CellsIDependOn)
             {
@@ -32,7 +32,7 @@ namespace SigmaExcel
                 {
                     return true;
                 }
-                if (cell.CheckForDependenciesCycle(ref current))
+                if (cell.CheckForDependenciesCycle(current))
                 {
                     return true;
                 }

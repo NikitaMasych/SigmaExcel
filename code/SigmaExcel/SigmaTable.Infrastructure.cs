@@ -45,7 +45,7 @@ namespace SigmaExcel
             for (int columnIndex = 0; columnIndex != columnsAmount; ++columnIndex)
             {
                 var newCell = new SigmaCell(rowsAmount - 1, columnIndex);
-                SetCellsIDependOn(ref newCell);
+                SetCellsIDependOn(newCell);
                 cellsRow.Add(newCell);
             }
             Cells.Add(cellsRow);
@@ -60,7 +60,7 @@ namespace SigmaExcel
             for (int rowIndex = 0; rowIndex != rowsAmount; ++rowIndex)
             {
                 var newCell = new SigmaCell(rowIndex, columnsAmount - 1);
-                SetCellsIDependOn(ref newCell);
+                SetCellsIDependOn(newCell);
                 Cells[rowIndex].Add(newCell);
             }
             State = TableState.Modified;
@@ -73,7 +73,7 @@ namespace SigmaExcel
                 cell.Evaluation = "valueToCauseParsingError";
                 UpdateDependentOnMeCells(cell.Row, cell.Column);
                 var currentCell = cell;
-                DeleteExpiredDependenciesOnMe(ref currentCell);
+                DeleteExpiredDependenciesOnMe(currentCell);
             }
             Cells.RemoveAt(rowsAmount - 1);
             dataGridView.Rows.RemoveAt(rowsAmount - 1);
@@ -88,7 +88,7 @@ namespace SigmaExcel
                 Cells[i][columnsAmount - 1].Evaluation = "valueToCauseParsingError";
                 UpdateDependentOnMeCells(i, columnsAmount - 1);
                 var currentCell = Cells[i][columnsAmount - 1];
-                DeleteExpiredDependenciesOnMe(ref currentCell);
+                DeleteExpiredDependenciesOnMe(currentCell);
                 Cells[i].RemoveAt(columnsAmount - 1);
             }
             dataGridView.Columns.RemoveAt(columnsAmount - 1);
@@ -166,7 +166,7 @@ namespace SigmaExcel
         {
             var cell = Cells[rowIndex][columnIndex];
             var cellBefore = cell.DeepCopy();
-            FullCellUpdate(ref cell);
+            FullCellUpdate(cell);
             if (!cellBefore.Equals(Cells[rowIndex][columnIndex]))
             {
                 State = TableState.Modified;
@@ -194,6 +194,14 @@ namespace SigmaExcel
                 }
             }
             return true;
+        }
+        public string GetSavedFileName()
+        {
+            if (string.IsNullOrEmpty(StoragePath))
+            {
+                return "Unsaved";
+            }
+            return Path.GetFileName(StoragePath);
         }
     }
 }
