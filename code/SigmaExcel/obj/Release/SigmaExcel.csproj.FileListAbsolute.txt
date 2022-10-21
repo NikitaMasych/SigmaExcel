@@ -2,8 +2,9 @@ C:\Users\38099\Desktop\Data\Study\2_year\Lab1Excel\code\SigmaExcel\bin\Release\S
 C:\Users\38099\Desktop\Data\Study\2_year\Lab1Excel\code\SigmaExcel\bin\Release\SigmaExcel.exe
 C:\Users\38099\Desktop\Data\Study\2_year\Lab1Excel\code\SigmaExcel\bin\Release\SigmaExcel.pdb
 C:\Users\38099\Desktop\Data\Study\2_year\Lab1Excel\code\SigmaExcel\bin\Release\Antlr4.Runtime.dll
+C:\Users\38099\Desktop\Data\Study\2_year\Lab1Excel\code\SigmaExcel\bin\Release\nunit.framework.dll
 C:\Users\38099\Desktop\Data\Study\2_year\Lab1Excel\code\SigmaExcel\bin\Release\Antlr4.Runtime.xml
-C:\Users\38099\Desktop\Data\Study\2_year\Lab1Excel\code\SigmaExcel\obj\Release\SigmaExcel.csprojAssemblyReference.cache
+C:\Users\38099\Desktop\Data\Study\2_year\Lab1Excel\code\SigmaExcel\bin\Release\nunit.framework.xml
 C:\Users\38099\Desktop\Data\Study\2_year\Lab1Excel\code\SigmaExcel\obj\Release\SigmaExcelLexer.cs
 C:\Users\38099\Desktop\Data\Study\2_year\Lab1Excel\code\SigmaExcel\obj\Release\SigmaExcelParser.cs
 C:\Users\38099\Desktop\Data\Study\2_year\Lab1Excel\code\SigmaExcel\obj\Release\SigmaExcelListener.cs
@@ -18,3 +19,4 @@ C:\Users\38099\Desktop\Data\Study\2_year\Lab1Excel\code\SigmaExcel\obj\Release\S
 C:\Users\38099\Desktop\Data\Study\2_year\Lab1Excel\code\SigmaExcel\obj\Release\SigmaExcel.csproj.CopyComplete
 C:\Users\38099\Desktop\Data\Study\2_year\Lab1Excel\code\SigmaExcel\obj\Release\SigmaExcel.exe
 C:\Users\38099\Desktop\Data\Study\2_year\Lab1Excel\code\SigmaExcel\obj\Release\SigmaExcel.pdb
+C:\Users\38099\Desktop\Data\Study\2_year\Lab1Excel\code\SigmaExcel\obj\Release\SigmaExcel.csprojAssemblyReference.cache

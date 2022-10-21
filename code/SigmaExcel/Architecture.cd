@@ -2,23 +2,60 @@
 <ClassDiagram MajorVersion="1" MinorVersion="1">
   <Class Name="SigmaExcel.ExcelBaseRepresentor">
     <Position X="1" Y="1.25" Width="2.25" />
-    <TypeIdentifier />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAEAAAAAAAAAAAAAAAAAAAIA=</HashCode>
+      <FileName>ExcelBaseRepresentor.cs</FileName>
+    </TypeIdentifier>
   </Class>
   <Class Name="SigmaExcel.SigmaCell">
     <Position X="4" Y="0.75" Width="2.25" />
-    <TypeIdentifier />
+    <TypeIdentifier>
+      <HashCode>AAAAgABAAAAACAAAgABQAAAAAABIAgAQAAAAAAAAAAI=</HashCode>
+      <FileName>SigmaCell.cs</FileName>
+    </TypeIdentifier>
   </Class>
   <Class Name="SigmaExcel.SigmaEvaluator">
     <Position X="1" Y="3.5" Width="1.75" />
-    <TypeIdentifier />
-  </Class>
-  <Class Name="SigmaExcel.SigmaTable">
-    <Position X="9.5" Y="0.5" Width="1.5" />
-    <TypeIdentifier />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAIAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>SigmaEvaluator.cs</FileName>
+    </TypeIdentifier>
   </Class>
   <Class Name="SigmaExcel.SigmaVisitor">
     <Position X="7.25" Y="0.5" Width="1.5" />
-    <TypeIdentifier />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAACAAAAAIAABAAABAAAQFCAAAgAAEBAAAAQQA=</HashCode>
+      <FileName>SigmaVisitor.cs</FileName>
+    </TypeIdentifier>
   </Class>
+  <Class Name="SigmaExcel.EnvironmentalLoader">
+    <Position X="0.75" Y="5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAgAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>EnvironmentalLoader.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="SigmaExcel.SigmaTable">
+    <Position X="9.5" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>BAAAAAMACAECFFAACQ4AokAAAAAAiAAAGEAERBMAiAU=</HashCode>
+      <FileName>SigmaTable.Aux.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="SigmaExcel.ThrowExceptionErrorListener">
+    <Position X="3.75" Y="5" Width="3.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAgAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>ThrowExceptionErrorListener.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Enum Name="SigmaExcel.TableState">
+    <Position X="12" Y="1.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAACAAABAIAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>SigmaTable.Infrastructure.cs</FileName>
+    </TypeIdentifier>
+  </Enum>
   <Font Name="Segoe UI" Size="9" />
 </ClassDiagram>

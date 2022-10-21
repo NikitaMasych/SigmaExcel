@@ -16,7 +16,7 @@ namespace SigmaExcel
             updateStatusWorker.WorkerSupportsCancellation = true;
             updateStatusWorker.RunWorkerAsync();
         }
-        private void AddRow_Click(object sender, EventArgs e) =>
+        private void AddRow_Click(object sender, EventArgs e) => 
             table.AddRow();
         private void AddColumn_Click(object senser, EventArgs e) => 
             table.AddColumn();
