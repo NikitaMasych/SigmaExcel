@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Reflection;
 using System.Windows.Forms;
+using System.Threading;
+using System.Collections.Generic;
 
 namespace SigmaExcel
 {
@@ -47,7 +49,6 @@ namespace SigmaExcel
             saveFileDialog.Filter = "CSV TABLE|*.csv";
             saveFileDialog.RestoreDirectory = true;
         }
-
         #region Windows Form Designer generated code
 
         private void InitializeComponent()
@@ -84,6 +85,8 @@ namespace SigmaExcel
             this.deletionOfColumnWarningCheckBox = new System.Windows.Forms.CheckBox();
             this.deletionOfRowWarningCheckBox = new System.Windows.Forms.CheckBox();
             this.warningsSettingsLabel = new System.Windows.Forms.Label();
+            this.statusLabel = new System.Windows.Forms.Label();
+            this.updateStatusWorker = new System.ComponentModel.BackgroundWorker();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView)).BeginInit();
             this.menuStrip.SuspendLayout();
             this.panel1.SuspendLayout();
@@ -145,6 +148,7 @@ namespace SigmaExcel
             this.deleteColumnToolStripMenuItem,
             this.resetToolStripMenuItem,
             this.settingsToolStripMenuItem});
+            this.menuStrip.LayoutStyle = System.Windows.Forms.ToolStripLayoutStyle.HorizontalStackWithOverflow;
             this.menuStrip.Location = new System.Drawing.Point(0, 0);
             this.menuStrip.Name = "menuStrip";
             this.menuStrip.Size = new System.Drawing.Size(961, 48);
@@ -264,7 +268,7 @@ namespace SigmaExcel
             // 
             this.warningsToolStripMenuItem.Image = global::SigmaExcel.Properties.Resources.Warning;
             this.warningsToolStripMenuItem.Name = "warningsToolStripMenuItem";
-            this.warningsToolStripMenuItem.Size = new System.Drawing.Size(216, 28);
+            this.warningsToolStripMenuItem.Size = new System.Drawing.Size(152, 28);
             this.warningsToolStripMenuItem.Text = "Warnings";
             this.warningsToolStripMenuItem.Click += new System.EventHandler(this.OpenWarningsSettings_Click);
             // 
@@ -320,8 +324,10 @@ namespace SigmaExcel
             // exitWarningsSettingButton
             // 
             this.exitWarningsSettingButton.BackColor = System.Drawing.Color.Red;
+            this.exitWarningsSettingButton.FlatAppearance.BorderColor = System.Drawing.Color.Black;
             this.exitWarningsSettingButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.exitWarningsSettingButton.Font = new System.Drawing.Font("Bell MT", 10F);
+            this.exitWarningsSettingButton.ForeColor = System.Drawing.Color.White;
             this.exitWarningsSettingButton.Location = new System.Drawing.Point(274, 7);
             this.exitWarningsSettingButton.Name = "exitWarningsSettingButton";
             this.exitWarningsSettingButton.Size = new System.Drawing.Size(27, 28);
@@ -443,6 +449,27 @@ namespace SigmaExcel
             this.warningsSettingsLabel.MouseDown += new System.Windows.Forms.MouseEventHandler(this.MoveWarningsSettingPanel_MouseDown);
             this.warningsSettingsLabel.MouseMove += new System.Windows.Forms.MouseEventHandler(this.MoveWarningsSettingPanel_MouseMove);
             // 
+            // statusLabel
+            // 
+            this.statusLabel.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.statusLabel.AutoSize = true;
+            this.statusLabel.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(128)))), ((int)(((byte)(0)))));
+            this.statusLabel.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.statusLabel.Font = new System.Drawing.Font("Orbitron", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.statusLabel.ForeColor = System.Drawing.Color.White;
+            this.statusLabel.Location = new System.Drawing.Point(727, 14);
+            this.statusLabel.Name = "statusLabel";
+            this.statusLabel.Size = new System.Drawing.Size(61, 24);
+            this.statusLabel.TabIndex = 13;
+            this.statusLabel.Text = "New";
+            // 
+            // updateStatusWorker
+            // 
+            this.updateStatusWorker.WorkerReportsProgress = true;
+            this.updateStatusWorker.DoWork += new System.ComponentModel.DoWorkEventHandler(this.UpdateStatusWorker_DoWork);
+            this.updateStatusWorker.ProgressChanged += new System.ComponentModel.ProgressChangedEventHandler(this.NotifyStatusLabelChange_ProgressChanged);
+            // 
             // SigmaExcel
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(120F, 120F);
@@ -450,6 +477,7 @@ namespace SigmaExcel
             this.AutoSize = true;
             this.BackColor = System.Drawing.Color.White;
             this.ClientSize = new System.Drawing.Size(961, 614);
+            this.Controls.Add(this.statusLabel);
             this.Controls.Add(this.warningsSettingsPanel);
             this.Controls.Add(this.dataGridView);
             this.Controls.Add(this.panel1);
@@ -470,6 +498,7 @@ namespace SigmaExcel
             this.warningsSettingsPanel.ResumeLayout(false);
             this.warningsSettingsPanel.PerformLayout();
             this.ResumeLayout(false);
+            this.PerformLayout();
 
         }
 
@@ -506,6 +535,8 @@ namespace SigmaExcel
         private Button disableAllWarningsButton;
         private Button enableAllWarningsButton;
         private Button exitWarningsSettingButton;
+        private Label statusLabel;
+        private System.ComponentModel.BackgroundWorker updateStatusWorker;
     }
 }
 

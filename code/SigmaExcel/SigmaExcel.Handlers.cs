@@ -1,5 +1,7 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Windows.Forms;
+using System.IO;
 
 namespace SigmaExcel
 {
@@ -48,6 +50,7 @@ namespace SigmaExcel
             if (table.State == TableState.Saved || table.State == TableState.New ||
                 !Config.Warnings[NonSavedContentWarnings.Exit])
             {
+                updateStatusWorker.CancelAsync();
                 exitNow = true;
                 Application.Exit();
                 return;
@@ -58,6 +61,7 @@ namespace SigmaExcel
             {
                 case DialogResult.Yes:
                     {
+                        updateStatusWorker.CancelAsync();
                         HandleTableSaving(false);
                         exitNow = true;
                         Application.Exit();
@@ -65,6 +69,7 @@ namespace SigmaExcel
                     }
                 case DialogResult.No:
                     {
+                        updateStatusWorker.CancelAsync();
                         exitNow = true;
                         Application.Exit();
                         break;
@@ -97,7 +102,7 @@ namespace SigmaExcel
         {
             if (emergency)
             {
-                var storagePath = (table.StoragePath == string.Empty) ? 
+                var storagePath = string.IsNullOrEmpty(table.StoragePath) ? 
                     table.StoragePath : emergencySaveFilePath;
                 table.SaveToCSV(storagePath);
                 return;
@@ -154,6 +159,37 @@ namespace SigmaExcel
             resetWarningCheckBox.Checked = value;
             exitWarningCheckBox.Checked = value;
             openWarningCheckBox.Checked = value;
+        }
+        private void KeepTableStatusPosted()
+        {
+            Dictionary<TableState, string> State =
+             new Dictionary<TableState, string>
+             {
+                 [TableState.Modified] = "Modified",
+                 [TableState.New] = "New",
+                 [TableState.Saved] = "Saved",
+             };
+            string previousStatus = GetSavedFileName() + " - " + State[table.State];
+            string currentStatus;
+            const int newStatusPercentage = 100;
+            while (true)
+            {
+                currentStatus = GetSavedFileName() + " - " + State[table.State];
+
+                if (previousStatus != currentStatus)
+                {
+                    updateStatusWorker.ReportProgress(newStatusPercentage, currentStatus);
+                    previousStatus = currentStatus;
+                }
+            }
+        }
+        private string GetSavedFileName()
+        {
+            if (string.IsNullOrEmpty(table.StoragePath))
+            {
+                return "Unsaved";
+            }
+            return Path.GetFileName(table.StoragePath);
         }
     }
 }

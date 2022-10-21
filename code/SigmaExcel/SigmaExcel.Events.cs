@@ -2,6 +2,7 @@
 using System.Windows.Forms;
 using System.Linq;
 using System.Drawing;
+using System.ComponentModel;
 
 namespace SigmaExcel
 {
@@ -9,8 +10,13 @@ namespace SigmaExcel
     {
         private Point mouseDownWarningsSettingPanelLocation;
 
-        private void SigmaExcel_Load(object sender, EventArgs e) {}
-        private void AddRow_Click(object sender, EventArgs e) => 
+        private void SigmaExcel_Load(object sender, EventArgs e)
+        {
+            updateStatusWorker.WorkerReportsProgress = true;
+            updateStatusWorker.WorkerSupportsCancellation = true;
+            updateStatusWorker.RunWorkerAsync();
+        }
+        private void AddRow_Click(object sender, EventArgs e) =>
             table.AddRow();
         private void AddColumn_Click(object senser, EventArgs e) => 
             table.AddColumn();
@@ -48,7 +54,7 @@ namespace SigmaExcel
         }
         private void Save_Click(object sender, EventArgs e)
         {
-            if (table.StoragePath != string.Empty)
+            if ($"{table.StoragePath}" != string.Empty)
             {
                 table.SaveToCSV(table.StoragePath);
             }
@@ -140,5 +146,9 @@ namespace SigmaExcel
                     mouseDownWarningsSettingPanelLocation.Y;
             }
         }
+        private void UpdateStatusWorker_DoWork(object sender, DoWorkEventArgs e) =>
+            KeepTableStatusPosted();
+        private void NotifyStatusLabelChange_ProgressChanged(object sender, ProgressChangedEventArgs e) =>
+            statusLabel.Text = e.UserState.ToString();
     }
 }
