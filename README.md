@@ -9,6 +9,7 @@ This is MVP electronic table similar to the Microsoft Excel via C# and .NET.
 * Open table from a .csv file
 * Modify rows and columns amount
 * Reset table to the default state
+* Configure warnings for deletion of the unsaved content
 
 ## Supported operations and syntax:
 ```
@@ -22,10 +23,16 @@ This is MVP electronic table similar to the Microsoft Excel via C# and .NET.
 7. References to values of specific cells, e.g.: E8, B4
 8. Absolute value function, e.g.: abs(-2), abs(2) equals 2
 ```
+### Invalid expression behavior:
+If entered expression can not be evaluated (contains unspecified syntax, refers to unexisting/unevaluated cells, calculation error, e.g. division by zero), it remains in the cells and is visible for futher modification.
+
 # Parser implementation:
 
-Parsing Sigmaized with ANTLR4 context grammar.
+Parsing realized with ANTLR4 context grammar.
 
-# Saving to the files:
+## Saving of the table:
 
 Project uses model of .csv file in order to store table. First line contains dimensional sizes and after table-like separated by specific character expressions of the corresponding cells.
+
+## Saving current warnings:
+Each time application shutdowns, environmental file with current warnings configuration is saved in ${AppData}/SigmaExcel/
