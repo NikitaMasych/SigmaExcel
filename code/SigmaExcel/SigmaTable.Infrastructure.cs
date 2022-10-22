@@ -27,8 +27,8 @@ namespace SigmaExcel
         }
         public void Reset()
         {
-            columnsAmount = defaultColumnsAmount;
-            rowsAmount = defaultRowsAmount;
+            columnsAmount = Config.DefaultColumnsAmount;
+            rowsAmount = Config.DefaultRowsAmount;
             InitializeColumns();
             InitializeRows();
             InitializeCells();
@@ -98,15 +98,14 @@ namespace SigmaExcel
         public void SaveToCSV(string filePath)
         {
             StoragePath = filePath;
-            var delimiter = Environment.GetEnvironmentVariable("DEFAULT_SEPARATOR");
             StringBuilder output = new StringBuilder();
-            output.AppendLine($"{rowsAmount.ToString()}{delimiter}{columnsAmount.ToString()}");
+            output.AppendLine($"{rowsAmount.ToString()}{Config.DefaultDelimiter}{columnsAmount.ToString()}");
             foreach (var cellRow in Cells)
             {
                 StringBuilder line = new StringBuilder();
                 foreach (var cell in cellRow)
                 {
-                    line.Append($"{cell.Expression}{delimiter}");
+                    line.Append($"{cell.Expression}{Config.DefaultDelimiter}");
                 }
                 output.AppendLine(line.ToString());
             }
@@ -120,11 +119,9 @@ namespace SigmaExcel
         public void OpenFromCSV(string filePath)
         {
             StoragePath = filePath;
-            char delimiter = Environment.GetEnvironmentVariable("DEFAULT_SEPARATOR").
-                ToCharArray()[0];
             using (var reader = new StreamReader(filePath))
             {
-                var size = reader.ReadLine().Split(delimiter);
+                var size = reader.ReadLine().Split(Config.DefaultDelimiter);
                 rowsAmount = int.Parse(size[0]);
                 columnsAmount = int.Parse(size[1]);
                 InitializeColumns();
@@ -134,7 +131,7 @@ namespace SigmaExcel
                 for (int rowIndex = 0; rowIndex != rowsAmount; ++rowIndex)
                 {
                     var line = reader.ReadLine();
-                    var expressions = line.Split(delimiter);
+                    var expressions = line.Split(Config.DefaultDelimiter);
                     var cellsRow = new List<SigmaCell>();
                     for (int columnIndex = 0; columnIndex != columnsAmount; ++columnIndex)
                     {

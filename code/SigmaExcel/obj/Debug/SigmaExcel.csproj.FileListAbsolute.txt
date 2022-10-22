@@ -18,3 +18,5 @@ C:\Users\38099\Desktop\Data\Study\2_year\Lab1Excel\code\SigmaExcel\obj\Debug\Sig
 C:\Users\38099\Desktop\Data\Study\2_year\Lab1Excel\code\SigmaExcel\obj\Debug\SigmaExcel.exe
 C:\Users\38099\Desktop\Data\Study\2_year\Lab1Excel\code\SigmaExcel\obj\Debug\SigmaExcel.pdb
 C:\Users\38099\Desktop\Data\Study\2_year\Lab1Excel\code\SigmaExcel\obj\Debug\SigmaExcel.csprojAssemblyReference.cache
+C:\Users\38099\Desktop\Data\Study\2_year\Lab1Excel\code\SigmaExcel\bin\Debug\nunit.framework.dll
+C:\Users\38099\Desktop\Data\Study\2_year\Lab1Excel\code\SigmaExcel\bin\Debug\nunit.framework.xml

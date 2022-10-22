@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Windows.Forms;
-using System.IO;
 
 namespace SigmaExcel
 {
@@ -13,12 +12,16 @@ namespace SigmaExcel
             {
                 SetProcessDPIAware();
             }
-            var root = @"C:\Users\38099\Desktop\Data\Study\2_year\Lab1Excel\code\SigmaExcel";
-            var dotenv = Path.Combine(root, ".env");
-            EnvironmentalLoader.Load(dotenv);
+            try
+            {
+                Config.LoadWarningsEnvironmental();
+                Config.SetWarningsToEnvironmental();
+            }
+            catch { }
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
             Application.Run(new SigmaExcel());
+            Config.SaveCurrentWarningsConfiguration();
         }
         [System.Runtime.InteropServices.DllImport("user32.dll")]
         private static extern bool SetProcessDPIAware();

@@ -1,15 +1,11 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Windows.Forms;
-using System.IO;
 
 namespace SigmaExcel
 {
     partial class SigmaExcel
     {
         private SigmaTable table;
-        private static string emergencySaveFilePath =
-            Environment.GetEnvironmentVariable("EMERGENCY_SAVE_FILEPATH");
         private static bool exitNow = false;
         public SigmaExcel()
         {
@@ -18,7 +14,7 @@ namespace SigmaExcel
             table = new SigmaTable(ref dataGridView);
             ConfigureOpenFileDialog();
             ConfigureSaveFileDialog();
-            SetValueToAllWarningsCheckBoxes(true);
+            SetAllWarningsCheckBoxesAccordingToConfig();
         }
         private void HandleReset()
         {
@@ -103,7 +99,7 @@ namespace SigmaExcel
             if (emergency)
             {
                 var storagePath = string.IsNullOrEmpty(table.StoragePath) ? 
-                    table.StoragePath : emergencySaveFilePath;
+                    table.StoragePath : Config.EmergencySaveFilePath;
                 table.SaveToCSV(storagePath);
                 return;
             }
@@ -152,13 +148,18 @@ namespace SigmaExcel
             }
             dataGridView.Rows[rowIndex].Cells[columnIndex].Value = currentCell.Evaluation;
         }
-        private void SetValueToAllWarningsCheckBoxes(bool value)
+        private void SetAllWarningsCheckBoxesAccordingToConfig()
         {
-            deletionOfRowWarningCheckBox.Checked = value;
-            deletionOfColumnWarningCheckBox.Checked = value;
-            resetWarningCheckBox.Checked = value;
-            exitWarningCheckBox.Checked = value;
-            openWarningCheckBox.Checked = value;
+            deletionOfColumnWarningCheckBox.Checked =
+                Config.Warnings[NonSavedContentWarnings.DeletionOfColumn];
+            deletionOfRowWarningCheckBox.Checked =
+                Config.Warnings[NonSavedContentWarnings.DeletionOfRow];
+            resetWarningCheckBox.Checked =
+                Config.Warnings[NonSavedContentWarnings.Reset];
+            openWarningCheckBox.Checked =
+               Config.Warnings[NonSavedContentWarnings.Opening];
+            exitWarningCheckBox.Checked =
+                Config.Warnings[NonSavedContentWarnings.Exit]; 
         }
         private void KeepTableStatusPosted()
         {

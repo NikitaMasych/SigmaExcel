@@ -86,11 +86,8 @@ namespace SigmaExcel
                 HandleExit();
             }
         }
-        private void GoToDocumentationWebsite_Click(object sender, EventArgs e)
-        {
-            var documentationURL = Environment.GetEnvironmentVariable("DOCUMENTATION_URL");
-            System.Diagnostics.Process.Start(documentationURL);
-        }
+        private void GoToDocumentationWebsite_Click(object sender, EventArgs e) =>
+            System.Diagnostics.Process.Start(Config.DocumentationURL);
         private void SetDeletionOfRowWarning_CheckedChanged(object sender, EventArgs e) =>
             Config.Warnings[NonSavedContentWarnings.DeletionOfRow] =
                 deletionOfRowWarningCheckBox.Checked;
@@ -109,20 +106,20 @@ namespace SigmaExcel
         private void EnableAllWarnings_Click(object sender, EventArgs e)
         {
             const bool enable = true;
-            SetValueToAllWarningsCheckBoxes(enable);
             foreach (var warning in Config.Warnings.Keys.ToList())
             {
                 Config.Warnings[warning] = enable;
             }
+            SetAllWarningsCheckBoxesAccordingToConfig();
         }
         private void DisableAllWarnings_Click(object sender, EventArgs e)
         {
             const bool disable = false;
-            SetValueToAllWarningsCheckBoxes(disable);
             foreach (var warning in Config.Warnings.Keys.ToList())
             {
                 Config.Warnings[warning] = disable;
             }
+            SetAllWarningsCheckBoxesAccordingToConfig();
         }
         private void CloseWarningsSettings_Click(object sender, EventArgs e) =>
             warningsSettingsPanel.Visible = false;

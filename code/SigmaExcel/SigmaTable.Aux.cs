@@ -8,12 +8,8 @@ namespace SigmaExcel
 {
     public partial class SigmaTable
     {
-        private static int defaultColumnsAmount = 
-            int.Parse(Environment.GetEnvironmentVariable("DEFAULT_COLUMNS_AMOUNT"));
-        private static int defaultRowsAmount =
-            int.Parse(Environment.GetEnvironmentVariable("DEFAULT_ROWS_AMOUNT"));
-        private int columnsAmount = defaultColumnsAmount;
-        private int rowsAmount = defaultRowsAmount;
+        private int columnsAmount = Config.DefaultColumnsAmount;
+        private int rowsAmount = Config.DefaultRowsAmount;
         private DataGridView dataGridView;
 
         private void InitializeColumns()
