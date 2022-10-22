@@ -160,6 +160,21 @@
       <Install>false</Install>
     </BootstrapperPackage>
   </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Credentials.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\augmented_reality_computer_developer_coding_programming_icon_134250.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\1455555011_users-10_icon-icons.com_53271.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Credentials1.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Documentation.png" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
     <PropertyGroup>

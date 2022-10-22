@@ -129,6 +129,15 @@
   <metadata name="updateStatusWorker.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
     <value>465, 17</value>
   </metadata>
+  <data name="credentialsTextbox.Text" xml:space="preserve">
+    <value>-----------------------------------------------------------
+Software designed and developed by Nikita Masych.
+Distributed under MIT License.
+You may contact developer via:
+Email: nikitamasich152@gmail.com
+ Telegram: @Just_law_abiding_citizen
+-----------------------------------------------------------</value>
+  </data>
   <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
   <data name="$this.Icon" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>

@@ -8,7 +8,8 @@ namespace SigmaExcel
 {
     public partial class SigmaExcel : Form
     {
-        private Point mouseDownWarningsSettingPanelLocation;
+        private Point mouseDownWarningsSettingPanelLocation,
+            mouseDownCredentialsPanelLocation;
 
         private void SigmaExcel_Load(object sender, EventArgs e)
         {
@@ -147,5 +148,31 @@ namespace SigmaExcel
             KeepTableStatusPosted();
         private void NotifyStatusLabelChange_ProgressChanged(object sender, ProgressChangedEventArgs e) =>
             statusLabel.Text = e.UserState.ToString();
+        private void ShowCredentials_Click(object sender, EventArgs e)
+        {
+            credentialsPanel.Visible = true;
+        }
+        private void HideCredentials_Click(object sender, EventArgs e)
+        {
+            credentialsPanel.Visible = false;
+        }
+        private void MoveCredentialsPanel_MouseDown(object sender, MouseEventArgs e)
+        {
+            if (e.Button == MouseButtons.Left)
+            {
+
+                mouseDownCredentialsPanelLocation = e.Location;
+            }
+        }
+        private void MoveCredentialsPanel_MouseMove(object sender, MouseEventArgs e)
+        {
+            if (e.Button == MouseButtons.Left)
+            {
+                credentialsPanel.Left = e.X + credentialsPanel.Left -
+                    mouseDownCredentialsPanelLocation.X;
+                credentialsPanel.Top = e.Y + credentialsPanel.Top -
+                    mouseDownCredentialsPanelLocation.Y;
+            }
+        }
     }
 }

@@ -58,19 +58,13 @@ namespace SigmaExcel
             this.evaluateButton = new System.Windows.Forms.Button();
             this.menuStrip = new System.Windows.Forms.MenuStrip();
             this.fileToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.saveToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.saveAsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.openToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.exitToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.aboutToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.goToDocumentationToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.addRowToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.deleteRowToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.addColumnToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.deleteColumnToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.resetToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.settingsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.warningsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.openFileDialog = new System.Windows.Forms.OpenFileDialog();
             this.saveFileDialog = new System.Windows.Forms.SaveFileDialog();
             this.panel1 = new System.Windows.Forms.Panel();
@@ -87,10 +81,21 @@ namespace SigmaExcel
             this.warningsSettingsLabel = new System.Windows.Forms.Label();
             this.statusLabel = new System.Windows.Forms.Label();
             this.updateStatusWorker = new System.ComponentModel.BackgroundWorker();
+            this.credentialsTextbox = new System.Windows.Forms.TextBox();
+            this.credentialsPanel = new System.Windows.Forms.Panel();
+            this.button1 = new System.Windows.Forms.Button();
+            this.saveToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.saveAsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.openToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.exitToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.goToDocumentationToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.credentialsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.warningsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView)).BeginInit();
             this.menuStrip.SuspendLayout();
             this.panel1.SuspendLayout();
             this.warningsSettingsPanel.SuspendLayout();
+            this.credentialsPanel.SuspendLayout();
             this.SuspendLayout();
             // 
             // dataGridView
@@ -167,59 +172,14 @@ namespace SigmaExcel
             this.fileToolStripMenuItem.Size = new System.Drawing.Size(44, 44);
             this.fileToolStripMenuItem.Text = "File";
             // 
-            // saveToolStripMenuItem
-            // 
-            this.saveToolStripMenuItem.Image = global::SigmaExcel.Properties.Resources.Save_1;
-            this.saveToolStripMenuItem.Name = "saveToolStripMenuItem";
-            this.saveToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.S)));
-            this.saveToolStripMenuItem.Size = new System.Drawing.Size(227, 28);
-            this.saveToolStripMenuItem.Text = "Save";
-            this.saveToolStripMenuItem.Click += new System.EventHandler(this.Save_Click);
-            // 
-            // saveAsToolStripMenuItem
-            // 
-            this.saveAsToolStripMenuItem.Image = global::SigmaExcel.Properties.Resources.SaveAs_1;
-            this.saveAsToolStripMenuItem.Name = "saveAsToolStripMenuItem";
-            this.saveAsToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)(((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.Shift) 
-            | System.Windows.Forms.Keys.S)));
-            this.saveAsToolStripMenuItem.Size = new System.Drawing.Size(227, 28);
-            this.saveAsToolStripMenuItem.Text = "Save as";
-            this.saveAsToolStripMenuItem.Click += new System.EventHandler(this.SaveAs_Click);
-            // 
-            // openToolStripMenuItem
-            // 
-            this.openToolStripMenuItem.Image = global::SigmaExcel.Properties.Resources.Open_1;
-            this.openToolStripMenuItem.Name = "openToolStripMenuItem";
-            this.openToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.O)));
-            this.openToolStripMenuItem.Size = new System.Drawing.Size(227, 28);
-            this.openToolStripMenuItem.Text = "Open";
-            this.openToolStripMenuItem.Click += new System.EventHandler(this.Open_Click);
-            // 
-            // exitToolStripMenuItem
-            // 
-            this.exitToolStripMenuItem.Image = global::SigmaExcel.Properties.Resources.Exit_1;
-            this.exitToolStripMenuItem.Name = "exitToolStripMenuItem";
-            this.exitToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)(((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.Shift) 
-            | System.Windows.Forms.Keys.Q)));
-            this.exitToolStripMenuItem.Size = new System.Drawing.Size(227, 28);
-            this.exitToolStripMenuItem.Text = "Exit";
-            this.exitToolStripMenuItem.Click += new System.EventHandler(this.Exit_Click);
-            // 
             // aboutToolStripMenuItem
             // 
             this.aboutToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.goToDocumentationToolStripMenuItem});
+            this.goToDocumentationToolStripMenuItem,
+            this.credentialsToolStripMenuItem});
             this.aboutToolStripMenuItem.Name = "aboutToolStripMenuItem";
             this.aboutToolStripMenuItem.Size = new System.Drawing.Size(64, 44);
             this.aboutToolStripMenuItem.Text = "About";
-            // 
-            // goToDocumentationToolStripMenuItem
-            // 
-            this.goToDocumentationToolStripMenuItem.Image = global::SigmaExcel.Properties.Resources.Info_1;
-            this.goToDocumentationToolStripMenuItem.Name = "goToDocumentationToolStripMenuItem";
-            this.goToDocumentationToolStripMenuItem.Size = new System.Drawing.Size(233, 28);
-            this.goToDocumentationToolStripMenuItem.Text = "Go to documentation";
-            this.goToDocumentationToolStripMenuItem.Click += new System.EventHandler(this.GoToDocumentationWebsite_Click);
             // 
             // addRowToolStripMenuItem
             // 
@@ -263,14 +223,6 @@ namespace SigmaExcel
             this.settingsToolStripMenuItem.Name = "settingsToolStripMenuItem";
             this.settingsToolStripMenuItem.Size = new System.Drawing.Size(76, 44);
             this.settingsToolStripMenuItem.Text = "Settings";
-            // 
-            // warningsToolStripMenuItem
-            // 
-            this.warningsToolStripMenuItem.Image = global::SigmaExcel.Properties.Resources.Warning;
-            this.warningsToolStripMenuItem.Name = "warningsToolStripMenuItem";
-            this.warningsToolStripMenuItem.Size = new System.Drawing.Size(152, 28);
-            this.warningsToolStripMenuItem.Text = "Warnings";
-            this.warningsToolStripMenuItem.Click += new System.EventHandler(this.OpenWarningsSettings_Click);
             // 
             // openFileDialog
             // 
@@ -470,6 +422,111 @@ namespace SigmaExcel
             this.updateStatusWorker.DoWork += new System.ComponentModel.DoWorkEventHandler(this.UpdateStatusWorker_DoWork);
             this.updateStatusWorker.ProgressChanged += new System.ComponentModel.ProgressChangedEventHandler(this.NotifyStatusLabelChange_ProgressChanged);
             // 
+            // credentialsTextbox
+            // 
+            this.credentialsTextbox.BackColor = System.Drawing.Color.Black;
+            this.credentialsTextbox.Font = new System.Drawing.Font("Quicksand", 10F);
+            this.credentialsTextbox.ForeColor = System.Drawing.Color.White;
+            this.credentialsTextbox.Location = new System.Drawing.Point(28, 32);
+            this.credentialsTextbox.Multiline = true;
+            this.credentialsTextbox.Name = "credentialsTextbox";
+            this.credentialsTextbox.ReadOnly = true;
+            this.credentialsTextbox.Size = new System.Drawing.Size(434, 188);
+            this.credentialsTextbox.TabIndex = 14;
+            this.credentialsTextbox.Text = resources.GetString("credentialsTextbox.Text");
+            this.credentialsTextbox.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            // 
+            // credentialsPanel
+            // 
+            this.credentialsPanel.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.credentialsPanel.Controls.Add(this.button1);
+            this.credentialsPanel.Controls.Add(this.credentialsTextbox);
+            this.credentialsPanel.Location = new System.Drawing.Point(242, 195);
+            this.credentialsPanel.Name = "credentialsPanel";
+            this.credentialsPanel.Size = new System.Drawing.Size(488, 252);
+            this.credentialsPanel.TabIndex = 16;
+            this.credentialsPanel.Visible = false;
+            this.credentialsPanel.MouseDown += new System.Windows.Forms.MouseEventHandler(this.MoveCredentialsPanel_MouseDown);
+            this.credentialsPanel.MouseMove += new System.Windows.Forms.MouseEventHandler(this.MoveCredentialsPanel_MouseMove);
+            // 
+            // button1
+            // 
+            this.button1.BackColor = System.Drawing.Color.Red;
+            this.button1.FlatAppearance.BorderColor = System.Drawing.Color.Black;
+            this.button1.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.button1.Font = new System.Drawing.Font("Bell MT", 10F);
+            this.button1.ForeColor = System.Drawing.Color.White;
+            this.button1.Location = new System.Drawing.Point(458, 3);
+            this.button1.Name = "button1";
+            this.button1.Size = new System.Drawing.Size(27, 28);
+            this.button1.TabIndex = 16;
+            this.button1.Text = "X";
+            this.button1.TextAlign = System.Drawing.ContentAlignment.TopCenter;
+            this.button1.UseVisualStyleBackColor = false;
+            this.button1.Click += new System.EventHandler(this.HideCredentials_Click);
+            // 
+            // saveToolStripMenuItem
+            // 
+            this.saveToolStripMenuItem.Image = global::SigmaExcel.Properties.Resources.Save_1;
+            this.saveToolStripMenuItem.Name = "saveToolStripMenuItem";
+            this.saveToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.S)));
+            this.saveToolStripMenuItem.Size = new System.Drawing.Size(227, 28);
+            this.saveToolStripMenuItem.Text = "Save";
+            this.saveToolStripMenuItem.Click += new System.EventHandler(this.Save_Click);
+            // 
+            // saveAsToolStripMenuItem
+            // 
+            this.saveAsToolStripMenuItem.Image = global::SigmaExcel.Properties.Resources.SaveAs_1;
+            this.saveAsToolStripMenuItem.Name = "saveAsToolStripMenuItem";
+            this.saveAsToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)(((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.Shift) 
+            | System.Windows.Forms.Keys.S)));
+            this.saveAsToolStripMenuItem.Size = new System.Drawing.Size(227, 28);
+            this.saveAsToolStripMenuItem.Text = "Save as";
+            this.saveAsToolStripMenuItem.Click += new System.EventHandler(this.SaveAs_Click);
+            // 
+            // openToolStripMenuItem
+            // 
+            this.openToolStripMenuItem.Image = global::SigmaExcel.Properties.Resources.Open_1;
+            this.openToolStripMenuItem.Name = "openToolStripMenuItem";
+            this.openToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.O)));
+            this.openToolStripMenuItem.Size = new System.Drawing.Size(227, 28);
+            this.openToolStripMenuItem.Text = "Open";
+            this.openToolStripMenuItem.Click += new System.EventHandler(this.Open_Click);
+            // 
+            // exitToolStripMenuItem
+            // 
+            this.exitToolStripMenuItem.Image = global::SigmaExcel.Properties.Resources.Exit_1;
+            this.exitToolStripMenuItem.Name = "exitToolStripMenuItem";
+            this.exitToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)(((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.Shift) 
+            | System.Windows.Forms.Keys.Q)));
+            this.exitToolStripMenuItem.Size = new System.Drawing.Size(227, 28);
+            this.exitToolStripMenuItem.Text = "Exit";
+            this.exitToolStripMenuItem.Click += new System.EventHandler(this.Exit_Click);
+            // 
+            // goToDocumentationToolStripMenuItem
+            // 
+            this.goToDocumentationToolStripMenuItem.Image = global::SigmaExcel.Properties.Resources.Documentation;
+            this.goToDocumentationToolStripMenuItem.Name = "goToDocumentationToolStripMenuItem";
+            this.goToDocumentationToolStripMenuItem.Size = new System.Drawing.Size(233, 28);
+            this.goToDocumentationToolStripMenuItem.Text = "Go to documentation";
+            this.goToDocumentationToolStripMenuItem.Click += new System.EventHandler(this.GoToDocumentationWebsite_Click);
+            // 
+            // credentialsToolStripMenuItem
+            // 
+            this.credentialsToolStripMenuItem.Image = global::SigmaExcel.Properties.Resources.Info_1;
+            this.credentialsToolStripMenuItem.Name = "credentialsToolStripMenuItem";
+            this.credentialsToolStripMenuItem.Size = new System.Drawing.Size(233, 28);
+            this.credentialsToolStripMenuItem.Text = "Credentials";
+            this.credentialsToolStripMenuItem.Click += new System.EventHandler(this.ShowCredentials_Click);
+            // 
+            // warningsToolStripMenuItem
+            // 
+            this.warningsToolStripMenuItem.Image = global::SigmaExcel.Properties.Resources.Warning;
+            this.warningsToolStripMenuItem.Name = "warningsToolStripMenuItem";
+            this.warningsToolStripMenuItem.Size = new System.Drawing.Size(152, 28);
+            this.warningsToolStripMenuItem.Text = "Warnings";
+            this.warningsToolStripMenuItem.Click += new System.EventHandler(this.OpenWarningsSettings_Click);
+            // 
             // SigmaExcel
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(120F, 120F);
@@ -477,6 +534,7 @@ namespace SigmaExcel
             this.AutoSize = true;
             this.BackColor = System.Drawing.Color.White;
             this.ClientSize = new System.Drawing.Size(961, 614);
+            this.Controls.Add(this.credentialsPanel);
             this.Controls.Add(this.statusLabel);
             this.Controls.Add(this.warningsSettingsPanel);
             this.Controls.Add(this.dataGridView);
@@ -497,6 +555,8 @@ namespace SigmaExcel
             this.panel1.PerformLayout();
             this.warningsSettingsPanel.ResumeLayout(false);
             this.warningsSettingsPanel.PerformLayout();
+            this.credentialsPanel.ResumeLayout(false);
+            this.credentialsPanel.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -537,6 +597,10 @@ namespace SigmaExcel
         private Button exitWarningsSettingButton;
         private Label statusLabel;
         private System.ComponentModel.BackgroundWorker updateStatusWorker;
+        private ToolStripMenuItem credentialsToolStripMenuItem;
+        private TextBox credentialsTextbox;
+        private Panel credentialsPanel;
+        private Button button1;
     }
 }
 
